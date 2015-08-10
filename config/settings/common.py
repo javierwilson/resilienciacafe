@@ -41,11 +41,15 @@ THIRD_PARTY_APPS = (
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
     'suit_redactor',
+    'filer',
+    'mptt',
+    'easy_thumbnails',
 )
 
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'forocacao.users',  # custom users app
+    'app',
     # Your stuff: custom apps go here
 )
 

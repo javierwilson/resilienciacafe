@@ -65,3 +65,5 @@ node_modules/
 .vim*
 .virtualenvs
 .cache
+media
+migrations
