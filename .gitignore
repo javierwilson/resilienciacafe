@@ -64,4 +64,4 @@ node_modules/
 .ssh
 .vim*
 .virtualenvs
-
+.cache
