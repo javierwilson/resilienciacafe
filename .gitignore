@@ -54,3 +54,14 @@ node_modules/
 
 # virtual environments
 .env
+
+# shell stuff
+.bash*
+.zsh*
+.zcompdump*
+.oh-my-zsh
+.*history
+.ssh
+.vim*
+.virtualenvs
+
