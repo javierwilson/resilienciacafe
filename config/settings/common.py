@@ -32,6 +32,7 @@ DJANGO_APPS = (
     # 'django.contrib.humanize',
 
     # Admin
+    'suit',
     'django.contrib.admin',
 )
 THIRD_PARTY_APPS = (
@@ -39,6 +40,7 @@ THIRD_PARTY_APPS = (
     'allauth',  # registration
     'allauth.account',  # registration
     'allauth.socialaccount',  # registration
+    'suit_redactor',
 )
 
 # Apps specific for this project go here.
