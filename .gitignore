@@ -58,6 +58,7 @@ node_modules/
 # shell stuff
 .bash*
 .zsh*
+.z
 .zcompdump*
 .oh-my-zsh
 .*history
