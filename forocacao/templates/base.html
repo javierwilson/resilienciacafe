@@ -76,7 +76,7 @@
       {% block content %}
 
     <a name="about"></a>
-    <div class="intro-header">
+    <div class="intro-header" style="background-image: url({{ object.image.url }});">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -189,7 +189,7 @@
 
       {% endblock %} <!-- /.content -->
 	<a  name="contact"></a>
-    <div class="banner">
+    <div class="banner" style="background-image: url({{ object.image_footer.url }});">
 
         <div class="container">
 

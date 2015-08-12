@@ -262,3 +262,4 @@ LOGGING = {
 }
 
 # Your common stuff: Below this line define 3rd party library settings
+ACCOUNT_SIGNUP_FORM_CLASS = 'forocacao.users.forms.SignupForm'
