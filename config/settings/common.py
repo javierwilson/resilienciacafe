@@ -50,7 +50,7 @@ THIRD_PARTY_APPS = (
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'forocacao.users',  # custom users app
-    'app',
+    'forocacao.app',
     # Your stuff: custom apps go here
 )
 

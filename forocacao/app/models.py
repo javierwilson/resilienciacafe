@@ -26,7 +26,7 @@ class Conference(models.Model):
         return self.name
 
 class Activity(models.Model):
-    conference = models.ForeignKey('Conference')
+    conference = models.ForeignKey(Conference)
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     text = models.TextField(blank=True,
@@ -45,7 +45,7 @@ class Activity(models.Model):
         return self.name
 
 class Profession(models.Model):
-    conference = models.ForeignKey('Conference')
+    conference = models.ForeignKey(Conference)
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     text = models.TextField(blank=True,
@@ -60,7 +60,7 @@ class Profession(models.Model):
         return self.name
 
 class AttendeeType(models.Model):
-    conference = models.ForeignKey('Conference')
+    conference = models.ForeignKey(Conference)
     name = models.CharField(max_length=200)
     is_speaker = models.BooleanField()
 
@@ -72,13 +72,13 @@ class AttendeeType(models.Model):
         return self.name
 
 class Attendee(models.Model):
-    conference = models.ForeignKey('Conference')
-    profession = models.ForeignKey('Profession')
+    conference = models.ForeignKey(Conference)
+    profession = models.ForeignKey(Profession)
     phone = models.CharField(max_length=50, null=True, blank=True)
     age = models.IntegerField(null=True, blank=True)
     country = CountryField(null=True, blank=True)
     document = models.CharField(max_length=50, null=True, blank=True)
-    attendee_type = models.ForeignKey('AttendeeType', null=True)
+    attendee_type = models.ForeignKey(AttendeeType, null=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
     photo = models.ImageField(null=True, blank=True)
     text = models.TextField(blank=True,

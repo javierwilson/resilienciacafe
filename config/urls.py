@@ -9,7 +9,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     #url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
-    url(r'^$', include("app.urls", namespace="app")),
+    url(r'^$', include("forocacao.app.urls", namespace="app")),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
 
     # Django Admin
