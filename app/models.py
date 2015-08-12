@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils.translation import ugettext as _
 
 from filer.fields.image import FilerImageField
+from django_countries.fields import CountryField
 
 class Conference(models.Model):
     name = models.CharField(max_length=200)
@@ -61,6 +62,12 @@ class Profession(models.Model):
 class Attendee(models.Model):
     conference = models.ForeignKey('Conference')
     profession = models.ForeignKey('Profession')
+    firstname = models.CharField(max_length=50)
+    lastname = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=50, null=True, blank=True)
+    edad = models.IntegerField(null=True, blank=True)
+    pais = CountryField(null=True, blank=True)
+    documento = models.CharField(max_length=50, null=True, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
 
     class Meta:
@@ -68,4 +75,4 @@ class Attendee(models.Model):
         verbose_name_plural = _("Attendee")
 
     def __unicode__(self):
-        return self.user.username
+        return "%s %s" % (self.firstname, self.lastname)

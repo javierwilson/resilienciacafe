@@ -28,6 +28,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- This file store project specific CSS -->
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -88,14 +90,14 @@
                                 <a href="{% url 'users:detail' request.user.username  %}" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">{% trans "My Profile" %}</span></a>
                             </li>
                             <li>
-                                <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Registrarse</span></a>
+                            <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">{% trans "Salir" %}</span></a>
                             </li>
             {% else %}
                             <li>
-                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">{% trans "Sign up" %}</span></a>
+                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">{% trans "Registrarse" %}</span></a>
                             </li>
                             <li>
-                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">{% trans "Log in" %}</span></a>
+                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">{% trans "Ingresar" %}</span></a>
                             </li>
             {% endif %}
                             <li>
@@ -122,11 +124,12 @@
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <div>
+                    <div class="lead">
                         {{ object.text }}
                     </div>
+                    <!--
                     <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>-->
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <img class="img-responsive" src="img/ipad.png" alt="">
@@ -142,7 +145,7 @@
     <div class="content-section-b">
 
         <div class="container">
-
+<!--
             <div class="row">
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
@@ -154,7 +157,7 @@
                     <img class="img-responsive" src="img/dog.png" alt="">
                 </div>
             </div>
-
+-->
         </div>
         <!-- /.container -->
 
@@ -165,6 +168,7 @@
 
         <div class="container">
 
+            <!--
             <div class="row">
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
@@ -175,7 +179,7 @@
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
                     <img class="img-responsive" src="img/phones.png" alt="">
                 </div>
-            </div>
+            </div> -->
 
         </div>
         <!-- /.container -->
@@ -191,7 +195,7 @@
 
             <div class="row">
                 <div class="col-lg-6">
-                    <h2>Connect to Start Bootstrap:</h2>
+                    <h2></h2>
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-inline banner-social-buttons">

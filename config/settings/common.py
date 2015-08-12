@@ -44,6 +44,7 @@ THIRD_PARTY_APPS = (
     'filer',
     'mptt',
     'easy_thumbnails',
+    'django_countries',
 )
 
 # Apps specific for this project go here.
