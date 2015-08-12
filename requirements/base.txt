@@ -42,3 +42,4 @@ redis>=2.10.0
 django-suit-redactor
 django-suit
 django-filer
+django-countries

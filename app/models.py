@@ -10,7 +10,7 @@ class Conference(models.Model):
     title = models.CharField(max_length=200, null=True, blank=True)
     slug = models.SlugField()
     text = models.TextField(blank=True,
-                                 verbose_name='Autosized textarea',
+                                 verbose_name=_('Conference description'),
                                  help_text='Try and enter few some more lines')
     logo = FilerImageField(blank=True, null=True, related_name='conference_logos')
     image = FilerImageField(blank=True, null=True, related_name='conference_images')
@@ -30,7 +30,7 @@ class Activity(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     text = models.TextField(blank=True,
-                                 verbose_name='Autosized textarea',
+                                 verbose_name=_('Activity description'),
                                  help_text='Try and enter few some more lines')
     image = FilerImageField(blank=True, null=True, related_name='activity_images')
     image_footer = FilerImageField(blank=True, null=True, related_name='activity_footers')
@@ -49,7 +49,7 @@ class Profession(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     text = models.TextField(blank=True,
-                                 verbose_name='Autosized textarea',
+                                 verbose_name=_('Profession description'),
                                  help_text='Try and enter few some more lines')
 
     class Meta:
@@ -59,20 +59,36 @@ class Profession(models.Model):
     def __unicode__(self):
         return self.name
 
+class AttendeeType(models.Model):
+    conference = models.ForeignKey('Conference')
+    name = models.CharField(max_length=200)
+    is_speaker = models.BooleanField()
+
+    class Meta:
+        verbose_name = _("Type")
+        verbose_name_plural = _("Types")
+
+    def __unicode__(self):
+        return self.name
+
 class Attendee(models.Model):
     conference = models.ForeignKey('Conference')
     profession = models.ForeignKey('Profession')
-    firstname = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=50, null=True, blank=True)
-    edad = models.IntegerField(null=True, blank=True)
-    pais = CountryField(null=True, blank=True)
-    documento = models.CharField(max_length=50, null=True, blank=True)
+    phone = models.CharField(max_length=50, null=True, blank=True)
+    age = models.IntegerField(null=True, blank=True)
+    country = CountryField(null=True, blank=True)
+    document = models.CharField(max_length=50, null=True, blank=True)
+    attendee_type = models.ForeignKey('AttendeeType', null=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
+    photo = models.ImageField(null=True, blank=True)
+    text = models.TextField(blank=True,
+                                 verbose_name=_('Biography'),
+                                 help_text='Try and enter few some more lines')
+    activities = models.ManyToManyField('Activity', null=True)
 
     class Meta:
         verbose_name = _("Attendee")
         verbose_name_plural = _("Attendee")
 
     def __unicode__(self):
-        return "%s %s" % (self.firstname, self.lastname)
+        return "%s %s" % (self.user.first_name, self.user.last_name)
