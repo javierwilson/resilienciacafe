@@ -84,7 +84,7 @@ class Attendee(models.Model):
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),
                                  help_text='Try and enter few some more lines')
-    activities = models.ManyToManyField('Activity', null=True)
+    activities = models.ManyToManyField('Activity')
 
     class Meta:
         verbose_name = _("Attendee")
