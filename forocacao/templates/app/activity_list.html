@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ activities }}{% endblock %}
+
+{% block content %}
+<div class="container internal">
+
+<h1>{{ activities }}</h1>
+<div>
+{% for object in object_list %}
+    <h2>{{ object.name }}</h2>
+    <p>Organizado por: {{ object.organizer }}</p>
+    <p>{% thumbnail object.organizer.photo 250x250 crop %}</p>
+    {{ object.text }}
+{% empty %}
+    <h2>No activities yet.</h2>
+{% endfor %}
+</div>
+
+</div>
+{% endblock content %}

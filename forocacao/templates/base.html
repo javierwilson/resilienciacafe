@@ -101,7 +101,7 @@
                             </li>
             {% endif %}
                             <li>
-                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Archivo</span></a>
+                            <a href="{% url 'app:activities' object.slug %}" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">{{ object.activities }}</span></a>
                             </li>
                         </ul>
                     </div>
@@ -247,10 +247,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
 </body>
 

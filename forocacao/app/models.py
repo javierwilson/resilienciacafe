@@ -4,11 +4,15 @@ from django.utils.translation import ugettext as _
 
 from filer.fields.image import FilerImageField
 from django_countries.fields import CountryField
+from model_utils import Choices
 
 class Conference(models.Model):
     name = models.CharField(max_length=200)
     title = models.CharField(max_length=200, null=True, blank=True)
     slug = models.SlugField()
+    STATUS = Choices(('inactive',_('inactive')), ('draft', _('draft')), ('published', _('published')), ('frontpage',_('frontpage')))
+    status = models.CharField(choices=STATUS, default=STATUS.draft, max_length=20)
+    activities = models.CharField(max_length=50, null=True, blank=True)
     text = models.TextField(blank=True,
                                  verbose_name=_('Conference description'),
                                  help_text='Try and enter few some more lines')
@@ -29,6 +33,7 @@ class Activity(models.Model):
     conference = models.ForeignKey(Conference)
     name = models.CharField(max_length=200)
     slug = models.SlugField()
+    organizer = models.ForeignKey('Attendee', null=True)
     text = models.TextField(blank=True,
                                  verbose_name=_('Activity description'),
                                  help_text='Try and enter few some more lines')
