@@ -12,31 +12,31 @@ from model_utils import Choices
 
 from forocacao.users.models import User
 
-class Conference(models.Model):
-    name = models.CharField(max_length=200)
+class Event(models.Model):
+    name = models.CharField(max_length=200, verbose_name=_('Nombre'))
     title = models.CharField(max_length=200, null=True, blank=True)
     slug = models.SlugField()
     STATUS = Choices(('inactive',_('inactive')), ('draft', _('draft')), ('published', _('published')), ('frontpage',_('frontpage')))
     status = models.CharField(choices=STATUS, default=STATUS.draft, max_length=20)
     activities = models.CharField(max_length=50, null=True, blank=True)
     text = models.TextField(blank=True,
-                                 verbose_name=_('Conference description'),
+                                 verbose_name=_('Event description'),
                                  help_text='Try and enter few some more lines')
-    logo = FilerImageField(blank=True, null=True, related_name='conference_logos')
-    image = FilerImageField(blank=True, null=True, related_name='conference_images')
-    image_footer = FilerImageField(blank=True, null=True, related_name='conference_footers')
+    logo = FilerImageField(blank=True, null=True, related_name='event_logos')
+    image = FilerImageField(blank=True, null=True, related_name='event_images')
+    image_footer = FilerImageField(blank=True, null=True, related_name='event_footers')
     start = models.DateField(blank=True, null=True)
     end = models.DateField(blank=True, null=True)
 
     class Meta:
-        verbose_name = _("Concerence")
-        verbose_name_plural = _("Conferences")
+        verbose_name = _("Event")
+        verbose_name_plural = _("Events")
 
     def __unicode__(self):
         return self.name
 
 class Activity(models.Model):
-    conference = models.ForeignKey(Conference)
+    event = models.ForeignKey('Event')
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     organizer = models.ForeignKey('users.User', null=True)
@@ -56,7 +56,7 @@ class Activity(models.Model):
         return self.name
 
 class Profession(models.Model):
-    conference = models.ForeignKey(Conference)
+    event = models.ForeignKey('Event')
     name = models.CharField(max_length=200)
     slug = models.SlugField()
     text = models.TextField(blank=True,

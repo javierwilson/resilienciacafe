@@ -7,10 +7,10 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 
-from .views import HomeView, ActivitiesView, conference
+from .views import HomeView, ActivitiesView, event
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name="home"),
     url(r'^(?P<slug>[\w-]+)/activities/$', ActivitiesView.as_view(), name="activities"),
-    url(r'^(?P<url>.*/)$', conference, name="conference"),
+    url(r'^(?P<url>.*/)$', event, name="event"),
 ]

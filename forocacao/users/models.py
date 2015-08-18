@@ -19,15 +19,15 @@ class User(AbstractUser):
     # around the globe.
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
 
-    conference = models.ForeignKey('app.Conference', null=True)
-    profession = models.ForeignKey('app.Profession', null=True)
-    phone = models.CharField(max_length=50, null=True, blank=True)
-    age = models.IntegerField(null=True, blank=True)
-    country = CountryField(null=True, blank=True)
-    document = models.CharField(max_length=50, null=True, blank=True)
+    event = models.ForeignKey('app.Event', null=True)
+    profession = models.ForeignKey('app.Profession', null=True, verbose_name=_('Profession'))
+    phone = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Phone'))
+    age = models.IntegerField(null=True, blank=True, verbose_name=_('Age'))
+    country = CountryField(null=True, blank=True, verbose_name=_('Country'))
+    document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document'))
     TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
-    type = models.CharField(choices=TYPE, default=TYPE.regular, max_length=20)
-    photo = models.ImageField(null=True, blank=True)
+    type = models.CharField(choices=TYPE, default=TYPE.regular, max_length=20, verbose_name=_('Type'))
+    photo = models.ImageField(null=True, blank=True, verbose_name=_('Photo'))
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),
                                  help_text='Try and enter few some more lines')
