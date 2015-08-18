@@ -1,10 +1,16 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals, absolute_import
+
 from django.db import models
 from django.conf import settings
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 
 from filer.fields.image import FilerImageField
 from django_countries.fields import CountryField
 from model_utils import Choices
+
+from forocacao.users.models import User
 
 class Conference(models.Model):
     name = models.CharField(max_length=200)
@@ -33,7 +39,7 @@ class Activity(models.Model):
     conference = models.ForeignKey(Conference)
     name = models.CharField(max_length=200)
     slug = models.SlugField()
-    organizer = models.ForeignKey('Attendee', null=True)
+    organizer = models.ForeignKey('users.User', null=True)
     text = models.TextField(blank=True,
                                  verbose_name=_('Activity description'),
                                  help_text='Try and enter few some more lines')
@@ -76,24 +82,9 @@ class AttendeeType(models.Model):
     def __unicode__(self):
         return self.name
 
-class Attendee(models.Model):
-    conference = models.ForeignKey(Conference)
-    profession = models.ForeignKey(Profession)
-    phone = models.CharField(max_length=50, null=True, blank=True)
-    age = models.IntegerField(null=True, blank=True)
-    country = CountryField(null=True, blank=True)
-    document = models.CharField(max_length=50, null=True, blank=True)
-    attendee_type = models.ForeignKey(AttendeeType, null=True)
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
-    photo = models.ImageField(null=True, blank=True)
-    text = models.TextField(blank=True,
-                                 verbose_name=_('Biography'),
-                                 help_text='Try and enter few some more lines')
-    activities = models.ManyToManyField('Activity')
-
+class Attendee(User):
     class Meta:
-        verbose_name = _("Attendee")
-        verbose_name_plural = _("Attendee")
+        proxy = True
 
-    def __unicode__(self):
-        return "%s %s" % (self.user.first_name, self.user.last_name)
+    def __str__(self):
+        return "%s %s" % (self.first_name, self.last_name)

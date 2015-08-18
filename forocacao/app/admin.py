@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Conference, Activity, Profession, Attendee, AttendeeType
+from .models import Conference, Activity, Profession, AttendeeType, Attendee
 
 
 class ConferenceAdmin(admin.ModelAdmin):
@@ -22,5 +22,5 @@ class AttendeeTypeAdmin(admin.ModelAdmin):
 admin.site.register(Conference, ConferenceAdmin)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Profession, ProfessionAdmin)
-admin.site.register(Attendee, AttendeeAdmin)
 admin.site.register(AttendeeType, AttendeeTypeAdmin)
+admin.site.register(Attendee, AttendeeAdmin)
