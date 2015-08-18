@@ -17,7 +17,7 @@ class AttendeeAdmin(admin.ModelAdmin):
     list_filter = ('conference__name',)
     fieldsets = (
     	(None, {
-            'fields': ('conference','attendee_type','first_name', 'last_name', 'email', 'profession',
+            'fields': ('conference','type','first_name', 'last_name', 'email', 'profession',
 		'phone','age','country','document','photo')
         }),
         ('Informacion de actividades y biografia', {
