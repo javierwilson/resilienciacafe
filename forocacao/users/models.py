@@ -9,8 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from filer.fields.image import FilerImageField
 from django_countries.fields import CountryField
-
-#from forocacao.app.models import Conference, Profession, AttendeeType, Activity
+from model_utils import Choices
 
 
 @python_2_unicode_compatible
@@ -26,7 +25,8 @@ class User(AbstractUser):
     age = models.IntegerField(null=True, blank=True)
     country = CountryField(null=True, blank=True)
     document = models.CharField(max_length=50, null=True, blank=True)
-    attendee_type = models.ForeignKey('app.AttendeeType', null=True)
+    TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
+    type = models.CharField(choices=TYPE, default=TYPE.regular, max_length=20)
     photo = models.ImageField(null=True, blank=True)
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),

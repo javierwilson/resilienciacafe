@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Conference, Activity, Profession, AttendeeType, Attendee
+from .models import Conference, Activity, Profession, Attendee
 
 
 class ConferenceAdmin(admin.ModelAdmin):
@@ -30,11 +30,7 @@ class AttendeeAdmin(admin.ModelAdmin):
     	}),
     )
 
-class AttendeeTypeAdmin(admin.ModelAdmin):
-    list_filter = ('conference__name',)
-
 admin.site.register(Conference, ConferenceAdmin)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Profession, ProfessionAdmin)
-admin.site.register(AttendeeType, AttendeeTypeAdmin)
 admin.site.register(Attendee, AttendeeAdmin)

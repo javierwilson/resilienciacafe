@@ -70,18 +70,6 @@ class Profession(models.Model):
     def __unicode__(self):
         return self.name
 
-class AttendeeType(models.Model):
-    conference = models.ForeignKey(Conference)
-    name = models.CharField(max_length=200)
-    is_speaker = models.BooleanField()
-
-    class Meta:
-        verbose_name = _("Type")
-        verbose_name_plural = _("Types")
-
-    def __unicode__(self):
-        return self.name
-
 class Attendee(User):
     class Meta:
         proxy = True
