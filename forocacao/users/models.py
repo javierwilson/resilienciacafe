@@ -15,11 +15,9 @@ from model_utils import Choices
 @python_2_unicode_compatible
 class User(AbstractUser):
 
-    # First Name and Last Name do not cover name patterns
-    # around the globe.
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
 
-    event = models.ForeignKey('app.Event', null=True)
+    event = models.ForeignKey('app.Event', null=True, verbose_name=_('Event'))
     profession = models.ForeignKey('app.Profession', null=True, verbose_name=_('Profession'))
     phone = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Phone'))
     age = models.IntegerField(null=True, blank=True, verbose_name=_('Age'))
@@ -31,7 +29,7 @@ class User(AbstractUser):
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),
                                  help_text='Try and enter few some more lines')
-    activities = models.ManyToManyField('app.Activity')
+    activities = models.ManyToManyField('app.Activity', verbose_name=_('Activity'))
 
     class Meta:
         verbose_name = _("Attendee")
