@@ -8,10 +8,21 @@ from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
 from .models import User
 
+def has_approval_permission(request, obj=None):
+     if request.user.has_perm('user.can_approve_participant'):
+         return True
+     return False
 
 class MyUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = User
+
+    def get_form(self, request, obj=None, **kwargs):
+        if not has_approval_permission(request, obj):
+            self.exclude = ['active']
+        else:
+            self.fields = ['active']
+        return super(MyUserChangeForm, self).get_form(request, obj, **kwargs)
 
 
 class MyUserCreationForm(UserCreationForm):

@@ -43,3 +43,4 @@ django-suit-redactor
 django-suit
 django-filer
 django-countries
+django-smart-selects

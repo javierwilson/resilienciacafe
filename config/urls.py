@@ -10,6 +10,10 @@ from django.views.generic import TemplateView
 from forocacao.app.views import HomeView
 
 urlpatterns = [
+
+    # django smart selects
+    url(r'^chaining/', include('smart_selects.urls')),
+
     #url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
 

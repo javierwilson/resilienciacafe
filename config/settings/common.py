@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = (
     'mptt',
     'easy_thumbnails',
     'django_countries',
+    'smart_selects',
 )
 
 # Apps specific for this project go here.

@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from filer.fields.image import FilerImageField
 from django_countries.fields import CountryField
 from model_utils import Choices
+from smart_selects.db_fields import ChainedForeignKey
 
 
 @python_2_unicode_compatible
@@ -34,6 +35,9 @@ class User(AbstractUser):
     class Meta:
         verbose_name = _("Attendee")
         verbose_name_plural = _("Attendees")
+        permissions = (
+            ("can_approve_participant", "Can approve participant"),
+        )
 
     def __str__(self):
         return self.name
