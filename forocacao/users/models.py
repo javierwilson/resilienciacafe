@@ -19,7 +19,7 @@ class User(AbstractUser):
     name = models.CharField(_("Name of User"), blank=True, max_length=255)
 
     event = models.ForeignKey('app.Event', null=True, verbose_name=_('Event'))
-    profession = models.ForeignKey('app.Profession', null=True, verbose_name=_('Profession'))
+    profession = models.ForeignKey('app.Profession', null=True, blank=True, verbose_name=_('Profession'))
     phone = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Phone'))
     age = models.IntegerField(null=True, blank=True, verbose_name=_('Age'))
     country = CountryField(null=True, blank=True, verbose_name=_('Country'))
@@ -30,7 +30,7 @@ class User(AbstractUser):
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),
                                  help_text='Try and enter few some more lines')
-    activities = models.ManyToManyField('app.Activity', verbose_name=_('Activity'))
+    activities = models.ManyToManyField('app.Activity', blank=True, verbose_name=_('Activity'))
 
     class Meta:
         verbose_name = _("Attendee")

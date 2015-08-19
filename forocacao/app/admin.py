@@ -22,6 +22,7 @@ class AttendeeAdmin(admin.ModelAdmin):
     list_display = ['id','first_name','last_name','email','profession']
     list_filter = ('event__name','country','profession','type')
     search_fields = ['id','first_name','last_name']
+
     fieldsets = (
     	(None, {
             'fields': ('event','type','first_name', 'last_name', 'email', 'profession',
@@ -33,9 +34,15 @@ class AttendeeAdmin(admin.ModelAdmin):
     	}),
         ('Permisos de usuario', {
             'classes': ('collapse',),
-            'fields': ('name','username', 'password', 'is_active','is_staff','is_superuser','groups','user_permissions','last_login','date_joined')
+            'fields': ('name','username', 'password', 'is_active','last_login','date_joined')
     	}),
     )
+
+    def get_queryset(self, request):
+        qs = super(AttendeeAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(event=request.user.event)
 
     def get_form(self, request, obj=None, **kwargs):
         if not has_approval_permission(request, obj):
@@ -50,11 +57,13 @@ class AttendeeAdmin(admin.ModelAdmin):
                 }),
                 ('Permisos de usuario', {
                     'classes': ('collapse',),
-                    'fields': ('name','username', 'password', 'is_staff','is_superuser','groups','user_permissions','last_login','date_joined')
+                    'fields': ('name','username', 'password', 'last_login','date_joined')
                 }),
             )
-        return super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
-
+        form = super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
+        if not request.user.is_superuser:
+            self.readonly_fields = ('event',)
+        return form
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Activity, ActivityAdmin)
