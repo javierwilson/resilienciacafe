@@ -139,8 +139,8 @@ msgstr "Participantes"
 #~ msgid "Remove"
 #~ msgstr "Quitar"
 
-#~ msgid "My Profile"
-#~ msgstr "Mi Perfil"
+msgid "My Profile"
+msgstr "Mi Perfil"
 
 #~ msgid "Log In"
 #~ msgstr "Entrar"
