@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django import forms
+
 from .models import Event, Activity, Profession, Attendee
 
 
@@ -62,7 +64,10 @@ class AttendeeAdmin(admin.ModelAdmin):
             )
         form = super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
         if not request.user.is_superuser:
-            self.readonly_fields = ('event',)
+            form.base_fields['event'].initial = request.user.event
+            form.base_fields['event'].widget = forms.HiddenInput()
+            form.base_fields['event'].label = ''
+            #self.readonly_fields = ('event',)
         return form
 
 admin.site.register(Event, EventAdmin)
