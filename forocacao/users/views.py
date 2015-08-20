@@ -29,9 +29,10 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
         draw.text((x,y+50), ("%s %s") % (participant.first_name, participant.last_name), font=fnt, fill=(255,255,255,128))
         draw.text((x,y+50+50), ("%s") % (participant.profession), font=fnt, fill=(255,255,255,255))
         draw.text((x,y+50+50+50), ("%s") % (participant.country.name), font=fnt, fill=(255,255,255,255))
-        photo = Image.open(participant.photo)
-        photo.thumbnail((200,200))
-        img.paste(photo, (400,200))
+        if participant.photo:
+            photo = Image.open(participant.photo)
+            photo.thumbnail((200,200))
+            img.paste(photo, (400,200))
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return HttpResponse(response, content_type="image/png")

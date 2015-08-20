@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load thumbnail %}
 
 {% block title %}User: {{ object.username }}{% endblock %}
 
@@ -19,6 +20,10 @@
             {{ row.name }}
         {% endfor %}
         <p>{{ object.country.name }}</p>
+        {% if object.photo %}
+            <img src="{% thumbnail object.photo 250x250 crop %}" />
+        {% endif %}
+        <a href="{% url 'users:badge' username=object.username %}">Gafete PNG</a>
     </div>
   </div>
 
