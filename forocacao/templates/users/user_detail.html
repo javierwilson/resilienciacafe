@@ -20,10 +20,17 @@
             {{ row.name }}
         {% endfor %}
         <p>{{ object.country.name }}</p>
+        <div>
         {% if object.photo %}
             <img src="{% thumbnail object.photo 250x250 crop %}" />
         {% endif %}
         <a href="{% url 'users:badge' username=object.username %}">Gafete PNG</a>
+        </div>
+        <div>
+        {% if object.event.logo %}
+            <img src="{% thumbnail object.event.logo 100x100 crop %}" />
+        {% endif %}
+        </div>
     </div>
   </div>
 
