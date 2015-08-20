@@ -24,7 +24,7 @@
         {% if object.photo %}
             <img src="{% thumbnail object.photo 250x250 crop %}" />
         {% endif %}
-        <a href="{% url 'users:badge' username=object.username %}">Gafete PNG</a>
+        <p><a href="{% url 'users:badge' username=object.username %}">Gafete PNG</a></p>
         </div>
         <div>
         {% if object.event.logo %}
