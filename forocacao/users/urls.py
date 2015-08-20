@@ -27,6 +27,13 @@ urlpatterns = [
         name='detail'
     ),
 
+    # URL pattern for the UserBadgeView
+    url(
+        regex=r'^(?P<username>[\w.@+-]+)/badge/$',
+        view=views.UserBadgeView.as_view(),
+        name='badge'
+    ),
+
     # URL pattern for the UserUpdateView
     url(
         regex=r'^~update/$',
