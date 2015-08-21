@@ -16,13 +16,12 @@ from smart_selects.db_fields import ChainedForeignKey
 @python_2_unicode_compatible
 class User(AbstractUser):
 
-    name = models.CharField(_("Name of User"), blank=True, max_length=255)
-
+    #name = models.CharField(_("Name of User"), blank=True, max_length=255)
     event = models.ForeignKey('app.Event', null=True, verbose_name=_('Event'))
-    profession = models.ForeignKey('app.Profession', null=True, blank=True, verbose_name=_('Profession'))
-    phone = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Phone'))
+    profession = models.ForeignKey('app.Profession', verbose_name=_('Profession'))
+    phone = models.CharField(max_length=50, verbose_name=_('Phone'))
     age = models.IntegerField(null=True, blank=True, verbose_name=_('Age'))
-    country = CountryField(null=True, blank=True, verbose_name=_('Country'))
+    country = CountryField(verbose_name=_('Country'))
     document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document'))
     TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
     type = models.CharField(choices=TYPE, default=TYPE.regular, max_length=20, verbose_name=_('Type'))

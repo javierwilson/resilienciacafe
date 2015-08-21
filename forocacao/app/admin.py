@@ -36,7 +36,7 @@ class AttendeeAdmin(admin.ModelAdmin):
     	}),
         ('Permisos de usuario', {
             'classes': ('collapse',),
-            'fields': ('name','username', 'password', 'is_active','last_login','date_joined')
+            'fields': ('username', 'password', 'is_active','last_login','date_joined')
     	}),
     )
 
@@ -63,6 +63,12 @@ class AttendeeAdmin(admin.ModelAdmin):
                 }),
             )
         form = super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
+
+        # required fields (not required in original model)
+        form.base_fields['first_name'].required = True
+        form.base_fields['last_name'].required = True
+        form.base_fields['email'].required = True
+
         if not request.user.is_superuser:
             form.base_fields['event'].initial = request.user.event
             form.base_fields['event'].widget = forms.HiddenInput()
