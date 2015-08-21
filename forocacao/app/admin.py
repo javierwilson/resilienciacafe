@@ -1,18 +1,32 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod
+from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge
 
 class AttendeeTypeInline(admin.TabularInline):
     model = Event.types.through
 
+class EventBadgeInline(admin.TabularInline):
+    model = EventBadge
+
 class AttendeePaymentInline(admin.TabularInline):
     model = AttendeePayment
+    def get_formset(self, request, obj=None, **kwargs):
+        print "Getting form"
+        inline = super(AttendeePaymentInline, self).get_formset(request, obj, **kwargs)
+        # if update, limit payment method to current event
+        if obj:
+            inline.fields['payment_method'].queryset = PaymentMethod.objects.filter(id__in=obj.event.payment_methods.all())
+        # if not superuser, limit paytment method to user's event
+        if not request.user.is_superuser:
+            inline.fields['payment_method'].queryset = PaymentMethod.objects.filter(id__in=request.user.event.payment_methods.all())
+        return inline
 
 class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
     inlines = [
         AttendeeTypeInline,
+        EventBadgeInline,
     ]
 
 class ActivityAdmin(admin.ModelAdmin):

@@ -114,6 +114,12 @@ class AttendeePayment(models.Model):
         verbose_name = _("Attendee Payment")
         verbose_name_plural = _("Attendee Payments")
 
+class EventBadge(models.Model):
+    event = models.ForeignKey('Event', verbose_name=_('Event'))
+    FIELDS = (('event',_('Event')), ('first_name', _('First name')), ('last_name', _('Last name')), ('profession',_('Profession')),
+             ('country',_('Country')), ('type',_('Type')), ('email',_('E-mail')), ('text', _('Text')))
+    field = models.CharField(max_length=50, choices=FIELDS)
+
 class Attendee(User):
     class Meta:
         verbose_name = _("Attendee")
