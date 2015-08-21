@@ -29,7 +29,7 @@ class User(AbstractUser):
     #TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
     #type = models.ForeignKey('app.AttendeeType', default='regular', verbose_name=_('Type'))
     type = models.ForeignKey('app.AttendeeType', verbose_name=_('Type'))
-    payment_method = models.ForeignKey('app.PaymentMethod', null=True, verbose_name=_('Payment Method'))
+    #payment_method = models.ForeignKey('app.PaymentMethod', null=True, verbose_name=_('Payment Method'))
     photo = models.ImageField(null=True, blank=True, verbose_name=_('Photo'))
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),

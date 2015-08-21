@@ -99,14 +99,20 @@ class AttendeeType(models.Model):
         verbose_name = _("Attendee Type")
         verbose_name_plural = _("Attendee Types")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
-class AttendeePayments(models.Model):
+class AttendeePayment(models.Model):
+    attendee = models.ForeignKey('users.User', verbose_name=_('Attendee'))
+    payment_method = models.ForeignKey('PaymentMethod', verbose_name=_('Payment Method'))
     date = models.DateField(verbose_name=_("Date"))
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     reference = models.CharField(max_length=20)
     note = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name = _("Attendee Payment")
+        verbose_name_plural = _("Attendee Payments")
 
 class Attendee(User):
     class Meta:
