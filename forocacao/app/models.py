@@ -104,7 +104,7 @@ class AttendeeType(models.Model):
 
 class AttendeePayments(models.Model):
     date = models.DateField(verbose_name=_("Date"))
-    amount = models.DecimalField(max_digits=10, dcimal_places=2)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
     reference = models.CharField(max_length=20)
     note = models.CharField(max_length=200)
 
