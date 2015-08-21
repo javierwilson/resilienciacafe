@@ -20,11 +20,16 @@ class User(AbstractUser):
     event = models.ForeignKey('app.Event', null=True, verbose_name=_('Event'))
     profession = models.ForeignKey('app.Profession', verbose_name=_('Profession'))
     phone = models.CharField(max_length=50, verbose_name=_('Phone'))
-    age = models.IntegerField(null=True, blank=True, verbose_name=_('Age'))
+    #age = models.IntegerField(null=True, blank=True, verbose_name=_('Age'))
     country = CountryField(verbose_name=_('Country'))
-    document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document'))
-    TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
-    type = models.CharField(choices=TYPE, default=TYPE.regular, max_length=20, verbose_name=_('Type'))
+    nationality = CountryField(verbose_name=_('Nationality'))
+    sponsored = models.BooleanField()
+    sponsor = models.ForeignKey('User', limit_choices_to = {'type': 3}, null=True, blank=True)
+    #document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document'))
+    #TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
+    #type = models.ForeignKey('app.AttendeeType', default='regular', verbose_name=_('Type'))
+    type = models.ForeignKey('app.AttendeeType', verbose_name=_('Type'))
+    payment_method = models.ForeignKey('app.PaymentMethod', null=True, verbose_name=_('Payment Method'))
     photo = models.ImageField(null=True, blank=True, verbose_name=_('Photo'))
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),
@@ -39,8 +44,7 @@ class User(AbstractUser):
         )
 
     def __str__(self):
-        return self.name
-        #return "%s %s" % (self.user.first_name, self.user.last_name)
+        return "%s %s" % (self.first_name, self.last_name)
 
     def get_absolute_url(self):
         return reverse('users:detail', kwargs={'username': self.username})
