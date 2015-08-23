@@ -130,11 +130,12 @@ class Font(models.Model):
 
 class EventBadge(models.Model):
     event = models.ForeignKey('Event', verbose_name=_('Event'))
-    FIELDS = (('event',_('Event')), ('name', _('Complete name')), ('first_name', _('First name')), ('last_name', _('Last name')), ('profession',_('Profession')),
-             ('country',_('Country')), ('type',_('Type')), ('email',_('E-mail')), ('text', _('Text')))
+    FIELDS = (('event',_('Event')), ('name', _('Complete name')), ('first_name', _('First name')), ('last_name', _('Last name')),
+            ('profession',_('Profession')), ('country',_('Country')), ('type',_('Type')), ('email',_('E-mail')), ('text', _('Text')),
+            ('logo',_('Logo')), ('photo',_('Photo')))
     field = models.CharField(max_length=50, choices=FIELDS)
-    color = ColorField(default='')
-    font = models.ForeignKey('Font')
+    color = ColorField(default='', null=True, blank=True)
+    font = models.ForeignKey('Font', null=True, blank=True)
     size = models.IntegerField()
     x = models.IntegerField()
     y = models.IntegerField()

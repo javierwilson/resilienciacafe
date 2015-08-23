@@ -36,24 +36,26 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
                 'email': participant.email,
             }
         for field in event.eventbadge_set.all():
-            if field.field == 'text':
-                content = field.format
-            else:
-                content = match[field.field]
-            fnt = ImageFont.truetype(field.font.filename, field.size)
             x = field.x
             y = field.y
-            color = field.color
-            draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
+            size = field.size
+            if field.field == 'logo' and participant.event.logo:
+                logo = Image.open(participant.event.logo.file.file)
+                logo.thumbnail((size,size))
+                img.paste(logo, (x,y))
+            elif field.field == 'photo' and participant.photo:
+                photo = Image.open(participant.photo)
+                photo.thumbnail((size,size))
+                img.paste(photo, (x,y))
+            else:
+                if field.field == 'text':
+                    content = field.format
+                else:
+                    content = match[field.field]
+                fnt = ImageFont.truetype(field.font.filename, size)
+                color = field.color
+                draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
 
-        if participant.event.logo:
-            logo = Image.open(participant.event.logo.file.file)
-            logo.thumbnail((200,200))
-            img.paste(logo, (0,200))
-        if participant.photo:
-            photo = Image.open(participant.photo)
-            photo.thumbnail((200,200))
-            img.paste(photo, (400,200))
 
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
