@@ -11,16 +11,16 @@ class EventBadgeInline(admin.TabularInline):
 
 class AttendeePaymentInline(admin.TabularInline):
     model = AttendeePayment
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "payment_method":
+            kwargs["queryset"] = PaymentMethod.objects.filter(id__in=self.parent_obj.event.payment_methods.all())
+        return super(AttendeePaymentInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
+
     def get_formset(self, request, obj=None, **kwargs):
-        print "Getting form"
-        inline = super(AttendeePaymentInline, self).get_formset(request, obj, **kwargs)
-        # if update, limit payment method to current event
-        if obj:
-            inline.fields['payment_method'].queryset = PaymentMethod.objects.filter(id__in=obj.event.payment_methods.all())
-        # if not superuser, limit paytment method to user's event
-        if not request.user.is_superuser:
-            inline.fields['payment_method'].queryset = PaymentMethod.objects.filter(id__in=request.user.event.payment_methods.all())
-        return inline
+        self.parent_obj = obj
+        return super(AttendeePaymentInline, self).get_formset(
+            request, obj, **kwargs)
 
 class EventAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
