@@ -37,12 +37,14 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
             }
         for field in event.eventbadge_set.all():
             if field.field == 'text':
-                value = field.format
+                content = field.format
             else:
-                fnt = ImageFont.truetype(field.font.filename, field.size)
-                x = field.x
-                y = field.y
-                draw.text((x,y), ("%s") % (match[field.field]), font=fnt, fill=(255,255,255,128))
+                content = match[field.field]
+            fnt = ImageFont.truetype(field.font.filename, field.size)
+            x = field.x
+            y = field.y
+            color = field.color
+            draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
 
         if participant.event.logo:
             logo = Image.open(participant.event.logo.file.file)
