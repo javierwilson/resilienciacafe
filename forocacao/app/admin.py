@@ -14,7 +14,10 @@ class AttendeePaymentInline(admin.TabularInline):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "payment_method":
-            kwargs["queryset"] = PaymentMethod.objects.filter(id__in=self.parent_obj.event.payment_methods.all())
+            if self.parent_obj:
+                kwargs["queryset"] = PaymentMethod.objects.filter(id__in=self.parent_obj.event.payment_methods.all())
+            if not request.user.is_superuser:
+                kwargs["queryset"] = PaymentMethod.objects.filter(id__in=request.user.event.payment_methods.all())
         return super(AttendeePaymentInline, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_formset(self, request, obj=None, **kwargs):
@@ -99,7 +102,6 @@ class AttendeeAdmin(admin.ModelAdmin):
         if obj:
             form.base_fields['profession'].queryset = Profession.objects.filter(id__in=obj.event.professions.all())
             form.base_fields['type'].queryset = AttendeeType.objects.filter(id__in=obj.event.types.all())
-            #form.base_fields['payment_method'].queryset = PaymentMethod.objects.filter(id__in=obj.event.payment_methods.all())
 
         # if not superuser, limit type and profession to user's event
         if not request.user.is_superuser:
@@ -109,6 +111,7 @@ class AttendeeAdmin(admin.ModelAdmin):
             form.base_fields['event'].widget = forms.HiddenInput()
             form.base_fields['event'].label = ''
             #self.readonly_fields = ('event',)
+
         return form
 
 admin.site.register(Event, EventAdmin)
