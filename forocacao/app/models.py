@@ -140,6 +140,9 @@ class EventBadge(models.Model):
     y = models.IntegerField()
     format = models.CharField(max_length=50, null=True, blank=True)
 
+    def __unicode__(self):
+        return self.field
+
 class Attendee(User):
     class Meta:
         verbose_name = _("Attendee")

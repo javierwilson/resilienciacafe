@@ -20,16 +20,30 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
     slug_url_kwarg = "username"
     def get(self, request, username):
         participant = self.get_object()
+        event = participant.event
 
-        img = Image.new('RGBA', (600,400),(120,20,20))
-        fnt = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 40)
+        img = Image.new('RGBA', (event.badge_size_x, event.badge_size_y), event.badge_color)
         draw = ImageDraw.Draw(img)
-        x = 10
-        y = 10
-        draw.text((x,y), ("%s") % (participant.event), font=fnt, fill=(255,255,255,128))
-        draw.text((x,y+50), ("%s %s") % (participant.first_name, participant.last_name), font=fnt, fill=(255,255,255,128))
-        draw.text((x,y+50+50), ("%s") % (participant.profession), font=fnt, fill=(255,255,255,255))
-        draw.text((x,y+50+50+50), ("%s") % (participant.country.name), font=fnt, fill=(255,255,255,255))
+
+        match = {
+                'event': event.name,
+                'name': "%s %s" % (participant.first_name, participant.last_name ),
+                'first_name': participant.first_name,
+                'last_name': participant.last_name,
+                'profession': participant.profession,
+                'country': participant.country.name,
+                'type': participant.type,
+                'email': participant.email,
+            }
+        for field in event.eventbadge_set.all():
+            if field.field == 'text':
+                value = field.format
+            else:
+                fnt = ImageFont.truetype(field.font.filename, field.size)
+                x = field.x
+                y = field.y
+                draw.text((x,y), ("%s") % (match[field.field]), font=fnt, fill=(255,255,255,128))
+
         if participant.event.logo:
             logo = Image.open(participant.event.logo.file.file)
             logo.thumbnail((200,200))
@@ -38,6 +52,7 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
             photo = Image.open(participant.photo)
             photo.thumbnail((200,200))
             img.paste(photo, (400,200))
+
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return HttpResponse(response, content_type="image/png")
