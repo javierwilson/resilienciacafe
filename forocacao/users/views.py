@@ -39,14 +39,16 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
             x = field.x
             y = field.y
             size = field.size
-            if field.field == 'logo' and participant.event.logo:
-                logo = Image.open(participant.event.logo.file.file)
-                logo.thumbnail((size,size))
-                img.paste(logo, (x,y))
-            elif field.field == 'photo' and participant.photo:
-                photo = Image.open(participant.photo)
-                photo.thumbnail((size,size))
-                img.paste(photo, (x,y))
+            if field.field == 'logo':
+                if participant.event.logo:
+                    logo = Image.open(participant.event.logo.file.file)
+                    logo.thumbnail((size,size))
+                    img.paste(logo, (x,y))
+            elif field.field == 'photo':
+                if participant.photo:
+                    photo = Image.open(participant.photo)
+                    photo.thumbnail((size,size))
+                    img.paste(photo, (x,y))
             else:
                 if field.field == 'text':
                     content = field.format
