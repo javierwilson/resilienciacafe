@@ -19,10 +19,11 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
     slug_field = "username"
     slug_url_kwarg = "username"
     def get(self, request, username):
+        participant = self.get_object()
+
         img = Image.new('RGBA', (600,400),(120,20,20))
         fnt = ImageFont.truetype('Pillow/Tests/fonts/FreeMono.ttf', 40)
         draw = ImageDraw.Draw(img)
-        participant = self.get_object()
         x = 10
         y = 10
         draw.text((x,y), ("%s") % (participant.event), font=fnt, fill=(255,255,255,128))

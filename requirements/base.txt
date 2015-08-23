@@ -44,3 +44,4 @@ django-suit
 django-filer
 django-countries
 django-smart-selects
+git+git://github.com/jaredly/django-colorfield#egg=django-colorfield

@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = (
     'easy_thumbnails',
     'django_countries',
     'smart_selects',
+    'colorfield',
 )
 
 # Apps specific for this project go here.

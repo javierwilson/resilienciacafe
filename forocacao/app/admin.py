@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge
+from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font
 
 class AttendeeTypeInline(admin.TabularInline):
     model = Event.types.through
@@ -121,3 +121,4 @@ admin.site.register(Attendee, AttendeeAdmin)
 admin.site.register(AttendeeType)
 admin.site.register(AttendeePayment)
 admin.site.register(PaymentMethod)
+admin.site.register(Font)

@@ -9,6 +9,7 @@ from django.utils.translation import ugettext as _
 from filer.fields.image import FilerImageField
 from django_countries.fields import CountryField
 from model_utils import Choices
+from colorfield.fields import ColorField
 
 from forocacao.users.models import User
 
@@ -30,6 +31,9 @@ class Event(models.Model):
     types = models.ManyToManyField('AttendeeType', through='AttendeeTypeEvent')
     professions = models.ManyToManyField('Profession')
     payment_methods = models.ManyToManyField('PaymentMethod')
+    badge_size_x = models.IntegerField(null=True, blank=True)
+    badge_size_y = models.IntegerField(null=True, blank=True)
+    badge_color = ColorField(default='ffffff')
 
     class Meta:
         verbose_name = _("Event")
@@ -114,11 +118,27 @@ class AttendeePayment(models.Model):
         verbose_name = _("Attendee Payment")
         verbose_name_plural = _("Attendee Payments")
 
+class Font(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    filename = models.CharField(max_length=250, unique=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __unicode__(self):
+        return self.name
+
 class EventBadge(models.Model):
     event = models.ForeignKey('Event', verbose_name=_('Event'))
-    FIELDS = (('event',_('Event')), ('first_name', _('First name')), ('last_name', _('Last name')), ('profession',_('Profession')),
+    FIELDS = (('event',_('Event')), ('name', _('Complete name')), ('first_name', _('First name')), ('last_name', _('Last name')), ('profession',_('Profession')),
              ('country',_('Country')), ('type',_('Type')), ('email',_('E-mail')), ('text', _('Text')))
     field = models.CharField(max_length=50, choices=FIELDS)
+    color = ColorField(default='')
+    font = models.ForeignKey('Font')
+    size = models.IntegerField()
+    x = models.IntegerField()
+    y = models.IntegerField()
+    format = models.CharField(max_length=50, null=True, blank=True)
 
 class Attendee(User):
     class Meta:
