@@ -40,6 +40,7 @@ class User(AbstractUser):
         verbose_name = _("Attendee")
         verbose_name_plural = _("Attendees")
         permissions = (
+            ("can_print_badge", "Can print badge"),
             ("can_approve_participant", "Can approve participant"),
         )
 
