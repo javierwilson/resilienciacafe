@@ -58,7 +58,6 @@ class UserBadgeView(LoginRequiredMixin, DetailView):
                 color = field.color
                 draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
 
-
         response = HttpResponse(content_type="image/png")
         img.save(response, "PNG")
         return HttpResponse(response, content_type="image/png")

@@ -4,7 +4,9 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.conf import settings
 
-from .models import Event, Activity
+from braces.views import LoginRequiredMixin
+
+from .models import Event, Activity, Attendee
 
 class HomeView(DetailView):
 
@@ -17,6 +19,13 @@ class HomeView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         return context
+
+
+class AttendeeDetailView(LoginRequiredMixin, DetailView):
+    model = Attendee
+    slug_field = "username"
+    slug_url_kwarg = "username"
+
 
 class ActivitiesView(ListView):
 

@@ -107,12 +107,12 @@ class AttendeeType(models.Model):
         return self.name
 
 class AttendeePayment(models.Model):
-    attendee = models.ForeignKey('users.User', verbose_name=_('Attendee'))
+    attendee = models.ForeignKey('users.User', verbose_name=_('Attendee'), related_name='payments')
     payment_method = models.ForeignKey('PaymentMethod', verbose_name=_('Payment Method'))
     date = models.DateField(verbose_name=_("Date"))
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     reference = models.CharField(max_length=20)
-    note = models.CharField(max_length=200)
+    note = models.CharField(max_length=200, null=True, blank=True)
 
     class Meta:
         verbose_name = _("Attendee Payment")
@@ -149,6 +149,11 @@ class Attendee(User):
         verbose_name = _("Attendee")
         verbose_name_plural = _("Attendees")
         proxy = True
+
+    def price(self):
+        if not self.type:
+            return 0
+        return self.event.attendeetypeevent_set.get(attendeetype=self.type).price
 
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
