@@ -29,7 +29,7 @@
           <p>Patrocinador: {{ object.sponsor }}</p>
         {% endif %}
         <div class="separador"></div>
-        <h4>Actividades:</h4>
+        <h4>{{ object.event.activities_label }}</h4>
         <ul>
             {% for row in object.activities.all %}
             <li>{{ row.name }}</li>
