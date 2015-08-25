@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-19 00:20-0600\n"
+"POT-Creation-Date: 2015-08-24 09:38-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,101 +22,260 @@ msgstr ""
 msgid "Event Management"
 msgstr "Manejo de Eventos"
 
-#: models.py:16 models.py:40 models.py:60
+#: models.py:17 models.py:47 models.py:66 models.py:80 models.py:100
+#: models.py:122
 msgid "Name"
 msgstr "Nombre"
 
-#: models.py:17
+#: models.py:18
 msgid "Title"
 msgstr "Título"
 
-#: models.py:19
+#: models.py:20
 msgid "inactive"
 msgstr "deactivado"
 
-#: models.py:19
+#: models.py:20
 msgid "draft"
 msgstr "borrador"
 
-#: models.py:19
+#: models.py:20
 msgid "published"
 msgstr "publicado"
 
-#: models.py:19
+#: models.py:20
 msgid "frontpage"
 msgstr "portada"
 
-#: models.py:20
+#: models.py:21
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
-#: models.py:21 models.py:53
-msgid "Activities"
-msgstr "Actividades"
+#: models.py:22
+msgid "Activities label"
+msgstr "Etiqueta de actividades"
 
-#: models.py:23
+#: models.py:24
 msgid "Event description"
 msgstr "Descripción del evento"
 
-#: models.py:25
+#: models.py:26 models.py:137
 msgid "Logo"
 msgstr "Logo"
 
-#: models.py:26 models.py:46
+#: models.py:27 models.py:53
 msgid "Image"
 msgstr "Imagen"
 
-#: models.py:27 models.py:47
+#: models.py:28 models.py:54
 msgid "Image footer"
 msgstr "Imagen de abajo"
 
-#: models.py:28 models.py:48
+#: models.py:29 models.py:55
 msgid "Start"
 msgstr "Inicio"
 
-#: models.py:29 models.py:49
+#: models.py:30 models.py:56
 msgid "End"
 msgstr "Fin"
 
-#: models.py:32 models.py:39 models.py:59
+#: models.py:32
+msgid "Proffesions"
+msgstr "Profesiones"
+
+#: models.py:33 models.py:84
+msgid "Payment Methods"
+msgstr "Formas de pago"
+
+#: models.py:34
+msgid "Badge size X"
+msgstr "Gafete tamaño X"
+
+#: models.py:35
+msgid "Badge size Y"
+msgstr "Gafete tamaño Y"
+
+#: models.py:36
+msgid "Badge color"
+msgstr "Color del gafete"
+
+#: models.py:39 models.py:46 models.py:91 models.py:134 models.py:135
 msgid "Event"
 msgstr "Evento"
 
-#: models.py:33
+#: models.py:40
 msgid "Events"
 msgstr "Eventos"
 
-#: models.py:42
+#: models.py:49
 msgid "Organizer"
 msgstr "Organizador"
 
-#: models.py:44
+#: models.py:51
 msgid "Activity description"
 msgstr "Descripción de actividad"
 
-#: models.py:52
+#: models.py:59
 msgid "Activity"
 msgstr "Actividad"
 
-#: models.py:63
+#: models.py:60
+msgid "Activities"
+msgstr "Actividades"
+
+#: models.py:69
 msgid "Profession description"
 msgstr "Descripción de profesión"
 
-#: models.py:67
+#: models.py:73 models.py:136
 msgid "Profession"
 msgstr "Profesión"
 
-#: models.py:68
+#: models.py:74
 msgid "Professions"
 msgstr "Profesiones"
 
-#: models.py:75
+#: models.py:83 models.py:111
+msgid "Payment Method"
+msgstr "Forma de pago"
+
+#: models.py:90 models.py:103
+msgid "Attendee Type"
+msgstr "Tipo de Participante"
+
+#: models.py:92
+msgid "Price"
+msgstr "Precio"
+
+#: models.py:93
+msgid "EB Price"
+msgstr "Precio EB"
+
+#: models.py:96
+msgid "Attendee Type in Event"
+msgstr "Tipo de participante en evento"
+
+#: models.py:97
+msgid "Attendee Types in Events"
+msgstr "Tipo de participantes en eventos"
+
+#: models.py:104
+msgid "Attendee Types"
+msgstr "Tipos de Participante"
+
+#: models.py:110 models.py:155
 msgid "Attendee"
 msgstr "Participante"
 
-#: models.py:76
+#: models.py:112
+msgid "Date"
+msgstr "Fecha"
+
+#: models.py:113
+msgid "Amount"
+msgstr "Monto"
+
+#: models.py:114
+msgid "Reference"
+msgstr "Referencia"
+
+#: models.py:115
+msgid "Note"
+msgstr "Nota"
+
+#: models.py:118
+msgid "Attendee Payment"
+msgstr "Pago del participante"
+
+#: models.py:119
+msgid "Attendee Payments"
+msgstr "Pagos del participante"
+
+#: models.py:123
+msgid "Filename"
+msgstr "Archivo"
+
+#: models.py:126 models.py:140
+msgid "Font"
+msgstr "Fuente"
+
+#: models.py:127
+msgid "Fonts"
+msgstr "Fuentes"
+
+#: models.py:135
+msgid "Complete name"
+msgstr "Nombre completo"
+
+#: models.py:135
+msgid "First name"
+msgstr "Nombre"
+
+#: models.py:135
+msgid "Last name"
+msgstr "Apellido"
+
+#: models.py:136
+msgid "Country"
+msgstr "País"
+
+#: models.py:136
+msgid "Type"
+msgstr "Tipo"
+
+#: models.py:136
+msgid "E-mail"
+msgstr "E-mail"
+
+#: models.py:136
+msgid "Text"
+msgstr "Texto"
+
+#: models.py:137
+msgid "Photo"
+msgstr "Foto"
+
+#: models.py:138
+msgid "Field"
+msgstr "Campo"
+
+#: models.py:139
+msgid "Color"
+msgstr "Color"
+
+#: models.py:141
+msgid "Size"
+msgstr "Tamaño"
+
+#: models.py:142
+msgid "X"
+msgstr "X"
+
+#: models.py:143
+msgid "Y"
+msgstr "Y"
+
+#: models.py:144
+msgid "Extra"
+msgstr "Extra"
+
+#: models.py:147
+msgid "Badge"
+msgstr "Gafete"
+
+#: models.py:148
+msgid "Badges"
+msgstr "Gafetes"
+
+#: models.py:156
 msgid "Attendees"
 msgstr "Participantes"
+
+#~ msgid "Sheet"
+#~ msgstr "Hoja"
+
+#~ msgid "Tools"
+#~ msgstr "Herramientas"
 
 #~ msgid "E-mail Addresses"
 #~ msgstr "Direcciones de correo"
@@ -139,26 +298,17 @@ msgstr "Participantes"
 #~ msgid "Remove"
 #~ msgstr "Quitar"
 
-msgid "My Profile"
-msgstr "Mi Perfil"
+#~ msgid "My Profile"
+#~ msgstr "Mi Perfil"
 
 #~ msgid "Log In"
 #~ msgstr "Entrar"
-
-#~ msgid "First name"
-#~ msgstr "Nombre"
-
-#~ msgid "Last name"
-#~ msgstr "Apellido"
 
 #~ msgid "Phone"
 #~ msgstr "Teléfono"
 
 #~ msgid "Age"
 #~ msgstr "Edad"
-
-#~ msgid "Country"
-#~ msgstr "País"
 
 #~ msgid "Document"
 #~ msgstr "Documento"
@@ -171,12 +321,6 @@ msgstr "Mi Perfil"
 
 #~ msgid "Special"
 #~ msgstr "Especial"
-
-#~ msgid "Type"
-#~ msgstr "Tipo"
-
-#~ msgid "Photo"
-#~ msgstr "Foto"
 
 #~ msgid "Biography"
 #~ msgstr "Biografía"

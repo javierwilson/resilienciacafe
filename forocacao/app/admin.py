@@ -33,7 +33,7 @@ class EventAdmin(admin.ModelAdmin):
     ]
 
 class ActivityAdmin(admin.ModelAdmin):
-    list_filter = ('event__name',)
+    #list_filter = ('event__name',)
     prepopulated_fields = {"slug": ("name",)}
 
 class ProfessionAdmin(admin.ModelAdmin):
@@ -101,11 +101,13 @@ class AttendeeAdmin(admin.ModelAdmin):
         # if update, limit type and profession to current event
         if obj:
             form.base_fields['profession'].queryset = Profession.objects.filter(id__in=obj.event.professions.all())
+            form.base_fields['activities'].queryset = Activity.objects.filter(id__in=obj.event.activities.all())
             form.base_fields['type'].queryset = AttendeeType.objects.filter(id__in=obj.event.types.all())
 
         # if not superuser, limit type and profession to user's event
         if not request.user.is_superuser:
             form.base_fields['profession'].queryset = Profession.objects.filter(id__in=request.user.event.professions.all())
+            form.base_fields['activities'].queryset = Activity.objects.filter(id__in=request.user.event.activities.all())
             form.base_fields['type'].queryset = AttendeeType.objects.filter(id__in=request.user.event.types.all())
             form.base_fields['event'].initial = request.user.event
             form.base_fields['event'].widget = forms.HiddenInput()

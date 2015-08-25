@@ -6,32 +6,39 @@
 
 {% block content %}
 <div class="container internal">
-
   <div class="row">
     <div class="col-sm-12">
 
     {% if object.event.logo %}
-        <img src="{% thumbnail object.event.logo 100x100 crop %}" />
+        <img src="{% thumbnail object.event.logo 120x100 %}" style="float:left;" />
     {% endif %}
       <h2>{{ object.event }}</h2>
+      <div class="clearfix"></div>
       {% if object.name %}
         <p>{{ object.name }}</p>
       {% endif %}
         <h3>{{ object.first_name }} {{ object.last_name }}</h3>
-        <p>Actividades:</p>
+        <p>Profesión: {{ object.profession }}</p>
+        <p>Tipo: {{ object.type }}</p>
+        <p>País: {{ object.country.name }}</p>
+        <p>Nacionalidad: {{ object.nationality.name }}</p>
+        <p>Teléfono: {{ object.phone }}</p>
+        <p>Correo: {{ object.email }}</p>
+        <p>Patrocinado: {% if object.sponsored %}Si{% else %}No{% endif %}</p>
+        {%if object.sponsored %}
+          <p>Patrocinador: {{ object.sponsor }}</p>
+        {% endif %}
+        <div class="separador"></div>
+        <h4>Actividades:</h4>
         <ul>
             {% for row in object.activities.all %}
             <li>{{ row.name }}</li>
             {% endfor %}
         </ul>
-        <p>Profesión: {{ object.profession }}</p>
-        <p>Tipo: {{ object.type }}</p>
-        <p>País: {{ object.country.name }}</p>
-        <p>Nacionalidad: {{ object.nationality.name }}</p>
-        <p>Pagos:</p>
+        <h4>Pagos:</h4>
         <ul>
             {% for row in object.payments.all %}
-            <li>{{ row.date }}: {{ row.payment_method }}: {{ row.amount}} {% if row.note %}{{ row.note }}{% endif %}</li>
+            <li>{{ row.date }}: {{ row.amount}} -  {{ row.payment_method }} {% if row.note %}{{ row.note }}{% endif %}</li>
             {% endfor %}
         </ul>
         <div>

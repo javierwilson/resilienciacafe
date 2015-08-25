@@ -34,6 +34,11 @@ class ActivitiesView(ListView):
     def get_queryset(self):
         return Activity.objects.filter(event__slug=self.kwargs['slug'])
 
+    def get_context_data(self, **kwargs):
+        context = super(ActivitiesView, self).get_context_data(**kwargs)
+        context['event'] = Event.objects.get(slug=self.kwargs['slug'])
+        return context
+
 def event(request, url):
     #if not url.startswith('/'):
     #    url = '/' + url

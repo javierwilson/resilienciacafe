@@ -19,7 +19,8 @@ class Event(models.Model):
     slug = models.SlugField()
     STATUS = Choices(('inactive',_('inactive')), ('draft', _('draft')), ('published', _('published')), ('frontpage',_('frontpage')))
     status = models.CharField(choices=STATUS, default=STATUS.draft, max_length=20, verbose_name=_('Status'))
-    activities = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Activities'))
+    activities_label = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Activities label'))
+    activities = models.ManyToManyField('Activity', blank=True, verbose_name=_('Activities'))
     text = models.TextField(blank=True,
                                  verbose_name=_('Event description'),
                                  help_text='Try and enter few some more lines')
@@ -29,11 +30,11 @@ class Event(models.Model):
     start = models.DateField(blank=True, null=True, verbose_name=_('Start'))
     end = models.DateField(blank=True, null=True, verbose_name=_('End'))
     types = models.ManyToManyField('AttendeeType', through='AttendeeTypeEvent')
-    professions = models.ManyToManyField('Profession')
-    payment_methods = models.ManyToManyField('PaymentMethod')
-    badge_size_x = models.IntegerField(null=True, blank=True)
-    badge_size_y = models.IntegerField(null=True, blank=True)
-    badge_color = ColorField(default='ffffff')
+    professions = models.ManyToManyField('Profession', verbose_name=_('Proffesions'))
+    payment_methods = models.ManyToManyField('PaymentMethod', verbose_name=_('Payment Methods'))
+    badge_size_x = models.IntegerField(null=True, blank=True, verbose_name=_('Badge size X'))
+    badge_size_y = models.IntegerField(null=True, blank=True, verbose_name=_('Badge size Y'))
+    badge_color = ColorField(default='ffffff', verbose_name=_('Badge color'))
 
     class Meta:
         verbose_name = _("Event")
@@ -43,10 +44,10 @@ class Event(models.Model):
         return self.name
 
 class Activity(models.Model):
-    event = models.ForeignKey('Event', verbose_name=_('Event'))
+    #event = models.ForeignKey('Event', verbose_name=_('Event'))
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     slug = models.SlugField()
-    organizer = models.ForeignKey('users.User', null=True, verbose_name=_('Organizer'))
+    organizer = models.ForeignKey('users.User', null=True, blank=True, verbose_name=_('Organizer'))
     text = models.TextField(blank=True,
                                  verbose_name=_('Activity description'),
                                  help_text='Try and enter few some more lines')
@@ -87,10 +88,10 @@ class PaymentMethod(models.Model):
         return self.name
 
 class AttendeeTypeEvent(models.Model):
-    attendeetype = models.ForeignKey('AttendeeType')
-    event = models.ForeignKey('Event')
-    price = models.DecimalField(max_digits=8, decimal_places=2,)
-    eb_price = models.DecimalField(max_digits=8, decimal_places=2,)
+    attendeetype = models.ForeignKey('AttendeeType', verbose_name=_('Attendee Type'))
+    event = models.ForeignKey('Event', verbose_name=_('Event'))
+    price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('Price'))
+    eb_price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('EB Price'))
 
     class Meta:
         verbose_name = _("Attendee Type in Event")
@@ -109,20 +110,22 @@ class AttendeeType(models.Model):
 class AttendeePayment(models.Model):
     attendee = models.ForeignKey('users.User', verbose_name=_('Attendee'), related_name='payments')
     payment_method = models.ForeignKey('PaymentMethod', verbose_name=_('Payment Method'))
-    date = models.DateField(verbose_name=_("Date"))
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    reference = models.CharField(max_length=20)
-    note = models.CharField(max_length=200, null=True, blank=True)
+    date = models.DateField(verbose_name=_('Date'))
+    amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_('Amount'))
+    reference = models.CharField(max_length=20, verbose_name=_('Reference'))
+    note = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Note'))
 
     class Meta:
         verbose_name = _("Attendee Payment")
         verbose_name_plural = _("Attendee Payments")
 
 class Font(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    filename = models.CharField(max_length=250, unique=True)
+    name = models.CharField(max_length=50, unique=True, verbose_name=_('Name'))
+    filename = models.CharField(max_length=250, unique=True, verbose_name=_('Filename'))
 
     class Meta:
+        verbose_name = _("Font")
+        verbose_name_plural = _("Fonts")
         ordering = ['name']
 
     def __unicode__(self):
@@ -133,13 +136,17 @@ class EventBadge(models.Model):
     FIELDS = (('event',_('Event')), ('name', _('Complete name')), ('first_name', _('First name')), ('last_name', _('Last name')),
             ('profession',_('Profession')), ('country',_('Country')), ('type',_('Type')), ('email',_('E-mail')), ('text', _('Text')),
             ('logo',_('Logo')), ('photo',_('Photo')))
-    field = models.CharField(max_length=50, choices=FIELDS)
-    color = ColorField(default='', null=True, blank=True)
-    font = models.ForeignKey('Font', null=True, blank=True)
-    size = models.IntegerField()
-    x = models.IntegerField()
-    y = models.IntegerField()
-    format = models.CharField(max_length=50, null=True, blank=True)
+    field = models.CharField(max_length=50, choices=FIELDS, verbose_name=_('Field'))
+    color = ColorField(default='', null=True, blank=True, verbose_name=_('Color'))
+    font = models.ForeignKey('Font', null=True, blank=True, verbose_name=_('Font'))
+    size = models.IntegerField(verbose_name=_('Size'))
+    x = models.IntegerField(verbose_name=_('X'))
+    y = models.IntegerField(verbose_name=_('Y'))
+    format = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Extra'))
+
+    class Meta:
+        verbose_name = _("Badge")
+        verbose_name_plural = _("Badges")
 
     def __unicode__(self):
         return self.field

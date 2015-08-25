@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-19 00:29-0600\n"
+"POT-Creation-Date: 2015-08-24 08:50-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,69 +30,71 @@ msgid "Last name"
 msgstr "Apellido"
 
 #: models.py:20
-msgid "Name of User"
-msgstr "Nombre completo"
+msgid "Event"
+msgstr "Evento"
 
-#: models.py:23
+#: models.py:21
 msgid "Profession"
 msgstr "Profesión"
 
-#: models.py:24
+#: models.py:22
 msgid "Phone"
 msgstr "Teléfono"
 
-#: models.py:25
-msgid "Age"
-msgstr "Edad"
-
-#: models.py:26
+#: models.py:24
 msgid "Country"
 msgstr "País"
 
+#: models.py:25
+msgid "Nationality"
+msgstr "Nacionalidad"
+
+#: models.py:26
+msgid "Soponsored"
+msgstr "Patrocinado"
+
 #: models.py:27
-msgid "Document"
-msgstr "Documento"
-
-#: models.py:28
-msgid "Regular"
-msgstr ""
-
-#: models.py:28
-msgid "Speaker"
-msgstr "Ponente"
-
-#: models.py:28
 msgid "Sponsor"
 msgstr "Patrocinador"
 
-#: models.py:28
-msgid "Oganizer"
-msgstr "Organizador"
-
-#: models.py:28
-msgid "Special"
-msgstr "Especial"
-
-#: models.py:29
+#: models.py:31
 msgid "Type"
 msgstr "Tipo"
 
-#: models.py:30
+#: models.py:33
 msgid "Photo"
 msgstr "Foto"
 
-#: models.py:32
+#: models.py:35
 msgid "Biography"
 msgstr "Biografía"
 
-#: models.py:34
+#: models.py:37
 msgid "Activity"
 msgstr "Actividad"
 
-#: models.py:37
+#: models.py:40
 msgid "Attendee"
 msgstr "Participante"
 
-#: models.py:38
+#: models.py:41
 msgid "Attendees"
 msgstr "Participantes"
+
+#~ msgid "Name of User"
+#~ msgstr "Nombre completo"
+
+#~ msgid "Age"
+#~ msgstr "Edad"
+
+#~ msgid "Document"
+#~ msgstr "Documento"
+
+#~ msgid "Speaker"
+#~ msgstr "Ponente"
+
+#~ msgid "Oganizer"
+#~ msgstr "Organizador"
+
+#~ msgid "Special"
+#~ msgstr "Especial"
