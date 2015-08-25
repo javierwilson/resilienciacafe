@@ -2,6 +2,7 @@
 from __future__ import unicode_literals, absolute_import
 
 from django.db import models
+from django.db.models import Sum
 from django.conf import settings
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
@@ -119,6 +120,10 @@ class AttendeePayment(models.Model):
         verbose_name = _("Attendee Payment")
         verbose_name_plural = _("Attendee Payments")
 
+    def __unicode__(self):
+        return self.amount
+
+
 class Font(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name=_('Name'))
     filename = models.CharField(max_length=250, unique=True, verbose_name=_('Filename'))
@@ -157,10 +162,18 @@ class Attendee(User):
         verbose_name_plural = _("Attendees")
         proxy = True
 
+    def balance(self):
+        price = self.price()
+        if not self.payments.count():
+            return price
+        else:
+            paid = self.payments.aggregate(sum=Sum('amount'))['sum']
+            return price - paid
+
     def price(self):
         if not self.type:
             return 0
         return self.event.attendeetypeevent_set.get(attendeetype=self.type).price
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)

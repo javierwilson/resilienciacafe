@@ -46,7 +46,14 @@ def has_approval_permission(request, obj=None):
     return False
 
 class AttendeeAdmin(admin.ModelAdmin):
-    list_display = ['id','first_name','last_name','email','profession']
+
+    list_display = ['id','first_name','last_name','email','profession','balance']
+
+    def my_url_field(self, obj):
+        return '<a href="%s%s">%s</a>' % ('http://url-to-prepend.com/', obj.url_field, obj.url_field)
+    my_url_field.allow_tags = True
+    my_url_field.short_description = 'Column description'
+
     list_filter = ('event__name','country','profession','type')
     search_fields = ['id','first_name','last_name']
 
