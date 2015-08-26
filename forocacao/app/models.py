@@ -38,6 +38,7 @@ class Event(models.Model):
     badge_color = ColorField(default='ffffff', verbose_name=_('Badge color'))
 
     class Meta:
+        ordering = ['-start']
         verbose_name = _("Event")
         verbose_name_plural = _("Events")
 
@@ -58,6 +59,7 @@ class Activity(models.Model):
     end = models.DateTimeField(blank=True, null=True, verbose_name=_('End'))
 
     class Meta:
+        ordering = ['name']
         verbose_name = _("Activity")
         verbose_name_plural = _("Activities")
 
@@ -72,6 +74,7 @@ class Profession(models.Model):
                                  help_text='Try and enter few some more lines')
 
     class Meta:
+        ordering = ['name']
         verbose_name = _("Profession")
         verbose_name_plural = _("Professions")
 
@@ -82,6 +85,7 @@ class PaymentMethod(models.Model):
     name = models.CharField(max_length=100, verbose_name=_('Name'))
 
     class Meta:
+        ordering = ['name']
         verbose_name = _("Payment Method")
         verbose_name_plural = _("Payment Methods")
 
@@ -102,11 +106,27 @@ class AttendeeType(models.Model):
     name = models.CharField(max_length=50, verbose_name=_('Name'))
 
     class Meta:
+        ordering = ['name']
         verbose_name = _("Attendee Type")
         verbose_name_plural = _("Attendee Types")
 
     def __unicode__(self):
         return self.name
+
+class AttendeeReceipt(models.Model):
+    attendee = models.ForeignKey('users.User', verbose_name=_('Attendee'), related_name='receipts')
+    date = models.DateField(verbose_name=_('Date'))
+    reference = models.CharField(max_length=20, verbose_name=_('Reference'))
+    note = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Note'))
+
+    class Meta:
+        ordering = ['-date']
+        verbose_name = _("Attendee Receipt")
+        verbose_name_plural = _("Attendee Receipts")
+
+    def __unicode__(self):
+        return "%s" % (self.date,)
+
 
 class AttendeePayment(models.Model):
     attendee = models.ForeignKey('users.User', verbose_name=_('Attendee'), related_name='payments')
@@ -117,11 +137,12 @@ class AttendeePayment(models.Model):
     note = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Note'))
 
     class Meta:
+        ordering = ['-date']
         verbose_name = _("Attendee Payment")
         verbose_name_plural = _("Attendee Payments")
 
     def __unicode__(self):
-        return self.amount
+        return "%s" % (self.amount,)
 
 
 class Font(models.Model):
@@ -129,9 +150,9 @@ class Font(models.Model):
     filename = models.CharField(max_length=250, unique=True, verbose_name=_('Filename'))
 
     class Meta:
+        ordering = ['name']
         verbose_name = _("Font")
         verbose_name_plural = _("Fonts")
-        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -150,6 +171,7 @@ class EventBadge(models.Model):
     format = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Extra'))
 
     class Meta:
+        ordering = ['field']
         verbose_name = _("Badge")
         verbose_name_plural = _("Badges")
 
@@ -158,6 +180,7 @@ class EventBadge(models.Model):
 
 class Attendee(User):
     class Meta:
+        ordering = ['first_name', 'last_name']
         verbose_name = _("Attendee")
         verbose_name_plural = _("Attendees")
         proxy = True
@@ -169,6 +192,7 @@ class Attendee(User):
         else:
             paid = self.payments.aggregate(sum=Sum('amount'))['sum']
             return price - paid
+    balance.short_description = _("Balance")
 
     def price(self):
         if not self.type:
@@ -177,3 +201,4 @@ class Attendee(User):
 
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
+    price.short_description = _("Price")

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django import forms
 
-from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font
+from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt
 
 class AttendeeTypeInline(admin.TabularInline):
     model = Event.types.through
@@ -45,6 +45,21 @@ def has_approval_permission(request, obj=None):
         return True
     return False
 
+class AttendeeReceiptAdmin(admin.ModelAdmin):
+    list_display = ['attendee', 'date' ]
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(AttendeeReceiptAdmin, self).get_form(request, obj, **kwargs)
+
+        # if not superuser, limit type and profession to user's event
+        if not request.user.is_superuser:
+            form.base_fields['attendee'].queryset = Attendee.objects.filter(id__in=request.user.event.user_set.all())
+        return form
+
+
+class AttendeePaymentAdmin(admin.ModelAdmin):
+    list_display = ['attendee', 'payment_method', 'amount' ]
+
 class AttendeeAdmin(admin.ModelAdmin):
 
     list_display = ['id','first_name','last_name','email','profession','balance']
@@ -62,18 +77,18 @@ class AttendeeAdmin(admin.ModelAdmin):
     ]
 
     fieldsets = (
-    	(None, {
+        (None, {
             'fields': ('event','type','first_name', 'last_name', 'email', 'profession',
             'phone','country','nationality','sponsored','sponsor','photo')
         }),
         ('Informacion de actividades y biografia', {
             'classes': ('collapse',),
             'fields': ('text','activities',)
-    	}),
+        }),
         ('Permisos de usuario', {
             'classes': ('collapse',),
             'fields': ('username', 'password', 'is_active','last_login','date_joined')
-    	}),
+        }),
     )
 
     def get_queryset(self, request):
@@ -128,6 +143,7 @@ admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Profession, ProfessionAdmin)
 admin.site.register(Attendee, AttendeeAdmin)
 admin.site.register(AttendeeType)
-admin.site.register(AttendeePayment)
+admin.site.register(AttendeePayment, AttendeePaymentAdmin)
+admin.site.register(AttendeeReceipt, AttendeeReceiptAdmin)
 admin.site.register(PaymentMethod)
 admin.site.register(Font)

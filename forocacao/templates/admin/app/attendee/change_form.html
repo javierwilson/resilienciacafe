@@ -8,7 +8,7 @@
     {% if perms.users.can_print_badge %}
         <a href="{% url 'users:badge' username=original.username %}" class="historylink">{% trans "Badge" %}</a>
     {% endif %}
-    <a href="{% url 'users:detail' username=original.username %}" class="historylink">{% trans "Sheet" %}</a>
+    <a href="{% url 'app:detail' username=original.username %}" class="historylink">{% trans "Sheet" %}</a>
     </li>
     {% if has_absolute_url %}
         <li>
