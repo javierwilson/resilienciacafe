@@ -197,8 +197,12 @@ class Attendee(User):
     def price(self):
         if not self.type:
             return 0
-        return self.event.attendeetypeevent_set.get(attendeetype=self.type).price
+        try:
+            price = self.event.attendeetypeevent_set.get(attendeetype=self.type).price
+        except AttendeeTypeEvent.DoesNotExist:
+            price = "error"
+        return price
+    price.short_description = _("Price")
 
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)
-    price.short_description = _("Price")

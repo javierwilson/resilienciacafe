@@ -3,6 +3,11 @@ from django import forms
 
 from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt
 
+def has_approval_permission(request, obj=None):
+    if request.user.has_perm('users.can_approve_participant'):
+        return True
+    return False
+
 class AttendeeTypeInline(admin.TabularInline):
     model = Event.types.through
 
@@ -33,17 +38,10 @@ class EventAdmin(admin.ModelAdmin):
     ]
 
 class ActivityAdmin(admin.ModelAdmin):
-    #list_filter = ('event__name',)
     prepopulated_fields = {"slug": ("name",)}
 
 class ProfessionAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
-    #list_filter = ('event__name',)
-
-def has_approval_permission(request, obj=None):
-    if request.user.has_perm('users.can_approve_participant'):
-        return True
-    return False
 
 class AttendeeReceiptAdmin(admin.ModelAdmin):
     list_display = ['attendee', 'date' ]
@@ -54,6 +52,10 @@ class AttendeeReceiptAdmin(admin.ModelAdmin):
         # if not superuser, limit type and profession to user's event
         if not request.user.is_superuser:
             form.base_fields['attendee'].queryset = Attendee.objects.filter(id__in=request.user.event.user_set.all())
+
+        # show balance
+        form.base_fields['attendee'].label_from_instance = lambda obj: "%s %s (%s)" % (obj.first_name, obj.last_name, obj.balance())
+
         return form
 
 
