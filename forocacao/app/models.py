@@ -204,5 +204,9 @@ class Attendee(User):
         return price
     price.short_description = _("Price")
 
+    def full_name(self):
+        return "%s %s" % (self.first_name, self.last_name)
+    full_name.short_description = _("Name")
+
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms
+from django.utils.translation import ugettext as _
 
 from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt
 
@@ -54,7 +55,7 @@ class AttendeeReceiptAdmin(admin.ModelAdmin):
             form.base_fields['attendee'].queryset = Attendee.objects.filter(id__in=request.user.event.user_set.all())
 
         # show balance
-        form.base_fields['attendee'].label_from_instance = lambda obj: "%s %s (%s)" % (obj.first_name, obj.last_name, obj.balance())
+        form.base_fields['attendee'].label_from_instance = lambda obj: "%s %s (%s %s)" % (obj.first_name, obj.last_name, _('Balance'), obj.balance())
 
         return form
 
