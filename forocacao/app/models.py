@@ -114,7 +114,7 @@ class AttendeeType(models.Model):
         return self.name
 
 class AttendeeReceipt(models.Model):
-    attendee = models.ForeignKey('users.User', verbose_name=_('Attendee'), related_name='receipts')
+    attendee = models.ForeignKey('Attendee', verbose_name=_('Attendee'), related_name='receipts')
     date = models.DateField(verbose_name=_('Date'))
     reference = models.CharField(max_length=20, verbose_name=_('Reference'))
     note = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Note'))
@@ -195,12 +195,12 @@ class Attendee(User):
     balance.short_description = _("Balance")
 
     def price(self):
-        if not self.type:
-            return 0
+        if not self.type or not self.event:
+            return 'no type or event'
         try:
             price = self.event.attendeetypeevent_set.get(attendeetype=self.type).price
         except AttendeeTypeEvent.DoesNotExist:
-            price = "error"
+            return 'wrong type'
         return price
     price.short_description = _("Price")
 
