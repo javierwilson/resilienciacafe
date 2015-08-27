@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-24 08:50-0600\n"
+"POT-Creation-Date: 2015-08-27 06:56-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,6 +40,10 @@ msgstr "Profesión"
 #: models.py:22
 msgid "Phone"
 msgstr "Teléfono"
+
+#: models.py:23
+msgid "Extra Activity"
+msgstr "Precongreso"
 
 #: models.py:24
 msgid "Country"
@@ -81,20 +85,20 @@ msgstr "Participante"
 msgid "Attendees"
 msgstr "Participantes"
 
-#~ msgid "Name of User"
-#~ msgstr "Nombre completo"
+msgid "Name of User"
+msgstr "Nombre completo"
 
-#~ msgid "Age"
-#~ msgstr "Edad"
+msgid "Age"
+msgstr "Edad"
 
-#~ msgid "Document"
-#~ msgstr "Documento"
+msgid "Document"
+msgstr "Documento"
 
-#~ msgid "Speaker"
-#~ msgstr "Ponente"
+msgid "Speaker"
+msgstr "Ponente"
 
-#~ msgid "Oganizer"
-#~ msgstr "Organizador"
+msgid "Oganizer"
+msgstr "Organizador"
 
-#~ msgid "Special"
-#~ msgstr "Especial"
+msgid "Special"
+msgstr "Especial"
