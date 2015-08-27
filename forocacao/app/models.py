@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from filer.fields.image import FilerImageField
 from django_countries.fields import CountryField
 from model_utils import Choices
+from model_utils.fields import StatusField
 from colorfield.fields import ColorField
 
 from forocacao.users.models import User
@@ -44,8 +45,32 @@ class Event(models.Model):
         verbose_name = _("Event")
         verbose_name_plural = _("Events")
 
+    def event_slug(self):
+        return self.slug
+
     def __unicode__(self):
         return self.name
+
+
+class Content(models.Model):
+    event = models.ForeignKey('Event', verbose_name=_('Event'))
+    name = models.CharField(max_length=200, verbose_name=_('Name'))
+    title = models.CharField(max_length=200, verbose_name=_('Title'))
+    STATUS = Choices(('about',_('About')), ('footer', _('Footer')), ('services', _('Services')), ('404',_('Not Found')))
+    page = StatusField()
+    text = models.TextField()
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = _("Content")
+        verbose_name_plural = _("Contents")
+
+    def event_slug(self):
+        return self.event.slug
+
+    def __unicode__(self):
+        return self.name
+
 
 class Activity(models.Model):
     #event = models.ForeignKey('Event', verbose_name=_('Event'))

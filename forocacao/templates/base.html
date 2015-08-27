@@ -51,13 +51,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{% url 'about' %}">Acerca de...</a>
+                        <a href="{% url 'app:about' slug=object.event_slug %}">Acerca de...</a>
                     </li>
                     <li>
-                        <a href="#services">Servicios</a>
+                        <a href="{% url 'app:services' slug=object.event_slug %}">Servicios</a>
                     </li>
                     <li>
-                        <a href="#contact">Contacto</a>
+                        <a href="{% url 'app:contact' slug=object.event_slug %}">Servicios</a>
                     </li>
                 </ul>
             </div>

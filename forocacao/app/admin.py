@@ -2,12 +2,26 @@ from django.contrib import admin
 from django import forms
 from django.utils.translation import ugettext as _
 
-from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt
+from suit_redactor.widgets import RedactorWidget
+
+from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content
 
 def has_approval_permission(request, obj=None):
     if request.user.has_perm('users.can_approve_participant'):
         return True
     return False
+
+
+class ContentForm(forms.ModelForm):
+    class Meta:
+        widgets = {
+            'text': RedactorWidget(editor_options={'lang': 'es', 'minHeight': '300'})
+        }
+
+class ContentAdmin(admin.ModelAdmin):
+    form = ContentForm
+
+admin.site.register(Content, ContentAdmin)
 
 class AttendeeTypeInline(admin.TabularInline):
     model = Event.types.through
