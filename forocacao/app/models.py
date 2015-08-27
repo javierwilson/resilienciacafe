@@ -2,7 +2,7 @@
 from __future__ import unicode_literals, absolute_import
 
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, Max
 from django.conf import settings
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
@@ -28,6 +28,8 @@ class Event(models.Model):
     logo = FilerImageField(blank=True, null=True, related_name='event_logos', verbose_name=_('Logo'))
     image = FilerImageField(blank=True, null=True, related_name='event_images', verbose_name=_('Image'))
     image_footer = FilerImageField(blank=True, null=True, related_name='event_footers', verbose_name=_('Image footer') )
+    eb_start = models.DateField(blank=True, null=True, verbose_name=_('Early Bird Start'))
+    eb_end = models.DateField(blank=True, null=True, verbose_name=_('Early Bird End'))
     start = models.DateField(blank=True, null=True, verbose_name=_('Start'))
     end = models.DateField(blank=True, null=True, verbose_name=_('End'))
     types = models.ManyToManyField('AttendeeType', through='AttendeeTypeEvent')
@@ -96,7 +98,8 @@ class AttendeeTypeEvent(models.Model):
     attendeetype = models.ForeignKey('AttendeeType', verbose_name=_('Attendee Type'))
     event = models.ForeignKey('Event', verbose_name=_('Event'))
     price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('Price'))
-    eb_price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('EB Price'))
+    eb_price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('Early Bird Price'))
+    extra_price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name=_('Extra Activity Price'))
 
     class Meta:
         verbose_name = _("Attendee Type in Event")
@@ -185,20 +188,57 @@ class Attendee(User):
         verbose_name_plural = _("Attendees")
         proxy = True
 
+    def latest_payment(self):
+       return self.payments.aggregate(max=Max('date'))['max']
+
+    def paid(self):
+       return self.payments.aggregate(sum=Sum('amount'))['sum']
+
+    def earlybird_price(self):
+        if not self.type or not self.event:
+            return 'no type or event'
+        try:
+            price = self.event.attendeetypeevent_set.get(attendeetype=self.type).eb_price
+            if self.extra:
+                price += self.event.attendeetypeevent_set.get(attendeetype=self.type).extra_price
+        except AttendeeTypeEvent.DoesNotExist:
+            return 'wrong type'
+        return price
+
+    def regular_price(self):
+        if not self.type or not self.event:
+            return 'no type or event'
+        try:
+            price = self.event.attendeetypeevent_set.get(attendeetype=self.type).price
+            if self.extra:
+                price += self.event.attendeetypeevent_set.get(attendeetype=self.type).extra_price
+        except AttendeeTypeEvent.DoesNotExist:
+            return 'wrong type'
+        return price
+
     def balance(self):
         price = self.price()
         if not self.payments.count():
             return price
         else:
-            paid = self.payments.aggregate(sum=Sum('amount'))['sum']
-            return price - paid
+            return price - self.paid()
     balance.short_description = _("Balance")
+
+    def earlybird(self):
+            if not self.event.eb_end:
+                raise NameError('Event has no eb_end date')
+            return self.paid() >= self.earlybird_price() and self.latest_payment() <= self.event.eb_end
 
     def price(self):
         if not self.type or not self.event:
             return 'no type or event'
         try:
-            price = self.event.attendeetypeevent_set.get(attendeetype=self.type).price
+            if self.earlybird():
+                price = self.earlybird_price()
+            else:
+                price = self.regular_price()
+            if self.extra:
+                price += self.event.attendeetypeevent_set.get(attendeetype=self.type).extra_price
         except AttendeeTypeEvent.DoesNotExist:
             return 'wrong type'
         return price

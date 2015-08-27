@@ -6,7 +6,7 @@ from django.conf import settings
 
 from braces.views import LoginRequiredMixin
 
-from .models import Event, Activity, Attendee
+from .models import Event, Activity, Attendee, AttendeeReceipt
 
 class HomeView(DetailView):
 
@@ -19,6 +19,10 @@ class HomeView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         return context
+
+
+class AttendeeReceiptView(LoginRequiredMixin, DetailView):
+    model = AttendeeReceipt
 
 
 class AttendeeDetailView(LoginRequiredMixin, DetailView):

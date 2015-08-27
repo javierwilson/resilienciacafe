@@ -20,7 +20,7 @@ class User(AbstractUser):
     event = models.ForeignKey('app.Event', null=True, verbose_name=_('Event'))
     profession = models.ForeignKey('app.Profession', verbose_name=_('Profession'))
     phone = models.CharField(max_length=50, verbose_name=_('Phone'))
-    #age = models.IntegerField(null=True, blank=True, verbose_name=_('Age'))
+    extra = models.BooleanField(verbose_name=_('Extra Activity'))
     country = CountryField(verbose_name=_('Country'))
     nationality = CountryField(verbose_name=_('Nationality'))
     sponsored = models.BooleanField(verbose_name=_('Soponsored'))

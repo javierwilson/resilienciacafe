@@ -1,48 +1,61 @@
-{% extends "base.html" %}
+{% extends "base_print.html" %}
 {% load static %}
 {% load thumbnail %}
 
-{% block title %}User: {{ object.username }}{% endblock %}
+{% block title %}{{ object.event }}{% endblock %}
 
 {% block content %}
-<div class="container internal">
+<div class="col-md-12">
+    <div class="pull-right">
+        <input type="button" onclick="printDiv('printableArea')" value="Imprimir" class="btn btn-primary"/>
+        <a href="" class="btn btn-info">Regresar a la ficha del participante</a>
+    </div>
+</div>
+<div class="container internal"  id="printableArea">
   <div class="row">
     <div class="col-sm-12">
 
     {% if object.event.logo %}
-        <img src="{% thumbnail object.event.logo 100x100 crop %}" />
+        <img src="{% thumbnail object.event.logo 100x100 %}" class="pull-left"/>
     {% endif %}
-      <h2>{{ object.event }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
+    <h2>{{ object.event }}</h2>
+    <div class="clear"></div>
+    {% if object.name %}
+      <p>{{ object.name }}</p>
+    {% endif %}
+    <div class="contenido">  
         <h3>{{ object.first_name }} {{ object.last_name }}</h3>
-        <p>Actividades:</p>
+        <p>Profesión: {{ object.profession }}</p>
+        <p>Tipo: {{ object.type }}</p>
+        <p>País: {{ object.country.name }}</p>
+        <p>Nacionalidad: {{ object.nationality.name }}</p>
+        <p>Teléfono: {{ object.phone }}</p>
+        <p>Correo: {{ object.email }}</p>
+        <p>Patrocinado: {% if object.sponsored %}Si{% else %}No{% endif %}</p>
+        {%if object.sponsored %}
+          <p>Patrocinador: {{ object.sponsor }}</p>
+        {% endif %}
+        <div class="separador"></div>
+        <h4>{{ object.event.activities_label }}:</h4>
         <ul>
             {% for row in object.activities.all %}
             <li>{{ row.name }}</li>
             {% endfor %}
         </ul>
-        <p>Profesión: {{ object.profession }}</p>
-        <p>Tipo: {{ object.type }} Precio: {{ object.price }}</p>
-        <p>País: {{ object.country.name }}</p>
-        <p>Nacionalidad: {{ object.nationality.name }}</p>
-        <p>Pagos:</p>
+        <h4>Pagos:</h4>
         <ul>
             {% for row in object.payments.all %}
-            <li>{{ row.date }}: {{ row.payment_method }}: {{ row.amount}} {% if row.note %}{{ row.note }}{% endif %}</li>
+            <li>{{ row.date }}: {{ row.amount}} -  {{ row.payment_method }} {% if row.note %}{{ row.note }}{% endif %}</li>
             {% endfor %}
         </ul>
-        <div>
         {% if object.photo %}
         <!-- <img src="{% thumbnail object.photo 250x250 crop %}" /> -->
         {% endif %}
         <!-- <p><a href="{% url 'users:badge' username=object.username %}">Gafete PNG</a></p> -->
         </div>
-        <div>
-        </div>
-    </div>
+     </div>
   </div>
+</div>
 
 {% if object == request.user %}
 <!-- Action buttons -->

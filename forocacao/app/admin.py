@@ -82,7 +82,7 @@ class AttendeeAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('event','type','first_name', 'last_name', 'email', 'profession',
-            'phone','country','nationality','sponsored','sponsor','photo')
+            'phone','country','nationality','extra','sponsored','sponsor','photo')
         }),
         ('Informacion de actividades y biografia', {
             'classes': ('collapse',),
@@ -102,20 +102,7 @@ class AttendeeAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         if not has_approval_permission(request, obj):
-            self.fieldsets = (
-                (None, {
-                    'fields': ('event','type','first_name', 'last_name', 'email', 'profession',
-                    'phone','country','nationality','sponsored','sponsor','photo')
-                }),
-                ('Informacion de actividades y biografia', {
-                    'classes': ('collapse',),
-                    'fields': ('text','activities',)
-                }),
-                ('Permisos de usuario', {
-                    'classes': ('collapse',),
-                    'fields': ('username', 'password', 'last_login','date_joined')
-                }),
-            )
+            self.fieldsets[2][1]['fields'].add('is_active')
         form = super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
 
         # required fields (not required in original model)
