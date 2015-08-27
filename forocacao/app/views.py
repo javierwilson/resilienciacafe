@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
@@ -23,6 +25,19 @@ class HomeView(DetailView):
 
 class AttendeeReceiptView(LoginRequiredMixin, DetailView):
     model = AttendeeReceipt
+
+    def get_object(self):
+        try:
+            attendee = Attendee.objects.get(username=self.kwargs.get("username"))
+            if attendee.balance() > 0:
+                raise NameError('Balance > 0')
+            receipt = AttendeeReceipt.objects.get(attendee__username=self.kwargs.get("username"))
+            return receipt
+        except AttendeeReceipt.DoesNotExist:
+            attendee = Attendee.objects.get(username=self.kwargs.get("username"))
+            new_receipt = AttendeeReceipt(attendee=attendee, date=date.today())
+            new_receipt.save()
+            return new_receipt
 
 
 class AttendeeDetailView(LoginRequiredMixin, DetailView):

@@ -128,6 +128,12 @@ class AttendeeAdmin(admin.ModelAdmin):
 
         return form
 
+    def save_model(self, request, obj, form, change):
+        obj.username = obj.email
+        obj.save()
+
+
+
 admin.site.register(Event, EventAdmin)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Profession, ProfessionAdmin)

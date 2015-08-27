@@ -117,7 +117,7 @@ class AttendeeType(models.Model):
         return self.name
 
 class AttendeeReceipt(models.Model):
-    attendee = models.ForeignKey('Attendee', verbose_name=_('Attendee'), related_name='receipts')
+    attendee = models.OneToOneField('Attendee', verbose_name=_('Attendee'), related_name='receipt')
     date = models.DateField(verbose_name=_('Date'))
     reference = models.CharField(max_length=20, verbose_name=_('Reference'))
     note = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Note'))
