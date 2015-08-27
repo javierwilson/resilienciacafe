@@ -1,0 +1,67 @@
+{% extends "base_print.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    <div class="pull-right">
+        <input type="button" onclick="printDiv('printableArea')" value="Imprimir" class="btn btn-primary"/>
+        <a href="/admin/app/attendee/{{ object.attendee.id }}" class="btn btn-info">Regresar a la ficha del participante</a>
+    </div>
+</div>
+<div class="container internal" id="printableArea">
+  <div class="row">
+    <div class="col-sm-10">
+
+    {% if object.event.logo %}
+        <img src="{% thumbnail object.event.logo 100x100 crop %}" />
+    {% endif %}
+      <div class="col-md-6">
+          <h1>Recibo oficial de caja</h1>
+      </div>
+      <div class="col-md-6">
+        <div class="pull-right">Fecha: {{ object.date }}</div>
+      </div>
+      <br clear="both">
+      <hr/>
+      <div class="contanido">
+          <p>Recibimos de: {{ object.attendee.full_name }}</p>
+          <p>La cantidad de: ${{ object.attendee.price }}</p>
+          <p>En concepto de: Cancelación de participación en {{ object.attendee.event }}</p>
+          {% if object.name %}
+            <p>{{ object.name }}</p>
+          {% endif %}
+            <p>Detalle de pagos realizados:</p>
+            <ul>
+                {% for row in object.attendee.payments.all %}
+                <li>{{ row.date }}: {{ row.payment_method }}: {{ row.amount}} {% if row.note %}{{ row.note }}{% endif %}</li>
+                {% endfor %}
+             </ul>
+       </div>
+       <div style="margin-top: 120px;"></div>
+       <div class="col-md-3" style="border-top: 1px solid #000;margin-right:80px;">Recibi conforme</div>
+       <div class="col-md-3" style="border-top: 1px solid #000;">Entregue conforme</div>
+    <div>
+  </div>
+</div>
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+  <div class="col-sm-12 ">
+    <a class="btn btn-primary" href="{% url 'users:update' %}">My Info</a>
+    <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a>
+    <!-- Your Stuff: Custom user template urls -->
+  </div>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+
+</div>
+{% endblock content %}
+
