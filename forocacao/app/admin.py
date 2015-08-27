@@ -109,6 +109,8 @@ class AttendeeAdmin(admin.ModelAdmin):
         form.base_fields['first_name'].required = True
         form.base_fields['last_name'].required = True
         form.base_fields['email'].required = True
+        form.base_fields['password'].required = False
+        form.base_fields['username'].required = False
 
         # if update, limit type and profession to current event
         if obj:

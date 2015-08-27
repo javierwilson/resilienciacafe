@@ -237,8 +237,8 @@ class Attendee(User):
                 price = self.earlybird_price()
             else:
                 price = self.regular_price()
-            if self.extra:
-                price += self.event.attendeetypeevent_set.get(attendeetype=self.type).extra_price
+            #if self.extra:
+            #    price += self.event.attendeetypeevent_set.get(attendeetype=self.type).extra_price
         except AttendeeTypeEvent.DoesNotExist:
             return 'wrong type'
         return price
