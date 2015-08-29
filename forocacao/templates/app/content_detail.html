@@ -6,10 +6,6 @@
 
 {% block content %}
 <div class="col-md-12">
-    <div class="pull-right">
-        <input type="button" onclick="printDiv('printableArea')" value="Imprimir" class="btn btn-primary"/>
-        <a href="/admin/app/attendee/{{ object.attendee.id }}" class="btn btn-info">Regresar a la ficha del participante</a>
-    </div>
 </div>
 <div class="container internal">
   <div class="row">
@@ -18,11 +14,10 @@
     {% if object.event.logo %}
         <img src="{% thumbnail object.event.logo 100x100 %}" class="pull-left"/>
     {% endif %}
-    <h2>{{ object.event }}</h2>
-    <div class="clear"></div>
     {% if object.name %}
-      <p>{{ object.name }}</p>
+    <h1>{{ object.name }}</h1>
     {% endif %}
+    <div class="clear"></div>
     <div class="contenido">  
         {{ object.text|safe }}
      </div>

@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 
 from suit_redactor.widgets import RedactorWidget
 
-from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content
+from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content, Field
 
 def has_approval_permission(request, obj=None):
     if request.user.has_perm('users.can_approve_participant'):
@@ -159,3 +159,4 @@ admin.site.register(AttendeePayment, AttendeePaymentAdmin)
 admin.site.register(AttendeeReceipt, AttendeeReceiptAdmin)
 admin.site.register(PaymentMethod)
 admin.site.register(Font)
+admin.site.register(Field)

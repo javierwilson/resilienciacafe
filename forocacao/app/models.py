@@ -18,6 +18,7 @@ from forocacao.users.models import User
 class Event(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     title = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Title'))
+    organizer = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Organizer'))
     slug = models.SlugField()
     STATUS = Choices(('inactive',_('inactive')), ('draft', _('draft')), ('published', _('published')), ('frontpage',_('frontpage')))
     status = models.CharField(choices=STATUS, default=STATUS.draft, max_length=20, verbose_name=_('Status'))
@@ -49,11 +50,30 @@ class Event(models.Model):
         return self.name
 
 
+class Field(models.Model):
+    STATUS = (
+            #('first_name', _('First name')), ('last_name', _('Last name')), ('email',_('E-mail')),
+            ('document', _('Document')), ('phone', _('Telephone')),
+            ('organization', _('Organization')), ('position', _('Position')),
+            ('profession',_('Profession')), ('country',_('Country')), 
+    )
+    event = models.ForeignKey('Event', related_name='fields', verbose_name=_('Event'))
+    name = StatusField()
+    label = models.CharField(max_length=100)
+    order = models.IntegerField(null=True)
+
+    class Meta:
+        ordering = ['event', 'order']
+
+    def __unicode__(self):
+        return "%s : %s" % (self.event, self.name)
+
+
 class Content(models.Model):
     event = models.ForeignKey('Event', related_name='contents', verbose_name=_('Event'))
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     title = models.CharField(max_length=200, verbose_name=_('Title'))
-    STATUS = Choices(('about',_('About')), ('info',_('Main description')), ('footer', _('Footer')), ('services', _('Services')), ('404',_('Not Found')))
+    STATUS = Choices(('about',_('About')), ('contact',_('Contact')), ('info',_('Main description')), ('footer', _('Footer')), ('services', _('Services')), ('404',_('Not Found')))
     page = StatusField()
     text = models.TextField()
 

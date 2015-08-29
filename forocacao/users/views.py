@@ -79,7 +79,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
 
-    fields = ['name', 'phone', 'event', 'activities' ] #FIXME : add all needed fields
+    fields = ['first_name', 'last_name', 'phone', 'activities' ] #FIXME : add all needed fields
 
     # we already imported User in the view code above, remember?
     model = User
