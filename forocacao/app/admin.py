@@ -90,7 +90,7 @@ class AttendeeAdmin(admin.ModelAdmin):
         }),
         ('Permisos de usuario', {
             'classes': ('collapse',),
-            'fields': ('username', 'password', 'is_active','last_login','date_joined')
+            'fields': ['username', 'password', 'is_active','last_login','date_joined']
         }),
     )
 
@@ -102,7 +102,7 @@ class AttendeeAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         if not has_approval_permission(request, obj):
-            self.fieldsets[2][1]['fields'].add('is_active')
+            self.fieldsets[2][1]['fields'] = ['username', 'password', 'is_active','last_login','date_joined']
         form = super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
 
         # required fields (not required in original model)
