@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ object.event }}{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+</div>
+<div class="container internal">
+  <div class="row">
+    <div class="col-sm-12">
+
+    {% if object.event.logo %}
+        <img src="{% thumbnail object.event.logo 100x100 %}" class="pull-left"/>
+    {% endif %}
+    {% if object.name %}
+    <h1>{{ object.name }}</h1>
+    {% endif %}
+    <div class="clear"></div>
+    <div class="contenido">  
+        {{ object.text|safe }}
+     </div>
+  </div>
+</div>
+
+
+</div>
+{% endblock content %}
+

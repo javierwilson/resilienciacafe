@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^chaining/', include('smart_selects.urls')),
 
     #url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name="home"),
-    url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
+    #url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name="about"),
 
     # Django Admin
     url(r'^admin/', include(admin.site.urls)),

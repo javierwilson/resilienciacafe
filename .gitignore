@@ -70,3 +70,4 @@ media
 migrations
 *.sh
 .lesshst
+.gitconfig
