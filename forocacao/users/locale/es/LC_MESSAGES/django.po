@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-27 06:56-0600\n"
+"POT-Creation-Date: 2015-09-01 02:50-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,6 +28,22 @@ msgstr "Nombre"
 #: forms.py:8
 msgid "Last name"
 msgstr "Apellido"
+
+#: forms.py:9
+msgid "Document"
+msgstr "Documento"
+
+#: forms.py:10
+msgid "Telephone"
+msgstr "Teléfono"
+
+#: forms.py:11
+msgid "Organization"
+msgstr "Organización"
+
+#: forms.py:12
+msgid "Position"
+msgstr "Cargo"
 
 #: models.py:20
 msgid "Event"
@@ -57,31 +73,31 @@ msgstr "Nacionalidad"
 msgid "Soponsored"
 msgstr "Patrocinado"
 
-#: models.py:27
+#: models.py:28
 msgid "Sponsor"
 msgstr "Patrocinador"
 
-#: models.py:31
+#: models.py:32
 msgid "Type"
 msgstr "Tipo"
 
-#: models.py:33
+#: models.py:34
 msgid "Photo"
 msgstr "Foto"
 
-#: models.py:35
+#: models.py:36
 msgid "Biography"
 msgstr "Biografía"
 
-#: models.py:37
+#: models.py:38
 msgid "Activity"
 msgstr "Actividad"
 
-#: models.py:40
+#: models.py:41
 msgid "Attendee"
 msgstr "Participante"
 
-#: models.py:41
+#: models.py:42
 msgid "Attendees"
 msgstr "Participantes"
 
@@ -91,14 +107,8 @@ msgstr "Nombre completo"
 msgid "Age"
 msgstr "Edad"
 
-msgid "Document"
-msgstr "Documento"
-
 msgid "Speaker"
 msgstr "Ponente"
-
-msgid "Oganizer"
-msgstr "Organizador"
 
 msgid "Special"
 msgstr "Especial"

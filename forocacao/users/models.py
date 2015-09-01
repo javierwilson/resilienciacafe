@@ -18,17 +18,18 @@ class User(AbstractUser):
 
     #name = models.CharField(_("Name of User"), blank=True, max_length=255)
     event = models.ForeignKey('app.Event', null=True, verbose_name=_('Event'))
-    profession = models.ForeignKey('app.Profession', verbose_name=_('Profession'))
+    profession = models.ForeignKey('app.Profession', null=True, verbose_name=_('Profession'))
     phone = models.CharField(max_length=50, verbose_name=_('Phone'))
-    extra = models.BooleanField(verbose_name=_('Extra Activity'))
+    extra = models.BooleanField(verbose_name=_('Extra Activity'), default=False)
     country = CountryField(verbose_name=_('Country'))
     nationality = CountryField(verbose_name=_('Nationality'))
-    sponsored = models.BooleanField(verbose_name=_('Soponsored'))
+    sponsored = models.BooleanField(verbose_name=_('Soponsored'), default=False)
+    # FIXME: sponsor always == 3?
     sponsor = models.ForeignKey('User', limit_choices_to = {'type': 3}, null=True, blank=True, verbose_name=_('Sponsor'))
     #document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document'))
     #TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
     #type = models.ForeignKey('app.AttendeeType', default='regular', verbose_name=_('Type'))
-    type = models.ForeignKey('app.AttendeeType', verbose_name=_('Type'))
+    type = models.ForeignKey('app.AttendeeType', null=True, verbose_name=_('Type'))
     #payment_method = models.ForeignKey('app.PaymentMethod', null=True, verbose_name=_('Payment Method'))
     photo = models.ImageField(null=True, blank=True, verbose_name=_('Photo'))
     text = models.TextField(blank=True,
