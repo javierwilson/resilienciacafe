@@ -344,56 +344,56 @@ msgstr "Gafetes"
 msgid "Attendees"
 msgstr "Participantes"
 
-#~ msgid "Receipt"
-#~ msgstr "Recibo"
+msgid "Receipt"
+msgstr "Recibo"
 
-#~ msgid "Sheet"
-#~ msgstr "Hoja"
+msgid "Sheet"
+msgstr "Hoja"
 
-#~ msgid "Tools"
-#~ msgstr "Herramientas"
+msgid "Tools"
+msgstr "Herramientas"
 
-#~ msgid "E-mail Addresses"
-#~ msgstr "Direcciones de correo"
+msgid "E-mail Addresses"
+msgstr "Direcciones de correo"
 
-#~ msgid "Verified"
-#~ msgstr "Verificado"
+msgid "Verified"
+msgstr "Verificado"
 
-#~ msgid "Unverified"
-#~ msgstr "Sin verificar"
+msgid "Unverified"
+msgstr "Sin verificar"
 
-#~ msgid "Primary"
-#~ msgstr "Primario"
+msgid "Primary"
+msgstr "Primario"
 
-#~ msgid "Make Primary"
-#~ msgstr "Hacer primario"
+msgid "Make Primary"
+msgstr "Hacer primario"
 
-#~ msgid "Re-send Verification"
-#~ msgstr "Re-enviar verficación"
+msgid "Re-send Verification"
+msgstr "Re-enviar verficación"
 
-#~ msgid "Remove"
-#~ msgstr "Quitar"
+msgid "Remove"
+msgstr "Quitar"
 
-#~ msgid "My Profile"
-#~ msgstr "Mi Perfil"
+msgid "My Profile"
+msgstr "Mi Perfil"
 
-#~ msgid "Log In"
-#~ msgstr "Entrar"
+msgid "Log In"
+msgstr "Entrar"
 
-#~ msgid "Phone"
-#~ msgstr "Teléfono"
+msgid "Phone"
+msgstr "Teléfono"
 
-#~ msgid "Age"
-#~ msgstr "Edad"
+msgid "Age"
+msgstr "Edad"
 
-#~ msgid "Speaker"
-#~ msgstr "Ponente"
+msgid "Speaker"
+msgstr "Ponente"
 
-#~ msgid "Sponsor"
-#~ msgstr "Patrocinador"
+msgid "Sponsor"
+msgstr "Patrocinador"
 
-#~ msgid "Special"
-#~ msgstr "Especial"
+msgid "Special"
+msgstr "Especial"
 
-#~ msgid "Biography"
-#~ msgstr "Biografía"
+msgid "Biography"
+msgstr "Biografía"

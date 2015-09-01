@@ -26,7 +26,9 @@ class User(AbstractUser):
     sponsored = models.BooleanField(verbose_name=_('Soponsored'), default=False)
     # FIXME: sponsor always == 3?
     sponsor = models.ForeignKey('User', limit_choices_to = {'type': 3}, null=True, blank=True, verbose_name=_('Sponsor'))
-    #document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document'))
+    document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document'))
+    organization = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Organization'))
+    position = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Position'))
     #TYPE = Choices(('regular',_('Regular')), ('speaker', _('Speaker')), ('sponsor', _('Sponsor')), ('organizer',_('Oganizer')), ('special',_('Special')))
     #type = models.ForeignKey('app.AttendeeType', default='regular', verbose_name=_('Type'))
     type = models.ForeignKey('app.AttendeeType', null=True, verbose_name=_('Type'))

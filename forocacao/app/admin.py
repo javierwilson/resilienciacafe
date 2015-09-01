@@ -3,6 +3,8 @@ from django import forms
 from django.utils.translation import ugettext as _
 
 from suit_redactor.widgets import RedactorWidget
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content, Field
 
@@ -77,16 +79,24 @@ class AttendeeReceiptAdmin(admin.ModelAdmin):
 class AttendeePaymentAdmin(admin.ModelAdmin):
     list_display = ['attendee', 'payment_method', 'amount' ]
 
-class AttendeeAdmin(admin.ModelAdmin):
 
-    list_display = ['id','first_name','last_name','email','profession','balance']
+class AttendeeResource(resources.ModelResource):
+    class Meta:
+        model = Attendee
+
+
+class AttendeeAdmin(ImportExportModelAdmin):
+
+    list_display = ['id','first_name','last_name','email','organization','balance']
+
+    resource_class = AttendeeResource
 
     def my_url_field(self, obj):
         return '<a href="%s%s">%s</a>' % ('http://url-to-prepend.com/', obj.url_field, obj.url_field)
     my_url_field.allow_tags = True
     my_url_field.short_description = 'Column description'
 
-    list_filter = ('event__name','country','profession','type')
+    list_filter = ('event__name','country','organization','type')
     search_fields = ['id','first_name','last_name']
 
     inlines = [
@@ -96,6 +106,7 @@ class AttendeeAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('event','type','first_name', 'last_name', 'email', 'profession',
+            'organization','position','document',
             'phone','country','nationality','extra','sponsored','sponsor','photo')
         }),
         ('Informacion de actividades y biografia', {
