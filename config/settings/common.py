@@ -98,7 +98,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.s
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ("""Javier Wilson""", 'javier.wilson@gmail.com'),
+    ("""John Doe""", 'john.doe@example.com'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
@@ -222,11 +222,19 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# Determines whether or not an e-mail address is automatically confirmed by a mere GET request.
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+# The URL to redirect to after a successful e-mail confirmation, in case no user is logged in.
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = 'app:home'
+# The URL to redirect to after a successful e-mail confirmation, in case of an authenticated user. Set to None to use settings.
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'app:home'
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 15
 
 # Custom user app defaults
 # Select the correct user model
 AUTH_USER_MODEL = 'users.User'
-LOGIN_REDIRECT_URL = 'users:redirect'
+#LOGIN_REDIRECT_URL = 'users:redirect'
+LOGIN_REDIRECT_URL = 'app:home'
 LOGIN_URL = 'account_login'
 
 # SLUGLIFIER
