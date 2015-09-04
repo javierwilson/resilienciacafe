@@ -33,6 +33,7 @@ class User(AbstractUser):
     #type = models.ForeignKey('app.AttendeeType', default='regular', verbose_name=_('Type'))
     type = models.ForeignKey('app.AttendeeType', null=True, verbose_name=_('Type'))
     #payment_method = models.ForeignKey('app.PaymentMethod', null=True, verbose_name=_('Payment Method'))
+    approved = models.BooleanField(default=False, verbose_name=_('Approved'))
     photo = models.ImageField(null=True, blank=True, verbose_name=_('Photo'))
     text = models.TextField(blank=True,
                                  verbose_name=_('Biography'),

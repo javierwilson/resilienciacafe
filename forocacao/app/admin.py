@@ -105,7 +105,7 @@ class AttendeeAdmin(ImportExportModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('event','type','first_name', 'last_name', 'email', 'profession',
+            'fields': ('event','type','first_name', 'last_name', 'email', 'approved', 'profession',
             'organization','position','document',
             'phone','country','nationality','extra','sponsored','sponsor','photo')
         }),
@@ -127,7 +127,9 @@ class AttendeeAdmin(ImportExportModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         if not has_approval_permission(request, obj):
-            self.fieldsets[2][1]['fields'] = ['username', 'password', 'is_active','last_login','date_joined']
+            self.fieldsets[0][1]['fields'] = ('event','type','first_name', 'last_name', 'email', 'approved', 'profession',
+                'organization','position','document',
+                'phone','country','nationality','extra','sponsored','sponsor','photo')
         form = super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
 
         # required fields (not required in original model)
