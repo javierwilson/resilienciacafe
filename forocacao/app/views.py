@@ -1,4 +1,5 @@
 from datetime import date
+from PIL import Image, ImageDraw, ImageFont
 
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
@@ -9,6 +10,8 @@ from django.conf import settings
 from braces.views import LoginRequiredMixin
 
 from .models import Event, Activity, Attendee, AttendeeReceipt, Content
+
+
 
 class HomeView(DetailView):
 
@@ -46,6 +49,65 @@ class AttendeeReceiptView(LoginRequiredMixin, DetailView):
             new_receipt.save()
             return new_receipt
 
+
+
+class AttendeeJPEGView(LoginRequiredMixin, DetailView):
+    model = Attendee
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    def get(self, request, username):
+        participant = self.get_object()
+        print participant
+        event = participant.event
+
+        img = Image.new('RGBA', (event.badge_size_x, event.badge_size_y), event.badge_color)
+        draw = ImageDraw.Draw(img)
+
+        match = {
+                'event': event.name,
+                'name': "%s %s" % (participant.first_name, participant.last_name ),
+                'first_name': participant.first_name,
+                'last_name': participant.last_name,
+                'profession': participant.profession,
+                'country': participant.country.name,
+                'type': participant.type,
+                'email': participant.email,
+            }
+        for field in event.eventbadge_set.all():
+            x = field.x
+            y = field.y
+            size = field.size
+            if field.field == 'logo':
+                if participant.event.logo:
+                    logo = Image.open(participant.event.logo.file.file)
+                    logo.thumbnail((size,size))
+                    img.paste(logo, (x,y))
+            elif field.field == 'photo':
+                if participant.photo:
+                    photo = Image.open(participant.photo)
+                    photo.thumbnail((size,size))
+                    img.paste(photo, (x,y))
+            else:
+                if field.field == 'text':
+                    content = field.format
+                else:
+                    content = match[field.field]
+                fnt = ImageFont.truetype(field.font.filename, size)
+                color = field.color
+                draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
+
+
+        response = HttpResponse(content_type="image/png")
+        img.save(response, "PNG")
+        return HttpResponse(response, content_type="image/png")
+
+
+
+class AttendeeBadgeView(LoginRequiredMixin, DetailView):
+    model = Attendee
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    template_name = "app/attendee_badge.html"
 
 class AttendeeDetailView(LoginRequiredMixin, DetailView):
     model = Attendee

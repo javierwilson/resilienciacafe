@@ -6,12 +6,13 @@
     </li>
     <li>
     {% if perms.users.can_print_badge %}
-        <a href="{% url 'users:badge' username=original.username %}" class="historylink">{% trans "Badge" %}</a>
+        <a href="{% url 'app:badge' username=original.username %}" class="historylink">{% trans "Badge" %}</a>
         {% if original.balance <= 0 %}
             <a href="{% url 'app:receipt' username=original.username %}" class="historylink">{% trans "Receipt" %}</a>
         {% endif %}
     {% endif %}
     <a href="{% url 'app:detail' username=original.username %}" class="historylink">{% trans "Sheet" %}</a>
+    <a href="{% url 'app:jpeg' username=original.username %}" class="historylink">{% trans "PDF" %}</a>
     </li>
     {% if has_absolute_url %}
         <li>
