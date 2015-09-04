@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 02:50-0600\n"
+"POT-Creation-Date: 2015-09-04 10:31-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,11 +37,11 @@ msgstr "Documento"
 msgid "Telephone"
 msgstr "Teléfono"
 
-#: forms.py:11
+#: forms.py:11 models.py:30
 msgid "Organization"
 msgstr "Organización"
 
-#: forms.py:12
+#: forms.py:12 models.py:31
 msgid "Position"
 msgstr "Cargo"
 
@@ -77,27 +77,31 @@ msgstr "Patrocinado"
 msgid "Sponsor"
 msgstr "Patrocinador"
 
-#: models.py:32
+#: models.py:29
+msgid "Document ID"
+msgstr "Documento de Identidad"
+
+#: models.py:34
 msgid "Type"
 msgstr "Tipo"
 
-#: models.py:34
+#: models.py:36
 msgid "Photo"
 msgstr "Foto"
 
-#: models.py:36
+#: models.py:38
 msgid "Biography"
 msgstr "Biografía"
 
-#: models.py:38
+#: models.py:40
 msgid "Activity"
 msgstr "Actividad"
 
-#: models.py:41
+#: models.py:43
 msgid "Attendee"
 msgstr "Participante"
 
-#: models.py:42
+#: models.py:44
 msgid "Attendees"
 msgstr "Participantes"
 
