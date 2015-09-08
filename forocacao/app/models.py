@@ -288,5 +288,9 @@ class Attendee(User):
         return "%s %s" % (self.first_name, self.last_name)
     full_name.short_description = _("Name")
 
+    def make_approved(modeladmin, request, queryset):
+        queryset.update(approved=True)
+    make_approved.short_description = _("Approve participation of selected attendees")
+
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.last_name)

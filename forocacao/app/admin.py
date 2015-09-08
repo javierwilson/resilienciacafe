@@ -85,7 +85,13 @@ class AttendeeResource(resources.ModelResource):
         model = Attendee
 
 
+def make_approved(modeladmin, request, queryset):
+    queryset.update(approved=True)
+make_approved.short_description = _("Approve participation of selected attendees")
+
 class AttendeeAdmin(ImportExportModelAdmin):
+
+    actions = [make_approved]
 
     list_display = ['id','first_name','last_name','email','organization','balance']
 
