@@ -45,7 +45,6 @@ THIRD_PARTY_APPS = (
     'mptt',
     'easy_thumbnails',
     'django_countries',
-    'smart_selects',
     'colorfield',
     'import_export',
 )

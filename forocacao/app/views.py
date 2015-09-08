@@ -1,13 +1,23 @@
+# -*- coding: utf-8 -*-
 from datetime import date
 from PIL import Image, ImageDraw, ImageFont
 
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from django.conf import settings
+from django.template.defaultfilters import date as _date
+from django.utils import timezone
 
 from braces.views import LoginRequiredMixin
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.graphics.barcode import qr
+from reportlab.graphics.shapes import Drawing
+from reportlab.graphics import renderPDF
 
 from .models import Event, Activity, Attendee, AttendeeReceipt, Content
 
@@ -50,14 +60,101 @@ class AttendeeReceiptView(LoginRequiredMixin, DetailView):
             return new_receipt
 
 
+class AttendeePDFView(LoginRequiredMixin, DetailView):
+    model = Attendee
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    template_name = "app/attendee_badge.html"
+    response = HttpResponse(content_type="application/pdf")
+    canvas = canvas.Canvas(response)
+    canvas.pagesize = letter
+
+    def draw(self, string, x, y, color=colors.black, font='Helvetica', size=12):
+        self.canvas.setFillColor(color)
+        self.canvas.setFont(font, size)
+        self.canvas.drawString(x, y, string)
+
+    def get(self, request, username):
+        participant = self.get_object()
+
+        self.canvas.setTitle("%s : %s" % (participant.event.name, participant.full_name()))
+        width, height = letter
+        y = hstart = height-20
+        x = wstart = 120
+
+        self.draw("Evento", x, y, size=10, color=colors.grey)
+        y -= 20
+        self.draw(participant.event.name, x, y, size=22)
+        y -= 20
+
+        self.draw("Fecha y Hora", x, y, size=10, color=colors.grey)
+        y -= 20
+        self.draw(_date(timezone.localtime(participant.event.start), 'r'), x, y)
+        y += 20
+
+        self.draw("Ubicación", x+200, y, size=10, color=colors.grey)
+        y -= 20
+        self.draw(participant.event.place, x+200, y)
+        y -= 20
+
+        self.draw("Participante", x, y, size=10, color=colors.grey)
+        y -= 20
+        self.draw(participant.full_name(), x, y)
+        y += 20
+
+        self.draw("Organización", x+200, y, size=10, color=colors.grey)
+        y -= 20
+        self.draw(participant.organization, x+200, y)
+        y -= 20
+
+        self.draw(u"País", x, y, size=10, color=colors.grey)
+        y -= 20
+        self.draw(str(participant.country.name), x, y)
+        y += 20
+
+        self.draw("Cargo", x+200, y, size=10, color=colors.grey)
+        y -= 20
+        self.draw(participant.position, x+200, y)
+        y += 20
+
+        # insert logo
+        logo = Image.open(participant.event.logo.file.file)
+        logo_width = logo.size[0]
+        logo_height = logo.size[1]
+        #logo._restrictSize(2 * inch, 1 * inch)
+        #logo.thumbnail((120,100))
+        logo = participant.event.logo.file.file.name
+        self.canvas.drawImage(logo, wstart-100, hstart-(logo_height/2), width=logo_width/2, height=logo_height/2)
+
+        # draw a QR code
+        contact = {
+            'name': "%s: %s" % (participant.id, participant.full_name()),
+            'phone_number': participant.phone,
+            'email': participant.email,
+            'url': reverse('app:detail', kwargs={'username': participant.username}),
+            'company': participant.organization,
+        }
+        qr_code = qr.QrCodeWidget(contact['name'])
+        bounds = qr_code.getBounds()
+        width = bounds[2] - bounds[0]
+        height = bounds[3] - bounds[1]
+        d = Drawing(100, 100, transform=[100./width,0,0,100./height,0,0])
+        d.add(qr_code)
+        renderPDF.draw(d, self.canvas, wstart+320, y)
+
+        self.canvas.showPage()
+        self.canvas.save()
+
+        return self.response
+
 
 class AttendeeJPEGView(LoginRequiredMixin, DetailView):
     model = Attendee
     slug_field = "username"
     slug_url_kwarg = "username"
+
     def get(self, request, username):
         participant = self.get_object()
-        print participant
         event = participant.event
 
         img = Image.new('RGBA', (event.badge_size_x, event.badge_size_y), event.badge_color)

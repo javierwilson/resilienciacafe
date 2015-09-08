@@ -12,7 +12,7 @@
         {% endif %}
     {% endif %}
     <a href="{% url 'app:detail' username=original.username %}" class="historylink">{% trans "Sheet" %}</a>
-    <a href="{% url 'app:jpeg' username=original.username %}" class="historylink">{% trans "PDF" %}</a>
+    <a href="{% url 'app:pdf' username=original.username %}" class="historylink">{% trans "PDF" %}</a>
     </li>
     {% if has_absolute_url %}
         <li>

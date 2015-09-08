@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView, DetailView
 
-from .views import HomeView, ActivitiesView, AttendeeDetailView, AttendeeBadgeView, AttendeeJPEGView, AttendeeReceiptView, ContentView, event 
+from .views import HomeView, ActivitiesView, AttendeeDetailView, AttendeeBadgeView, AttendeeJPEGView, AttendeePDFView, AttendeeReceiptView, ContentView, event 
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^attendee/(?P<username>[\w.@+-]+)/$',AttendeeDetailView.as_view(), name='detail'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/badge/$',AttendeeBadgeView.as_view(), name='badge'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/jpeg/$',AttendeeJPEGView.as_view(), name='jpeg'),
+    url(r'^attendee/(?P<username>[\w.@+-]+)/pdf/$',AttendeePDFView.as_view(), name='pdf'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/receipt/$',AttendeeReceiptView.as_view(), name='receipt'),
 
     url(r'^(?P<url>.*/)$', event, name='event'),
