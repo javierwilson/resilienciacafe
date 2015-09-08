@@ -1,5 +1,7 @@
-from django.contrib import admin
 from django import forms
+from django.conf import settings
+from django.contrib import admin
+from django.core.mail import send_mail
 from django.utils.translation import ugettext as _
 
 from suit_redactor.widgets import RedactorWidget
@@ -7,6 +9,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 
 from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content, Field
+from .pdf import createPDF
 
 def has_approval_permission(request, obj=None):
     if request.user.has_perm('users.can_approve_participant'):
@@ -84,6 +87,17 @@ class AttendeeResource(resources.ModelResource):
     class Meta:
         model = Attendee
 
+from django.core.mail import EmailMessage
+
+def mail_attendee(modeladmin, request, queryset):
+    for obj in queryset:
+        email = EmailMessage(obj.event.name, obj.event.title, settings.DEFAULT_FROM_EMAIL, [ obj.email ], 
+                headers={'Message-ID': "%s-%s" % (obj.event.slug, obj.id) })
+        filename = '/tmp/%s.pdf' % (obj.email, )
+        createPDF(obj, filename)
+        email.attach_file(filename)
+        email.send()
+mail_attendee.short_description = _("Mail selected attendees")
 
 def make_approved(modeladmin, request, queryset):
     queryset.update(approved=True)
@@ -91,7 +105,7 @@ make_approved.short_description = _("Approve participation of selected attendees
 
 class AttendeeAdmin(ImportExportModelAdmin):
 
-    actions = [make_approved]
+    actions = [make_approved, mail_attendee]
 
     list_display = ['id','first_name','last_name','email','organization','balance']
 
