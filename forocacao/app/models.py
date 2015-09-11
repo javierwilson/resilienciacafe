@@ -28,6 +28,7 @@ class Event(models.Model):
                                  verbose_name=_('Event description'),
                                  help_text='Try and enter few some more lines')
     logo = FilerImageField(blank=True, null=True, related_name='event_logos', verbose_name=_('Logo'))
+    pdflogo = FilerImageField(blank=True, null=True, related_name='event_pdflogos', verbose_name=_('PDF Logo'))
     image = FilerImageField(blank=True, null=True, related_name='event_images', verbose_name=_('Image'))
     image_footer = FilerImageField(blank=True, null=True, related_name='event_footers', verbose_name=_('Image footer') )
     eb_start = models.DateField(blank=True, null=True, verbose_name=_('Early Bird Start'))
@@ -73,10 +74,11 @@ class Field(models.Model):
 class Content(models.Model):
     event = models.ForeignKey('Event', related_name='contents', verbose_name=_('Event'))
     name = models.CharField(max_length=200, verbose_name=_('Name'))
+    image = FilerImageField(blank=True, null=True, verbose_name=_('Image'))
     title = models.CharField(max_length=200, verbose_name=_('Title'))
     STATUS = Choices(('about',_('About')), ('contact',_('Contact')), ('info',_('Main description')), ('footer', _('Footer')), ('services', _('Services')), ('404',_('Not Found')))
     page = StatusField()
-    text = models.TextField()
+    text = models.TextField(blank=True, null=True)
 
     class Meta:
         ordering = ['name']
