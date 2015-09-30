@@ -30,6 +30,7 @@ class Event(models.Model):
     logo = FilerImageField(blank=True, null=True, related_name='event_logos', verbose_name=_('Logo'))
     pdflogo = FilerImageField(blank=True, null=True, related_name='event_pdflogos', verbose_name=_('PDF Logo'))
     image = FilerImageField(blank=True, null=True, related_name='event_images', verbose_name=_('Image'))
+    translucid = FilerImageField(blank=True, null=True, related_name='translucid_images', verbose_name=_('Translucid Image'))
     image_footer = FilerImageField(blank=True, null=True, related_name='event_footers', verbose_name=_('Image footer') )
     eb_start = models.DateField(blank=True, null=True, verbose_name=_('Early Bird Start'))
     eb_end = models.DateField(blank=True, null=True, verbose_name=_('Early Bird End'))

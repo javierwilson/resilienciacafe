@@ -40,5 +40,5 @@ h2 { font-size: 26px }
 h3 { color: #006196;font-size: 18px;}
 .separador {display: block;height: 1px; border: 0; border-top: 1px solid #C2EAFF; margin: 1em 0;  padding: 0;  }
 h4 { color: #242424;font-size: 15px;}
-.lwr-logo { opacity: 0.6;}
-.lwr-header {opacity: 0.6;background-color: rgb(88, 88, 90); text-align: left;}
+.translucid-logo { opacity: 0.6;}
+.translucid-header {opacity: 0.6;background-color: rgb(88, 88, 90); text-align: left;}
