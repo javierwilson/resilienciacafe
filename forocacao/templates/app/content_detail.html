@@ -18,7 +18,9 @@
     <h1>{{ object.name }}</h1>
     {% endif %}
     <div class="clear"></div>
-    <div class="thumbnail"><img src="{% thumbnail object.image 400x400 crop %}" class="pull-right"/></div>
+    {% if object.image %}
+    <div class="thumbnail pull-right"><img src="{% thumbnail object.image 400x400 crop %}" /></div>
+    {% endif %}
     <div class="contenido">  
         {{ object.text|safe }}
      </div>

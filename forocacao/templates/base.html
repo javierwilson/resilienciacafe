@@ -79,12 +79,15 @@
 
     <a name="about"></a>
     <div class="intro-header" style="background-image: url({{ object.image.url }});">
+        <div class="lwr-header">
+            <div class="container"><img src="http://www.forocacao.com/media/filer_public/d1/48/d148a902-45e9-40dd-81c8-119e254bc69d/lwr-header-only.png" class="lwr-logo" alt="LWR"/></div>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
                         <h1>{{ object.name }}</h1>
-                        <h2>{{ object.start }}</h2>
+                        <h2>{{ object.start|date:"DATE_FORMAT" }}</h2>
                         <h2>{{ object.title }}</h2>
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
@@ -155,7 +158,7 @@
     </div>
     <!-- /.content-section-b -->
 
-    <div class="content-section-a">
+    <div class="content-section-a" style="display: none;">
 
         <div class="container">
         </div>
@@ -166,7 +169,7 @@
 
       {% endblock %} <!-- /.content -->
 	<a  name="contact"></a>
-    <div class="banner" style="background-image: url({{ object.image_footer.url }});">
+    <div class="banner" style="display: none; background-image: url({{ object.image_footer.url }});">
 
         <div class="container">
 
