@@ -77,7 +77,7 @@ class Content(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     image = FilerImageField(blank=True, null=True, verbose_name=_('Image'))
     title = models.CharField(max_length=200, verbose_name=_('Title'))
-    STATUS = Choices(('about',_('About')), ('contact',_('Contact')), ('info',_('Main description')), ('footer', _('Footer')), ('services', _('Services')), ('404',_('Not Found')))
+    STATUS = Choices(('about',_('About')), ('contact',_('Contact')), ('info',_('Main description')), ('footer', _('Footer')), ('services', _('Services')), ('404',_('Not Found')), ('confirmation', _('Confirmation')), ('other', _('Other')))
     page = StatusField()
     text = models.TextField(blank=True, null=True)
 

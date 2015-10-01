@@ -224,7 +224,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 # Determines whether or not an e-mail address is automatically confirmed by a mere GET request.
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 # The URL to redirect to after a successful e-mail confirmation, in case no user is logged in.
-ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = 'app:home'
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = 'app:confirmation'
 # The URL to redirect to after a successful e-mail confirmation, in case of an authenticated user. Set to None to use settings.
 ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'app:home'
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 15

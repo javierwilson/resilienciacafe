@@ -11,6 +11,7 @@ from .views import HomeView, ActivitiesView, AttendeeDetailView, AttendeeBadgeVi
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^(?P<slug>[\w-]+)/confirmation/$', ContentView.as_view(page='confirmation'), name='confirmation'),
     url(r'^(?P<slug>[\w-]+)/about/$', ContentView.as_view(page='about'), name='about'),
     url(r'^(?P<slug>[\w-]+)/services/$', ContentView.as_view(page='services'), name='services'),
     url(r'^(?P<slug>[\w-]+)/contact/$', ContentView.as_view(page='contact'), name='contact'),
