@@ -8,6 +8,13 @@
 <div class="col-md-12">
 </div>
 <div class="container internal">
+
+
+    {% if object.image %}
+    <div class="intro-header" style="background-image: url({{ object.image.url }});">
+    </div>
+    {% endif %}
+
   <div class="row">
     <div class="col-sm-12">
 
@@ -19,7 +26,7 @@
     {% endif %}
     <div class="clear"></div>
     {% if object.image %}
-    <div class="thumbnail pull-right"><img src="{% thumbnail object.image 400x400 crop %}" /></div>
+    {# <div class="thumbnail pull-right"><img src="{% thumbnail object.image 400x400 crop %}" /></div> #}
     {% endif %}
     <div class="contenido">  
         {{ object.text|safe }}
