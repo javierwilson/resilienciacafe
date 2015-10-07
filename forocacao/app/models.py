@@ -15,6 +15,10 @@ from colorfield.fields import ColorField
 
 from forocacao.users.models import User
 
+class Organization(models.Model):
+    name = models.CharField(max_length=200, verbose_name=_('Organization'))
+    email = models.CharField(max_length=100, verbose_name=_('E-Mail'))
+
 class Event(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     title = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Title'))
@@ -29,6 +33,7 @@ class Event(models.Model):
                                  help_text='Try and enter few some more lines')
     logo = FilerImageField(blank=True, null=True, related_name='event_logos', verbose_name=_('Logo'))
     pdflogo = FilerImageField(blank=True, null=True, related_name='event_pdflogos', verbose_name=_('PDF Logo'))
+    pdfnote = models.TextField(blank=True, null=True, verbose_name=_('PDF Note'))
     image = FilerImageField(blank=True, null=True, related_name='event_images', verbose_name=_('Image'))
     translucid = FilerImageField(blank=True, null=True, related_name='translucid_images', verbose_name=_('Translucid Image'))
     image_footer = FilerImageField(blank=True, null=True, related_name='event_footers', verbose_name=_('Image footer') )
@@ -58,7 +63,7 @@ class Field(models.Model):
             #('first_name', _('First name')), ('last_name', _('Last name')), ('email',_('E-mail')),
             ('document', _('Document')), ('phone', _('Telephone')),
             ('organization', _('Organization')), ('position', _('Position')),
-            ('profession',_('Profession')), ('country',_('Country')), 
+            ('profession',_('Profession')), ('country',_('Country')),
     )
     event = models.ForeignKey('Event', related_name='fields', verbose_name=_('Event'))
     name = StatusField()

@@ -39,6 +39,7 @@ class User(AbstractUser):
                                  verbose_name=_('Biography'),
                                  help_text='Try and enter few some more lines')
     activities = models.ManyToManyField('app.Activity', blank=True, verbose_name=_('Activity'))
+    responsible = models.ForeignKey('app.Organization', null=True, verbose_name=_('Organization responsible'))
 
     class Meta:
         verbose_name = _("Attendee")
