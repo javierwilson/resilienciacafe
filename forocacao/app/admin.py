@@ -1,14 +1,16 @@
 from django import forms
 from django.conf import settings
 from django.contrib import admin
-from django.core.mail import send_mail
+from django.contrib.admin import SimpleListFilter
+from django.core.mail import send_mail, EmailMessage
 from django.utils.translation import ugettext as _
 
 from suit_redactor.widgets import RedactorWidget
 from import_export import resources
-from import_export.admin import ImportExportModelAdmin
+from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 
-from .models import Event, Activity, Profession, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content, Field
+
+from .models import Event, Activity, Profession, Invited, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content, Field
 from .pdf import createPDF
 
 def has_approval_permission(request, obj=None):
@@ -83,15 +85,20 @@ class AttendeePaymentAdmin(admin.ModelAdmin):
     list_display = ['attendee', 'payment_method', 'amount' ]
 
 
+class InvitedResource(resources.ModelResource):
+    class Meta:
+        model = Invited
+        #fields = ('id', 'first_name', 'last_name', 'organization', 'email')
+
 class AttendeeResource(resources.ModelResource):
     class Meta:
         model = Attendee
-
-from django.core.mail import EmailMessage
+        fields = ('id', 'first_name', 'last_name', 'document', 'organization', 'position', 'telephone', 'username', 'email', 'country')
 
 def mail_attendee(modeladmin, request, queryset):
     for obj in queryset:
-        email = EmailMessage(obj.event.name, obj.event.title, settings.DEFAULT_FROM_EMAIL, [ obj.email ], 
+        message = "%s\r\n%s" % (obj.event.title, obj.event.pdfnote)
+        email = EmailMessage(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ],
                 headers={'Message-ID': "%s-%s" % (obj.event.slug, obj.id) })
         filename = '/tmp/%s.pdf' % (obj.email, )
         createPDF(obj, filename)
@@ -103,11 +110,24 @@ def make_approved(modeladmin, request, queryset):
     queryset.update(approved=True)
 make_approved.short_description = _("Approve participation of selected attendees")
 
+class InvitedFilter(SimpleListFilter):
+    title = _('invited')
+    parameter_name = 'invited'
+
+    def lookups(self, request, model_admin):
+        return [(True, _('Yes')), (False, _('No'))]
+
+    def queryset(self, request, queryset):
+        if self.value() == 'True':
+            return queryset.filter(email__in=Invited.objects.values('email'))
+        else:
+            return queryset.exclude(email__in=Invited.objects.values('email'))
+
 class AttendeeAdmin(ImportExportModelAdmin):
 
     actions = [make_approved, mail_attendee]
 
-    list_display = ['id','first_name','last_name','email','organization','balance']
+    list_display = ['id','first_name','last_name','email','organization','approved', 'invited']
 
     resource_class = AttendeeResource
 
@@ -116,7 +136,7 @@ class AttendeeAdmin(ImportExportModelAdmin):
     my_url_field.allow_tags = True
     my_url_field.short_description = 'Column description'
 
-    list_filter = ('event__name','country','organization','type')
+    list_filter = ('event__name','country','organization','type','approved', InvitedFilter)
     search_fields = ['id','first_name','last_name']
 
     inlines = [
@@ -182,6 +202,10 @@ class AttendeeAdmin(ImportExportModelAdmin):
         obj.save()
 
 
+class InvitedAdmin(ImportExportModelAdmin):
+    resource_class = InvitedResource
+
+
 
 admin.site.register(Event, EventAdmin)
 admin.site.register(Activity, ActivityAdmin)
@@ -193,3 +217,4 @@ admin.site.register(AttendeeReceipt, AttendeeReceiptAdmin)
 admin.site.register(PaymentMethod)
 admin.site.register(Font)
 admin.site.register(Field)
+admin.site.register(Invited, InvitedAdmin)

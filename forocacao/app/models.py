@@ -15,12 +15,24 @@ from colorfield.fields import ColorField
 
 from forocacao.users.models import User
 
+class Invited(models.Model):
+    first_name = models.CharField(max_length=200, verbose_name=_('First name'))
+    last_name = models.CharField(max_length=200, verbose_name=_('Last name'))
+    organization = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Organization'))
+    email = models.CharField(max_length=100, verbose_name=_('E-Mail'))
+
+    def __unicode__(self):
+        return self.email
+
 class Organization(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Organization'))
     email = models.CharField(max_length=100, verbose_name=_('E-Mail'))
 
+    def __unicode__(self):
+        return self.name
+
 class Event(models.Model):
-    name = models.CharField(max_length=200, verbose_name=_('Name'))
+    name = models.CharField(max_length=200, verbose_name=_('Event'))
     title = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Title'))
     organizer = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Organizer'))
     slug = models.SlugField()
@@ -263,6 +275,15 @@ class Attendee(User):
         except AttendeeTypeEvent.DoesNotExist:
             return 'wrong type'
         return price
+
+    def invited(self):
+        test = Invited.objects.filter(email=self.email)
+        if test:
+            return True
+        else:
+            return False
+    invited.short_description = _("Invited")
+    invited.boolean = True
 
     def balance(self):
         price = self.price()
