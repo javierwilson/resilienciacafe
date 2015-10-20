@@ -33,7 +33,11 @@ class ContentView(DetailView):
     page = None
 
     def get_object(self):
-        return self.model.objects.get(event__slug=self.kwargs['slug'], page=self.page)
+        if self.kwargs:
+            return self.model.objects.get(event__slug=self.kwargs['slug'], page=self.page)
+        else:
+            #FIXME qué si hay varios eventos?
+            return self.model.objects.get(page=self.page)
 
 
 class AttendeeReceiptView(LoginRequiredMixin, DetailView):
