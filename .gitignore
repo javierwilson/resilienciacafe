@@ -55,6 +55,9 @@ node_modules/
 # virtual environments
 .env
 
+# static files
+staticfiles/
+
 # shell stuff
 .bash*
 .zsh*
@@ -71,3 +74,4 @@ migrations
 *.sh
 .lesshst
 .gitconfig
+.ipython
