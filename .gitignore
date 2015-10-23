@@ -58,6 +58,9 @@ node_modules/
 # static files
 staticfiles/
 
+# db sql
+*.sql
+
 # shell stuff
 .bash*
 .zsh*
@@ -75,3 +78,5 @@ migrations
 .lesshst
 .gitconfig
 .ipython
+.config
+.local
