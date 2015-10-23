@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 from PIL import Image, ImageDraw, ImageFont
+import textwrap
 
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
@@ -82,6 +83,7 @@ class AttendeeJPEGView(LoginRequiredMixin, DetailView):
 
         img = Image.new('RGBA', (event.badge_size_x, event.badge_size_y), event.badge_color)
         draw = ImageDraw.Draw(img)
+        draw.rectangle(((0,0),(event.badge_size_x-1,event.badge_size_y-1)), outline = "black")
 
         match = {
                 'event': event.name,
@@ -89,6 +91,7 @@ class AttendeeJPEGView(LoginRequiredMixin, DetailView):
                 'first_name': participant.first_name,
                 'last_name': participant.last_name,
                 'profession': participant.profession,
+                'organization': participant.organization,
                 'country': participant.country.name,
                 'type': participant.type,
                 'email': participant.email,
@@ -114,7 +117,20 @@ class AttendeeJPEGView(LoginRequiredMixin, DetailView):
                     content = match[field.field]
                 fnt = ImageFont.truetype(field.font.filename, size)
                 color = field.color
-                draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
+                text = ("%s") % (content)
+                textsize = draw.textsize(text, font=fnt)
+                if textsize[0]+x < event.badge_size_x:
+                    draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
+                else:
+                    #draw.text((x,y), ("NO %s") % (content), font=fnt, fill=color)
+                    lines = textwrap.fill(text, 30).splitlines()
+                    tmp = y
+                    for line in lines:
+                        draw.text((x,y), line, font=fnt, fill=color)
+                        y += 22
+                    y = tmp
+
+                # FIXME: add barcode
 
 
         response = HttpResponse(content_type="image/png")
