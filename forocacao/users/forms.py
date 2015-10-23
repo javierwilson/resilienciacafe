@@ -19,7 +19,7 @@ class SignupForm(forms.Form):
         self.keyOrder = ['firs_name', 'last_name', 'document', 'phone', 'email', 'password']
 
     def signup(self, request, user):
-        user.username = self.cleaned_data['email']
+        user.username = self.cleaned_data['email'][:30]
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         event = Event.objects.filter(status='frontpage')[0]
