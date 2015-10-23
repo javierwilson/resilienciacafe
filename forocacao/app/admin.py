@@ -85,6 +85,10 @@ class AttendeePaymentAdmin(admin.ModelAdmin):
     list_display = ['attendee', 'payment_method', 'amount' ]
 
 
+class FontResource(resources.ModelResource):
+    class Meta:
+        model = Font
+
 class InvitedResource(resources.ModelResource):
     class Meta:
         model = Invited
@@ -93,7 +97,7 @@ class InvitedResource(resources.ModelResource):
 class AttendeeResource(resources.ModelResource):
     class Meta:
         model = Attendee
-        fields = ('id', 'first_name', 'last_name', 'document', 'organization', 'position', 'telephone', 'username', 'email', 'country')
+        fields = ('id', 'first_name', 'last_name', 'document', 'organization', 'position', 'telephone', 'username', 'email', 'country', 'address', 'sex')
 
 def mail_attendee(modeladmin, request, queryset):
     for obj in queryset:
@@ -120,8 +124,10 @@ class InvitedFilter(SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value() == 'True':
             return queryset.filter(email__in=Invited.objects.values('email'))
-        else:
+        elif self.value() == 'False':
             return queryset.exclude(email__in=Invited.objects.values('email'))
+        else:
+            return queryset
 
 class AttendeeAdmin(ImportExportModelAdmin):
 
@@ -198,9 +204,13 @@ class AttendeeAdmin(ImportExportModelAdmin):
         return form
 
     def save_model(self, request, obj, form, change):
-        obj.username = obj.email
+        if not obj.username:
+            obj.username = obj.email
         obj.save()
 
+
+class FontAdmin(ImportExportModelAdmin):
+    resource_class = FontResource
 
 class InvitedAdmin(ImportExportModelAdmin):
     resource_class = InvitedResource
@@ -215,6 +225,6 @@ admin.site.register(AttendeeType)
 admin.site.register(AttendeePayment, AttendeePaymentAdmin)
 admin.site.register(AttendeeReceipt, AttendeeReceiptAdmin)
 admin.site.register(PaymentMethod)
-admin.site.register(Font)
+admin.site.register(Font, FontAdmin)
 admin.site.register(Field)
 admin.site.register(Invited, InvitedAdmin)
