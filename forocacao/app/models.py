@@ -224,7 +224,7 @@ class EventBadge(models.Model):
     event = models.ForeignKey('Event', verbose_name=_('Event'))
     FIELDS = (('event',_('Event')), ('name', _('Complete name')), ('first_name', _('First name')), ('last_name', _('Last name')),
             ('profession',_('Profession')), ('country',_('Country')), ('type',_('Type')), ('email',_('E-mail')), ('text', _('Text')),
-            ('logo',_('Logo')), ('photo',_('Photo')))
+            ('logo',_('Logo')), ('photo',_('Photo')), ('organization',_('Organization')))
     field = models.CharField(max_length=50, choices=FIELDS, verbose_name=_('Field'))
     color = ColorField(default='', null=True, blank=True, verbose_name=_('Color'))
     font = models.ForeignKey('Font', null=True, blank=True, verbose_name=_('Font'))
