@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}Expositores{% endblock %}
+
+{% block content %}
+<div class="container internal">
+
+<h1>Expositores</h1>
+<div>
+{% for object in object_list %}
+    <div class="col-md-5 clearfix">
+        <h3>{{ object.full_name }}</h3>
+        <div class="contenido clear">
+            {% if object.photo %}
+                <img src="{% thumbnail object.photo 550x250 %}" class="img-responsive"/>
+            {% endif %}
+            {{ object.text|safe }}
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    {% if forloop.last or forloop.counter|divisibleby:2 %}
+        <div class='clearfix'></div>
+        <div class="col-md-10"><hr class="separador"/></div>
+    {% endif %}
+{% empty %}
+    <h2>No se han registrado expositores.</h2>
+{% endfor %}
+</div>
+
+</div>
+{% endblock content %}

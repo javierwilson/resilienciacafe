@@ -151,6 +151,19 @@ class AttendeeDetailView(LoginRequiredMixin, DetailView):
     slug_url_kwarg = "username"
 
 
+class SpeakersView(ListView):
+
+    model = Attendee
+    template_name = 'app/speaker_list.html'
+
+    def get_queryset(self):
+        return Attendee.objects.filter(event__slug=self.kwargs['slug'], type=Attendee.SPEAKER)
+
+    def get_context_data(self, **kwargs):
+        context = super(SpeakersView, self).get_context_data(**kwargs)
+        context['event'] = Event.objects.get(slug=self.kwargs['slug'])
+        return context
+
 class ActivitiesView(ListView):
 
     model = Activity

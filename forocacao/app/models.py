@@ -45,7 +45,8 @@ class Event(models.Model):
                                  help_text='Try and enter few some more lines')
     logo = FilerImageField(blank=True, null=True, related_name='event_logos', verbose_name=_('Logo'))
     pdflogo = FilerImageField(blank=True, null=True, related_name='event_pdflogos', verbose_name=_('PDF Logo'))
-    pdfnote = models.TextField(blank=True, null=True, verbose_name=_('PDF Note'))
+    pdfnote = models.TextField(blank=True, null=True, verbose_name=_('PDF and Approval Note'))
+    reject_note = models.TextField(blank=True, null=True, verbose_name=_('Reject Note'))
     image = FilerImageField(blank=True, null=True, related_name='event_images', verbose_name=_('Image'))
     translucid = FilerImageField(blank=True, null=True, related_name='translucid_images', verbose_name=_('Translucid Image'))
     image_footer = FilerImageField(blank=True, null=True, related_name='event_footers', verbose_name=_('Image footer') )
@@ -242,6 +243,11 @@ class EventBadge(models.Model):
         return self.field
 
 class Attendee(User):
+
+    ORGANIZER = 1
+    SPEAKER = 2
+    SPONSOR = 3
+
     class Meta:
         ordering = ['first_name', 'last_name']
         verbose_name = _("Attendee")

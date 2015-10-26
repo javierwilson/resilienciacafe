@@ -110,6 +110,13 @@ def mail_attendee(modeladmin, request, queryset):
         email.send()
 mail_attendee.short_description = _("Mail selected attendees")
 
+def make_rejected(modeladmin, request, queryset):
+    queryset.update(rejected=True)
+    for obj in queryset:
+        message = "%s\r\n%s" % (obj.event.title, obj.event.reject_note)
+        send_mail(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ])
+make_rejected.short_description = _("Reject participation of selected attendees")
+
 def make_approved(modeladmin, request, queryset):
     queryset.update(approved=True)
 make_approved.short_description = _("Approve participation of selected attendees")
@@ -129,11 +136,19 @@ class InvitedFilter(SimpleListFilter):
         else:
             return queryset
 
+class AttendeeForm(forms.ModelForm):
+    class Meta:
+        widgets = {
+            'text': RedactorWidget(editor_options={'lang': 'es', 'minHeight': '300'})
+        }
+
 class AttendeeAdmin(ImportExportModelAdmin):
 
-    actions = [make_approved, mail_attendee]
+    form = AttendeeForm
 
-    list_display = ['id','first_name','last_name','email','organization','approved', 'invited']
+    actions = [make_approved, make_rejected, mail_attendee]
+
+    list_display = ['id','first_name','last_name','email','organization','approved', 'invited', 'rejected']
 
     resource_class = AttendeeResource
 
@@ -142,7 +157,7 @@ class AttendeeAdmin(ImportExportModelAdmin):
     my_url_field.allow_tags = True
     my_url_field.short_description = 'Column description'
 
-    list_filter = ('event__name','country','organization','type','approved', InvitedFilter)
+    list_filter = ('event__name','country','organization','type','approved', InvitedFilter, 'rejected')
     search_fields = ['id','first_name','last_name']
 
     inlines = [
