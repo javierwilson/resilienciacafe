@@ -97,7 +97,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.s
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = (
-    ("""Javier Wilson""", 'javier.wilson@gmail.com'),
+    ('Admin', env('DJANGO_DEFAULT_FROM_EMAIL', default='root@localhost')),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
