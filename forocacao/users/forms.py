@@ -22,6 +22,10 @@ class SignupForm(forms.Form):
         user.username = self.cleaned_data['email'][:30]
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
+        user.organization = self.cleaned_data['organization']
+        user.position = self.cleaned_data['position']
+        user.phone = self.cleaned_data['phone']
+        user.document = self.cleaned_data['document']
         event = Event.objects.filter(status='frontpage')[0]
         if event:
             user.event = event
