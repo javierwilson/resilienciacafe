@@ -1,3 +1,5 @@
+import logging
+
 from django import forms
 from django.conf import settings
 from django.contrib import admin
@@ -28,8 +30,6 @@ class ContentForm(forms.ModelForm):
 class ContentAdmin(admin.ModelAdmin):
     form = ContentForm
 
-admin.site.register(Content, ContentAdmin)
-
 class AttendeeTypeInline(admin.TabularInline):
     model = Event.types.through
 
@@ -59,8 +59,16 @@ class EventAdmin(admin.ModelAdmin):
         EventBadgeInline,
     ]
 
+class ActivityForm(forms.ModelForm):
+    class Meta:
+        widgets = {
+            'text': RedactorWidget(editor_options={'lang': 'es', 'minHeight': '300'})
+        }
+
 class ActivityAdmin(admin.ModelAdmin):
+    form = ActivityForm
     prepopulated_fields = {"slug": ("name",)}
+    list_display = ['start', 'end', 'name' ]
 
 class ProfessionAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("name",)}
@@ -100,6 +108,7 @@ class AttendeeResource(resources.ModelResource):
         fields = ('id', 'first_name', 'last_name', 'document', 'organization', 'position', 'telephone', 'username', 'email', 'country', 'address', 'sex')
 
 def mail_attendee(modeladmin, request, queryset):
+    logger = logging.getLogger('django')
     for obj in queryset:
         message = "%s\r\n%s" % (obj.event.title, obj.event.pdfnote)
         email = EmailMessage(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ],
@@ -108,6 +117,7 @@ def mail_attendee(modeladmin, request, queryset):
         createPDF(obj, filename)
         email.attach_file(filename)
         email.send()
+	logger.info('APPROVED: %s' % (obj.email,))
 mail_attendee.short_description = _("Mail selected attendees")
 
 def make_rejected(modeladmin, request, queryset):
@@ -166,7 +176,7 @@ class AttendeeAdmin(ImportExportModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('event','type','first_name', 'last_name', 'email', 'approved', 'profession',
+            'fields': ('event','type','first_name', 'last_name', 'email', 'approved', 'rejected', 'profession',
             'organization','position','document',
             'phone','country','nationality','extra','sponsored','sponsor','photo')
         }),
@@ -243,3 +253,4 @@ admin.site.register(PaymentMethod)
 admin.site.register(Font, FontAdmin)
 admin.site.register(Field)
 admin.site.register(Invited, InvitedAdmin)
+admin.site.register(Content, ContentAdmin)

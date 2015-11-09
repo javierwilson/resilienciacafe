@@ -19,9 +19,9 @@ class User(AbstractUser):
     #name = models.CharField(_("Name of User"), blank=True, max_length=255)
     event = models.ForeignKey('app.Event', null=True, verbose_name=_('Event'))
     profession = models.ForeignKey('app.Profession', null=True, blank=True, verbose_name=_('Profession'))
-    phone = models.CharField(max_length=50, verbose_name=_('Phone'))
+    phone = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Phone'))
     extra = models.BooleanField(verbose_name=_('Extra Activity'), default=False)
-    country = CountryField(verbose_name=_('Country'))
+    country = CountryField(verbose_name=_('Country'), blank=True, null=True)
     nationality = CountryField(null=True, blank=True, verbose_name=_('Nationality'))
     sponsored = models.BooleanField(verbose_name=_('Soponsored'), default=False)
     # FIXME: sponsor always == 3?

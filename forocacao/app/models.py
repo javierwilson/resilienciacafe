@@ -122,7 +122,7 @@ class Activity(models.Model):
     end = models.DateTimeField(blank=True, null=True, verbose_name=_('End'))
 
     class Meta:
-        ordering = ['name']
+        ordering = ['start','name']
         verbose_name = _("Activity")
         verbose_name_plural = _("Activities")
 

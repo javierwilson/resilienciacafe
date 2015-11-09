@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ object.event }}{% endblock %}
+
+{% block content %}
+<div class="container internal">
+  <div class="row">
+    <div class="col-sm-12">
+
+    {% if object.event.logo %}
+        <img src="{% thumbnail object.event.logo 100x100 %}" class="pull-left"/>
+    {% endif %}
+    <h2>{{ object.event }}</h2>
+    <div class="clear"></div>
+    {% if object.name %}
+      <p>{{ object.name }}</p>
+    {% endif %}
+    <div class="contenido">  
+        <h3>{{ object.first_name }} {{ object.last_name }}</h3>
+        <p>{{ object.type }}</p>
+        <div class="separador"></div>
+        {% if object.activities.all %}
+        <h4>{{ object.event.activities_label }}:</h4>
+        <ul>
+            {% for row in object.activities.all %}
+            <li>{{ row.name }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% if object.photo %}
+            <img src="{% thumbnail object.photo 550x250 %}" class="img-responsive"/>
+        {% endif %}
+        {{ object.text|safe }}
+        </div>
+     </div>
+  </div>
+</div>
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+  <div class="col-sm-12 ">
+    <a class="btn btn-primary" href="{% url 'users:update' %}">My Profile</a>
+    <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a>
+    <!-- Your Stuff: Custom user template urls -->
+  </div>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+
+</div>
+{% endblock content %}
+

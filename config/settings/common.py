@@ -168,6 +168,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 # Your stuff: custom template context processors go here
                 'forocacao.app.context_processors.current_event',
+                'forocacao.app.context_processors.google_analytics',
             ],
         },
     },
@@ -261,9 +262,18 @@ LOGGING = {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
-        }
+        },
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+        },
     },
     'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level':'INFO',
+            'propagate': True,
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
@@ -272,6 +282,8 @@ LOGGING = {
     }
 }
 
+
 # Your common stuff: Below this line define 3rd party library settings
 ACCOUNT_SIGNUP_FORM_CLASS = 'forocacao.users.forms.SignupForm'
 ACCOUNT_USERNAME_REQUIRED = False
+GOOGLE_ANALYTICS_KEY = env('GOOGLE_ANALYTICS_KEY', default='')

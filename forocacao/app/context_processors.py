@@ -8,6 +8,14 @@ def get_or_none(model, objects, *args, **kwargs):
     except model.DoesNotExist:
         return None
 
+def google_analytics(request):
+    '''
+    A context processor to access Google Analytics data
+    '''
+    return {
+            'GOOGLE_ANALYTICS_KEY': settings.GOOGLE_ANALYTICS_KEY,
+    }
+
 def current_event(request):
     '''
     A context processor to add the "current event" to the current Context

@@ -46,3 +46,5 @@ django-countries
 django-smart-selects
 git+git://github.com/jaredly/django-colorfield#egg=django-colorfield
 django-import-export==0.2.8
+unidecode
+#reportlab
