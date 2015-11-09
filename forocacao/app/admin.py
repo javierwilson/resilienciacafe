@@ -237,7 +237,24 @@ class AttendeeAdmin(ImportExportModelAdmin):
 class FontAdmin(ImportExportModelAdmin):
     resource_class = FontResource
 
+class RegisteredFilter(SimpleListFilter):
+    title = _('registered')
+    parameter_name = 'registered'
+
+    def lookups(self, request, model_admin):
+        return [(True, _('Yes')), (False, _('No'))]
+
+    def queryset(self, request, queryset):
+        if self.value() == 'True':
+            return queryset.filter(email__in=Attendee.objects.values('email'))
+        elif self.value() == 'False':
+            return queryset.exclude(email__in=Attendee.objects.values('email'))
+        else:
+            return queryset
+
 class InvitedAdmin(ImportExportModelAdmin):
+    list_display = ['id','first_name','last_name','email','organization','registered']
+    list_filter = (RegisteredFilter,)
     resource_class = InvitedResource
 
 

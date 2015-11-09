@@ -19,7 +19,16 @@ class Invited(models.Model):
     first_name = models.CharField(max_length=200, verbose_name=_('First name'))
     last_name = models.CharField(max_length=200, verbose_name=_('Last name'))
     organization = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Organization'))
-    email = models.CharField(max_length=100, verbose_name=_('E-Mail'))
+    email = models.CharField(max_length=100, verbose_name=_('E-Mail'), unique=True)
+
+    def registered(self):
+        test = Attendee.objects.filter(email=self.email)
+        if test:
+            return True
+        else:
+            return False
+    registered.short_description = _("Registered")
+    registered.boolean = True
 
     def __unicode__(self):
         return self.email
