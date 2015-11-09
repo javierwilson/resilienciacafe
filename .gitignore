@@ -60,6 +60,7 @@ staticfiles/
 
 # db sql
 *.sql
+/tmp
 
 # shell stuff
 .bash*
