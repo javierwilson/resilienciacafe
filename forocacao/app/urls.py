@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^(?P<eventslug>[\w-]+)/speakers/(?P<slug>[\w-]+)/$', SpeakersDetailView.as_view(), name='speakers-detail'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/$',AttendeeDetailView.as_view(), name='detail'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/badge/$',AttendeeBadgeView.as_view(), name='badge'),
-    url(r'^attendee/(?P<username>[\w.@+-]+)/jpeg/$',AttendeePNGView.as_view(), name='jpeg'),
+    url(r'^attendee/(?P<username>[\w.@+-]+)/png/$',AttendeePNGView.as_view(), name='png'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/pdf/$',AttendeePDFView.as_view(), name='pdf'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/receipt/$',AttendeeReceiptView.as_view(), name='receipt'),
 

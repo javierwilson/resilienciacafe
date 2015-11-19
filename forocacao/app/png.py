@@ -37,7 +37,8 @@ def createPNG(participant, where):
 
     match = {
             'event': event.name,
-            'name': "%s %s" % (participant.first_name, participant.last_name ),
+            #'name': "%s %s" % (participant.first_name, participant.last_name ),
+            'name': "%s %s" % (participant.first_name.partition(' ')[0], participant.last_name.partition(' ')[0]),
             'first_name': participant.first_name,
             'last_name': participant.last_name,
             'profession': participant.profession,
@@ -82,8 +83,8 @@ def createPNG(participant, where):
                 y = tmp
 
     # FIXME: add barcode
-    full_name = "%s: %s" % (participant.id, participant.full_name())
-    barcode = get_barcode(full_name, event.badge_size_x-4)
+    short_full_name = "%s: %s" % (participant.id, participant.short_full_name())
+    barcode = get_barcode(short_full_name, event.badge_size_x-4)
     barcode_image = renderPM.drawToPIL(barcode)
     img.paste(barcode_image, (0+2, event.badge_size_y-70))
 

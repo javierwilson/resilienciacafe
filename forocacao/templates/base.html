@@ -110,10 +110,10 @@
                             </li>
             {% endif %}
                             <li>
-                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-info-circle"></i> <span class="network-name">{{ event.activities_label }}</span></a>
+                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{{ event.activities_label }}</span></a>
                             </li>
                             <li>
-                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-info-circle"></i> <span class="network-name">Expositores</span></a>
+                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">Expositores</span></a>
                             </li>
                         </ul>
                     </div>
@@ -202,10 +202,10 @@
             {% endif %}
             {% if event %}
                             <li>
-                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-info-circle"></i> <span class="network-name">{{ event.activities_label }}</span></a>
+                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{{ event.activities_label }}</span></a>
                             </li>
                             <li>
-                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-info-circle"></i> <span class="network-name">Expositores</span></a>
+                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">Expositores</span></a>
                             </li>
             {% endif %}
                     </ul>

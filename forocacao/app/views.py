@@ -65,6 +65,7 @@ class AttendeePDFView(LoginRequiredMixin, DetailView):
     response = HttpResponse(content_type="application/pdf")
 
     def get(self, request, username):
+        self.response = HttpResponse(content_type="application/pdf")
         createPDF(self.get_object(), self.response)
         return self.response
 
@@ -76,6 +77,7 @@ class AttendeePNGView(LoginRequiredMixin, DetailView):
     response = HttpResponse(content_type="image/png")
 
     def get(self, request, username):
+        self.response = HttpResponse(content_type="image/png")
         createPNG(self.get_object(), self.response)
         return self.response
 

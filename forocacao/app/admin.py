@@ -168,7 +168,7 @@ class AttendeeAdmin(ImportExportModelAdmin):
     my_url_field.short_description = 'Column description'
 
     list_filter = ('event__name','country','organization','type','approved', InvitedFilter, 'rejected')
-    search_fields = ['id','first_name','last_name']
+    search_fields = ['id','first_name','last_name','email']
 
     inlines = [
         AttendeePaymentInline,
@@ -255,6 +255,7 @@ class RegisteredFilter(SimpleListFilter):
 class InvitedAdmin(ImportExportModelAdmin):
     list_display = ['id','first_name','last_name','email','organization','registered']
     list_filter = (RegisteredFilter,)
+    search_fields = ['id','first_name','last_name','email']
     resource_class = InvitedResource
 
 

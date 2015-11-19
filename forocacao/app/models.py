@@ -21,6 +21,11 @@ class Invited(models.Model):
     organization = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Organization'))
     email = models.CharField(max_length=100, verbose_name=_('E-Mail'), unique=True)
 
+    class Meta:
+        ordering = ['first_name', 'last_name']
+        verbose_name = _("Invited")
+        verbose_name_plural = _("Invited")
+
     def registered(self):
         test = Attendee.objects.filter(email=self.email)
         if test:
@@ -126,6 +131,7 @@ class Activity(models.Model):
                                  verbose_name=_('Activity description'),
                                  help_text='Try and enter few some more lines')
     image = FilerImageField(blank=True, null=True, related_name='activity_images', verbose_name=_('Image'))
+    archivo = models.FileField(blank=True, null=True, upload_to='activity', verbose_name=_('File'))
     image_footer = FilerImageField(blank=True, null=True, related_name='activity_footers', verbose_name=_('Image footer'))
     start = models.DateTimeField(blank=True, null=True, verbose_name=_('Start'))
     end = models.DateTimeField(blank=True, null=True, verbose_name=_('End'))
@@ -327,6 +333,10 @@ class Attendee(User):
             return 'wrong type'
         return price
     price.short_description = _("Price")
+
+    def short_full_name(self):
+        return "%s %s" % (self.first_name.partition(' ')[0], self.last_name.partition(' ')[0])
+    short_full_name.short_description = _("Name")
 
     def full_name(self):
         return "%s %s" % (self.first_name, self.last_name)
