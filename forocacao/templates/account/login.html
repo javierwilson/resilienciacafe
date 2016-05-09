@@ -33,6 +33,7 @@
       {% endif %}
 
       <form class="login" method="POST" action="{% url 'account_login' %}">
+        <p>Por favor inicie sesión con sus datos de registro o <a href="{{ signup_url }}">registrese</a> si aún no lo ha hecho.</p>
         {% csrf_token %}
         {{ form|crispy }}
         {% if redirect_field_value %}

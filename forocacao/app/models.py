@@ -15,6 +15,19 @@ from colorfield.fields import ColorField
 
 from forocacao.users.models import User
 
+class News(models.Model):
+    title = models.CharField(max_length=200, verbose_name=_('Title'))
+    media = models.CharField(max_length=200, verbose_name=_('Media'))
+    url = models.URLField()
+    date = models.DateField()
+    event = models.ForeignKey('Event', related_name='news', verbose_name=_('Event'))
+
+    class Meta:
+        ordering = ['-date', 'title']
+
+    def __unicode__(self):
+        return self.title
+
 class Invited(models.Model):
     first_name = models.CharField(max_length=200, verbose_name=_('First name'))
     last_name = models.CharField(max_length=200, verbose_name=_('Last name'))

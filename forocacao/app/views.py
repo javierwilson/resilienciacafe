@@ -119,7 +119,7 @@ class SpeakersView(ListView):
         context['event'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
 
-class ActivitiesView(ListView):
+class ActivitiesView(LoginRequiredMixin, ListView):
 
     model = Activity
 

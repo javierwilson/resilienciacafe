@@ -12,7 +12,7 @@ from import_export import resources
 from import_export.admin import ImportExportModelAdmin, ImportExportMixin
 
 
-from .models import Event, Activity, Profession, Invited, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content, Field
+from .models import Event, Activity, Profession, Invited, Attendee, AttendeeType, AttendeePayment, PaymentMethod, EventBadge, Font, AttendeeReceipt, Content, Field, News
 from .pdf import createPDF
 
 def has_approval_permission(request, obj=None):
@@ -272,3 +272,4 @@ admin.site.register(Font, FontAdmin)
 admin.site.register(Field)
 admin.site.register(Invited, InvitedAdmin)
 admin.site.register(Content, ContentAdmin)
+admin.site.register(News)
