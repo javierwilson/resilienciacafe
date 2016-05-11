@@ -131,19 +131,18 @@ class ActivitiesView(LoginRequiredMixin, ListView):
         context['event'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
 
-def event(request, url):
+def event(request,slug):
     #if not url.startswith('/'):
     #    url = '/' + url
-    template_name = "pages/home.html"
-    if url.endswith('/'):
-        url = url[:-1]
-    print "BAD URL: %s" % (url,)
+    template_name = "pages/event.html"
+    if slug.endswith('/'):
+        slug = slug[:-1]
     try:
-        f = get_object_or_404(Event, slug=url)
+        f = get_object_or_404(Event, slug=slug)
     except Http404:
-        if not url.endswith('/') and settings.APPEND_SLASH:
-            url += '/'
-            f = get_object_or_404(Event, slug=url)
+        if not slug.endswith('/') and settings.APPEND_SLASH:
+            slug += '/'
+            f = get_object_or_404(Event, slug=slug)
             return HttpResponsePermanentRedirect('%s/' % request.path)
         else:
             raise

@@ -45,13 +45,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand topnav" href="{% url 'app:home' %}">Inicio: {{ event }}</a>
+                <a class="navbar-brand topnav" href="{% url 'app:event' event.slug %}">Inicio: {{ event }}</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <!--
                 <ul class="nav navbar-nav navbar-right">
-                    {% if event %}
                     <li>
                         <a href="{% url 'app:about' event.slug %}">Acerca de...</a>
                     </li>
@@ -64,9 +62,10 @@
                     <li>
                         <a href="{% url 'app:contact' event.slug %}">Contacto</a>
                     </li>
-                    {% endif %}
+                    <li>
+                        <form name="eventselect"><select onChange="window.document.location.href=this.options[this.selectedIndex].value;"><option>Otros eventos</option>{% for e in events %}<option value="/{{ e.slug }}">{{ e }}</option>{% endfor %}</select></form>
+                    </li>
                 </ul>
-            -->
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -83,19 +82,28 @@
       {% block content %}
 
     <a name="about"></a>
-    <div class="intro-header" style="background-image: url({{ object.image.url }});">
+    <div class="intro-header">
         <div class="translucid-header">
             <div class="container"><img src="{{ object.translucid.url }}" class="translucid-logo" alt="Logo"/></div>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
+                <div class="col-lg-9">
+                    <div class="intro-message" style="background: url({{ object.image.url }}) no-repeat center top;">
                         <h1>{{ object.name }}</h1>
-                        <!-- <h2>{{ object.start|date:"DATE_FORMAT" }}</h2> -->
-                        <h2>{{ object.title|safe }}</h2>
+                        <h2>{{ object.start|date:"DATE_FORMAT" }}</h2>
+                        <h2>{{ object.title }}</h2>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
                         <hr class="intro-divider">
-                        <!--
                         <ul class="list-inline intro-social-buttons">
             {% if request.user.is_authenticated %}
                             <li>
@@ -119,8 +127,14 @@
                             <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">Expositores</span></a>
                             </li>
                         </ul>
-                        -->
                     </div>
+                </div>
+                <div class="col-lg-3"><h1 style="color:black">Noticias</h1>
+                <ul>
+                {% for n in event.news.all %}
+                   <li style="text-align:left; color:#777"><a target="_blank" href="{{ n.url }}">{{ n.title }}</a> <i>{{ n.media }}</i></li>
+                {% endfor %}
+                </ul>
                 </div>
             </div>
 
@@ -227,7 +241,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                <!--
                     <ul class="list-inline">
                         <li>
 			    <a href="{% url 'app:home' %}">Inicio</a>
@@ -251,8 +264,7 @@
                         </li>
             {% endif %}
                     </ul>
-                    -->
-                    <p class="copyright text-muted small">Copyright &copy; {{event.organizer }} 2016. All Rights Reserved</p>
+                    <p class="copyright text-muted small">Copyright &copy; {{event.organizer }} 2015. All Rights Reserved</p>
                 </div>
             </div>
         </div>

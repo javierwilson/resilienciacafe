@@ -20,11 +20,22 @@ def current_event(request):
     '''
     A context processor to add the "current event" to the current Context
     '''
+    events = Event.objects.all()
     try:
-        current_event = Event.objects.filter(status='frontpage')[0]
+        if hasattr(request, 'resolver_match'):
+            slug = request.resolver_match.kwargs.get('eventslug') or request.resolver_match.kwargs.get('slug')
+            if slug and slug.endswith('/'):
+                slug = slug[:-1]
+            current_event = Event.objects.get(slug=slug)
+            basehtml = 'base.archive.html'
+        else:
+            current_event = Event.objects.filter(status='frontpage')[0]
+            basehtml = 'base.html'
 
         return {
+            'events': events,
             'event': current_event,
+            'basehtml': basehtml,
             'current_event': current_event.name,
             'current_slug': current_event.slug,
             'current_info': get_or_none(Content, current_event.contents, page='info'),
@@ -33,7 +44,9 @@ def current_event(request):
     except Event.DoesNotExist:
         # always return a dict, no matter what!
         return {
+            'events': events,
             'event': None,
+            'basehtml': 'base.html',
             'current_event': '',
             'current_slug': '',
             'current_info': '',
