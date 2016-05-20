@@ -22,15 +22,16 @@ def current_event(request):
     '''
     events = Event.objects.all()
     try:
+        basehtml = 'base.html'
         if hasattr(request, 'resolver_match') and request.resolver_match:
             slug = request.resolver_match.kwargs.get('eventslug') or request.resolver_match.kwargs.get('slug')
             if slug and slug.endswith('/'):
                 slug = slug[:-1]
             current_event = Event.objects.get(slug=slug)
-            basehtml = 'base.archive.html'
         else:
             current_event = Event.objects.filter(status='frontpage')[0]
-            basehtml = 'base.html'
+        if current_event.template:
+            basehtml = current_event.template
 
         return {
             'events': events,

@@ -88,6 +88,7 @@ class Event(models.Model):
     badge_size_x = models.IntegerField(null=True, blank=True, verbose_name=_('Badge size X'))
     badge_size_y = models.IntegerField(null=True, blank=True, verbose_name=_('Badge size Y'))
     badge_color = ColorField(default='ffffff', verbose_name=_('Badge color'))
+    template = models.CharField(max_length=200, null=True, blank=True)
 
     class Meta:
         ordering = ['-start']
