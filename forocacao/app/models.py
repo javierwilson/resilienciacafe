@@ -136,6 +136,21 @@ class Content(models.Model):
         return self.name
 
 
+class Logo(models.Model):
+    event = models.ForeignKey('Event', related_name='logos', verbose_name=_('Event'))
+    name = models.CharField(max_length=200, verbose_name=_('Name'))
+    image = FilerImageField(verbose_name=_('Logo'))
+    weight = models.IntegerField()
+
+    class Meta:
+        ordering = ['weight']
+        verbose_name = _("Logos")
+        verbose_name_plural = _("Logos")
+
+    def __unicode__(self):
+        return self.name
+
+
 class Activity(models.Model):
     #event = models.ForeignKey('Event', verbose_name=_('Event'))
     name = models.CharField(max_length=200, verbose_name=_('Name'))
