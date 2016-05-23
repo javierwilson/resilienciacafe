@@ -25,5 +25,5 @@ urlpatterns = [
     url(r'^attendee/(?P<username>[\w.@+-]+)/pdf/$',AttendeePDFView.as_view(), name='pdf'),
     url(r'^attendee/(?P<username>[\w.@+-]+)/receipt/$',AttendeeReceiptView.as_view(), name='receipt'),
 
-    url(r'^(?P<slug>[\w-]+)/$', event, name='event'),
+    url(r'^(?P<slug>[\w-]+)/$', HomeView.as_view(), name='event'),
 ]

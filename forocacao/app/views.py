@@ -20,8 +20,12 @@ class HomeView(DetailView):
     model = Event
     template_name = "pages/home.html"
 
-    def get_object(self):
-        return Event.objects.filter(status='frontpage')[0]
+    def get_object(self, **kwargs):
+        try:
+            object = super(HomeView, self).get_object(**kwargs)
+        except AttributeError:
+            object = Event.objects.filter(status='frontpage')[0]
+        return object
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -133,6 +137,7 @@ class ActivitiesView(ListView):
         context['event'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
 
+# orphan
 def event(request,slug):
     #if not url.startswith('/'):
     #    url = '/' + url
