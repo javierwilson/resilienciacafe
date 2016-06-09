@@ -23,7 +23,7 @@ def current_event(request):
     events = Event.objects.all()
     try:
         basehtml = 'base.html'
-        if hasattr(request, 'resolver_match') and request.resolver_match:
+        if (hasattr(request, 'resolver_match') and request.resolver_match) and (request.resolver_match.kwargs.get('eventslug') or request.resolver_match.kwargs.get('slug')):
             slug = request.resolver_match.kwargs.get('eventslug') or request.resolver_match.kwargs.get('slug')
             if slug and slug.endswith('/'):
                 slug = slug[:-1]

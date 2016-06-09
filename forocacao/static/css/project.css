@@ -42,3 +42,83 @@ h3 { color: #006196;font-size: 18px;}
 h4 { color: #242424;font-size: 15px;}
 .translucid-logo { opacity: 0.6;}
 .translucid-header {opacity: 0.6;background-color: rgb(88, 88, 90); text-align: left;}
+/* foro 2016 */
+.date {
+  background-color: rgb(194, 207, 47);
+  border-radius: 5px;
+  padding: 7px;
+  font-size: 15px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  line-height: 2em;
+}
+.reserve {
+  color:#4b2b2b;
+  font-size: 29px;
+  text-align: left !important;
+}
+.info {
+  text-align: left !important;
+  font-size: 17px;
+}
+.info h2 {
+  font-size: 19px;
+}
+.anfitriona {
+  margin-top: 20px;
+}
+.logos {
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+.navbar-default select {
+  color: #6e3018;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+  float: left;
+  text-align: left;
+  background-color: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 2px;
+}
+.navbar-default select:hover, .navbar-default select:focus {
+  color: #6e3018;
+}
+.navbar-default select option {
+  padding: 5px;
+  border-bottom: 1px solid #fff;
+}
+.subtitle {
+  font-size: 32px;
+  color:#6e3018;
+  font-size: 18px;
+  border-bottom: 1px solid rgb(240, 176, 152);
+  padding-bottom: 17px;
+}
+.topnav {width: 100%;}
+@media (max-width: 800px) {
+  .navbar-header { width: 35%;}
+  .navbar-right { width: 65%;}
+  .navbar-default select { width: 110px;}
+}
+@media (min-width:500 and max-width: 800px) {
+  .navbar-header { width: 30%;}
+  .navbar-brand { height: 61px;}
+  .navbar-right { width: 70%;}
+}
+@media (max-width: 768px) {
+  .title2 {font-size: 32px;color:#94c11f;}
+  .subtitle {
+    font-size: 32px;
+    color:#6e3018;
+    font-size: 18px;
+    border-bottom: 1px solid rgb(240, 176, 152);
+    padding-bottom: 17px;
+  }
+  .reserve { font-size: 21px; }
+  .logos img { width: 80px;}
+  .navbar-brand { width: 70%;height:60px;}
+}

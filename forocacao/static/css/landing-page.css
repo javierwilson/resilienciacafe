@@ -50,7 +50,7 @@ body { font-weight: 400;}
 .intro-message {
     position: relative;
     padding-top: 05%;
-    padding-bottom: 40%;
+    /*padding-bottom: 40%;*/
 }
 
 .intro-message > h1 {
