@@ -91,7 +91,7 @@
             {% endfor %}
         </div>
         <div class="col-md-6 col-md-offset-1 hidden-xs">
-            <img src="{{ object.image.url }}" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+            <img src="{% thumbnail object.image 800x308 %}" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
         </div>
         <div class="col-md-5">
             <img src="{% thumbnail object.translucid 400x300 %}" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>

@@ -133,7 +133,7 @@ class Content(models.Model):
         verbose_name_plural = _("Contents")
 
     def __unicode__(self):
-        return self.name
+        return "%s: %s" % (self.event, self.name)
 
 
 class Logo(models.Model):
