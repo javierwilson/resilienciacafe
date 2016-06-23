@@ -30,6 +30,13 @@ class ContentForm(forms.ModelForm):
 class ContentAdmin(admin.ModelAdmin):
     form = ContentForm
 
+    def get_queryset(self, request):
+        qs = super(ContentAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        return qs.filter(event=request.user.event)
+
+
 class AttendeeTypeInline(admin.TabularInline):
     model = Event.types.through
 
