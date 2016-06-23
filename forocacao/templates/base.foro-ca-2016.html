@@ -39,16 +39,16 @@
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            <div class="navbar-header col-md-4 col-sm-10">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                {% if not home %}<img src="{{ event.logo.url }}"/>{% endif %}
-                <a class="navbar-brand topnav" href="{% url 'app:home' %}">
-                Inicio: {{ event }}</a>
+                {% if not home %}<div class="col-md-2 col-sm-2 col-xs-3 nopadding"><img src="{{ event.logo.url }}"/></div>{% endif %}
+                <div class="col-md-10 col-sm-10 {% if not home %}col-xs-6 nopadding{% else %}cols-xs-8 {% endif %}"><a class="navbar-brand topnav" href="{% url 'app:home' %}">
+                Inicio: {{ event }}</a></div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -77,7 +77,6 @@
         <!-- /.container -->
     </nav>
 
-
     <!-- Header -->
       {% if messages %}
           {% for message in messages %}
@@ -86,17 +85,17 @@
       {% endif %}
       {% block content %}
 
-    <div class="intro-bheader">
+    <div class="clearfix intro-bheader">
         <div class="col-md-12 logos">
             {% for logo in logos %}
                 <img src="{% thumbnail logo.image 200x200 %}"/>
             {% endfor %}
         </div>
-        <div class="col-md-6 col-md-offset-1 hidden-xs">
-            <img src="{% thumbnail object.image 800x308 %}" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+        <div class="col-md-7 col-sm-8 col-md-offset-1 hidden-xs">
+            <img src="{% thumbnail object.image 800x308 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
         </div>
-        <div class="col-md-5">
-            <img src="{% thumbnail object.translucid 400x300 %}" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <img src="{% thumbnail object.translucid 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
         </div>
         <div class="col-md-12 visible-xs">
             <img src="{% static 'img/logoforocacaoregional-movil.png' %}" title="{{ object.name }} {{ object.title }}"/>

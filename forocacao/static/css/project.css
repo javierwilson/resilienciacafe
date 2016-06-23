@@ -100,15 +100,8 @@ h4 { color: #242424;font-size: 15px;}
 }
 .topnav {width: 100%;}
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand { margin-left:0px !important;}
-@media (max-width: 800px) {
-  .navbar-header { width: 35%;}
-  .navbar-right { width: 65%;}
-  .navbar-default select { width: 110px;}
-}
-@media (min-width:500 and max-width: 800px) {
-  .navbar-header { width: 30%;}
-  .navbar-brand { height: 61px;}
-  .navbar-right { width: 70%;}
+@media (min-width:700px) and (max-width: 980px) {
+  .intro-bheader { padding-top: 100px;}
 }
 @media (max-width: 768px) {
   .title2 {font-size: 32px;color:#94c11f;}
@@ -122,4 +115,13 @@ h4 { color: #242424;font-size: 15px;}
   .reserve { font-size: 21px; }
   .logos img { width: 80px;}
   .navbar-brand { width: 70%;height:60px;}
+}
+@media (max-width: 640px) { 
+  .intro-bheader { padding-top: 50px;}
+  .navbar-brand { padding: 4px;}
+  .nopadding {padding: 0px;}
+  .navbar-brand { width: auto;}
+}
+@media (max-width: 360px) { 
+  .navbar-brand { width: 70%;}
 }
