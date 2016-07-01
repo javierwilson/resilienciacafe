@@ -3,12 +3,16 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from django_countries import countries
+
 from forocacao.app.models import Event
 
 class SignupForm(forms.Form):
     first_name = forms.CharField(max_length=30, label=_('First name'))
     last_name = forms.CharField(max_length=30, label=_('Last name'))
     document = forms.CharField(max_length=30, label=_('Document ID'))
+    #country = forms.CountryField(verbose_name=_('Country'), blank=True, null=True)
+    country= forms.ChoiceField(countries)
     phone = forms.CharField(max_length=30, label=_('Telephone'))
     organization = forms.CharField(max_length=30, label=_('Organization'))
     position = forms.CharField(max_length=30, label=_('Position'))
@@ -16,7 +20,7 @@ class SignupForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
         self.fields['first_name'].widget.attrs.update({'autofocus': 'autofocus'})
-        self.keyOrder = ['firs_name', 'last_name', 'document', 'phone', 'email', 'password']
+        self.keyOrder = ['firs_name', 'last_name', 'country', 'document', 'phone', 'email', 'password']
 
     def signup(self, request, user):
         user.username = self.cleaned_data['email'][:30]
@@ -25,6 +29,7 @@ class SignupForm(forms.Form):
         user.organization = self.cleaned_data['organization']
         user.position = self.cleaned_data['position']
         user.phone = self.cleaned_data['phone']
+        user.country = self.cleaned_data['country']
         user.document = self.cleaned_data['document']
         event = Event.objects.filter(status='frontpage')[0]
         if event:
