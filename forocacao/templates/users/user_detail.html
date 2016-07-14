@@ -1,4 +1,4 @@
-{% extends "base_print.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load thumbnail %}
 
@@ -9,38 +9,47 @@
   <div class="row">
     <div class="col-sm-12">
 
+    <!--
     {% if object.event.logo %}
         <img src="{% thumbnail object.event.logo 120x100 %}" style="float:left;" />
     {% endif %}
       <h2>{{ object.event }}</h2>
+    -->
       <div class="clearfix"></div>
       {% if object.name %}
         <p>{{ object.name }}</p>
       {% endif %}
         <h3>{{ object.first_name }} {{ object.last_name }}</h3>
-        <p>Profesión: {{ object.profession }}</p>
-        <p>Tipo: {{ object.type }}</p>
+        <p>Organización: {{ object.organization }}</p>
+        <p>Cargo: {{ object.position }}</p>
+        <p>Documento: {{ object.document }}</p>
+        <!-- <p>Profesión: {{ object.profession }}</p> -->
+        <!-- <p>Tipo: {{ object.type }}</p> -->
         <p>País: {{ object.country.name }}</p>
-        <p>Nacionalidad: {{ object.nationality.name }}</p>
+        <!-- <p>Nacionalidad: {{ object.nationality.name }}</p> -->
         <p>Teléfono: {{ object.phone }}</p>
         <p>Correo: {{ object.email }}</p>
-        <p>Patrocinado: {% if object.sponsored %}Si{% else %}No{% endif %}</p>
+        <!-- <p>Patrocinado: {% if object.sponsored %}Si{% else %}No{% endif %}</p> -->
         {%if object.sponsored %}
           <p>Patrocinador: {{ object.sponsor }}</p>
         {% endif %}
         <div class="separador"></div>
+        <!--
         <h4>{{ object.event.activities_label }}</h4>
         <ul>
             {% for row in object.activities.all %}
             <li>{{ row.name }}</li>
             {% endfor %}
         </ul>
+        -->
+        <!--
         <h4>Pagos:</h4>
         <ul>
             {% for row in object.payments.all %}
             <li>{{ row.date }}: {{ row.amount}} -  {{ row.payment_method }} {% if row.note %}{{ row.note }}{% endif %}</li>
             {% endfor %}
         </ul>
+        -->
         <div>
         {% if object.photo %}
         <!-- <img src="{% thumbnail object.photo 250x250 crop %}" /> -->
@@ -57,8 +66,8 @@
 <div class="row">
 
   <div class="col-sm-12 ">
-    <a class="btn btn-primary" href="{% url 'users:update' %}">My Profile</a>
-    <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a>
+    <!-- <a class="btn btn-primary" href="{% url 'users:update' %}">Mi Perfil</a> -->
+    <!-- <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a> -->
     <!-- Your Stuff: Custom user template urls -->
   </div>
 
