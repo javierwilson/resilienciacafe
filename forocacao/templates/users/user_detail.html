@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load thumbnail %}
+{% load i18n %}
 
 {% block title %}User: {{ object.username }}{% endblock %}
 
@@ -21,13 +22,14 @@
       {% endif %}
         <h3>{{ object.first_name }} {{ object.last_name }}</h3>
         <p>Organización: {{ object.organization }}</p>
-        <p>Cargo: {{ object.position }}</p>
+        <p>Cargo: {% if object.profession %}{{ object.profession }} - {% endif %}{{ object.position }}</p>
         <p>Documento de identidad: {{ object.document }}</p>
         <!-- <p>Profesión: {{ object.profession }}</p> -->
         <!-- <p>Tipo: {{ object.type }}</p> -->
         <p>País: {{ object.country.name }}</p>
         <!-- <p>Nacionalidad: {{ object.nationality.name }}</p> -->
-        <p>Sexo: {{ object.document }}</p>
+        <p>Edad: {{ object.get_age_display }}</p>
+        <p>Sexo: {% trans object.get_sex_display %}</p>
         <p>Teléfono: {{ object.phone }}</p>
         <p>Correo: {{ object.email }}</p>
         <!-- <p>Patrocinado: {% if object.sponsored %}Si{% else %}No{% endif %}</p> -->

@@ -115,27 +115,30 @@ class AttendeeResource(resources.ModelResource):
         fields = ('id', 'first_name', 'last_name', 'document', 'organization', 'position', 'telephone', 'username', 'email', 'country', 'address', 'sex')
 
 def mail_attendee(modeladmin, request, queryset):
-    logger = logging.getLogger('django')
-    for obj in queryset:
-        message = "%s\r\n%s" % (obj.event.title, obj.event.pdfnote)
-        email = EmailMessage(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ],
-                headers={'Message-ID': "%s-%s" % (obj.event.slug, obj.id) })
-        filename = '/tmp/%s.pdf' % (obj.email, )
-        createPDF(obj, filename)
-        email.attach_file(filename)
-        email.send()
-	logger.info('APPROVED: %s' % (obj.email,))
+    if has_approval_permission(request):
+        logger = logging.getLogger('django')
+        for obj in queryset:
+            message = "%s\r\n%s" % (obj.event.title, obj.event.pdfnote)
+            email = EmailMessage(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ],
+                    headers={'Message-ID': "%s-%s" % (obj.event.slug, obj.id) })
+            filename = '/tmp/%s.pdf' % (obj.email, )
+            createPDF(obj, filename)
+            email.attach_file(filename)
+            email.send()
+            logger.info('APPROVED: %s' % (obj.email,))
 mail_attendee.short_description = _("Mail selected attendees")
 
 def make_rejected(modeladmin, request, queryset):
-    queryset.update(rejected=True)
-    for obj in queryset:
-        message = "%s\r\n%s" % (obj.event.title, obj.event.reject_note)
-        send_mail(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ])
+    if has_approval_permission(request):
+        queryset.update(rejected=True)
+        for obj in queryset:
+            message = "%s\r\n%s" % (obj.event.title, obj.event.reject_note)
+            send_mail(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ])
 make_rejected.short_description = _("Reject participation of selected attendees")
 
 def make_approved(modeladmin, request, queryset):
-    queryset.update(approved=True)
+    if has_approval_permission(request):
+        queryset.update(approved=True)
 make_approved.short_description = _("Approve participation of selected attendees")
 
 class InvitedFilter(SimpleListFilter):
@@ -203,6 +206,17 @@ class AttendeeAdmin(ImportExportModelAdmin):
             return qs
         return qs.filter(event=request.user.event)
 
+    def get_readonly_fields(self, request, obj=None):
+        from django.contrib.admin.util import flatten_fieldsets
+        if not request.user.is_superuser:
+            if self.declared_fieldsets:
+                fields = flatten_fieldsets(self.declared_fieldsets)
+            else:
+                form = self.get_formset(request, obj).form
+                fields = form.base_fields.keys()
+            return fields
+        return self.readonly_fields
+
     def get_form(self, request, obj=None, **kwargs):
         if not has_approval_permission(request, obj):
             self.fieldsets[0][1]['fields'] = ('event','type','first_name', 'last_name', 'email', 'approved', 'profession',
@@ -211,27 +225,28 @@ class AttendeeAdmin(ImportExportModelAdmin):
         form = super(AttendeeAdmin, self).get_form(request, obj, **kwargs)
 
         # required fields (not required in original model)
-        form.base_fields['first_name'].required = True
-        form.base_fields['last_name'].required = True
-        form.base_fields['email'].required = True
-        form.base_fields['password'].required = False
-        form.base_fields['username'].required = False
+        if form.base_fields:
+            form.base_fields['first_name'].required = True
+            form.base_fields['last_name'].required = True
+            form.base_fields['email'].required = True
+            form.base_fields['password'].required = False
+            form.base_fields['username'].required = False
 
-        # if update, limit type and profession to current event
-        if obj and obj.event:
-            form.base_fields['profession'].queryset = Profession.objects.filter(id__in=obj.event.professions.all())
-            form.base_fields['activities'].queryset = Activity.objects.filter(id__in=obj.event.activities.all())
-            form.base_fields['type'].queryset = AttendeeType.objects.filter(id__in=obj.event.types.all())
+            # if update, limit type and profession to current event
+            if obj and obj.event:
+                form.base_fields['profession'].queryset = Profession.objects.filter(id__in=obj.event.professions.all())
+                form.base_fields['activities'].queryset = Activity.objects.filter(id__in=obj.event.activities.all())
+                form.base_fields['type'].queryset = AttendeeType.objects.filter(id__in=obj.event.types.all())
 
-        # if not superuser, limit type and profession to user's event
-        if not request.user.is_superuser:
-            form.base_fields['profession'].queryset = Profession.objects.filter(id__in=request.user.event.professions.all())
-            form.base_fields['activities'].queryset = Activity.objects.filter(id__in=request.user.event.activities.all())
-            form.base_fields['type'].queryset = AttendeeType.objects.filter(id__in=request.user.event.types.all())
-            form.base_fields['event'].initial = request.user.event
-            form.base_fields['event'].widget = forms.HiddenInput()
-            form.base_fields['event'].label = ''
-            #self.readonly_fields = ('event',)
+            # if not superuser, limit type and profession to user's event
+            if not request.user.is_superuser:
+                form.base_fields['profession'].queryset = Profession.objects.filter(id__in=request.user.event.professions.all())
+                form.base_fields['activities'].queryset = Activity.objects.filter(id__in=request.user.event.activities.all())
+                form.base_fields['type'].queryset = AttendeeType.objects.filter(id__in=request.user.event.types.all())
+                form.base_fields['event'].initial = request.user.event
+                form.base_fields['event'].widget = forms.HiddenInput()
+                form.base_fields['event'].label = ''
+                #self.readonly_fields = ('event',)
 
         return form
 
