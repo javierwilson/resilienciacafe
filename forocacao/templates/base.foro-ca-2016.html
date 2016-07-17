@@ -88,7 +88,8 @@
     <div class="clearfix intro-bheader">
         <div class="col-md-12 logos">
             {% for logo in logos %}
-                <img src="{% thumbnail logo.image 200x200 %}"/>
+                {% if logo.url %}<a href="{{logo.url}}" target="_blank"><img src="{% thumbnail logo.image 200x200 %}"/></a>{% else %}
+               <img src="{% thumbnail logo.image 200x200 %}"/>{% endif %}
             {% endfor %}
         </div>
         <div class="col-md-7 col-sm-8 col-md-offset-1 hidden-xs">
@@ -112,9 +113,15 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="intro-message">
+                    <div class="intro-message-off">
                         <h2>{{ object.start|date:"d"}} y {{ object.end|date:"DATE_FORMAT" }} - {{ object.place }}</h2>
-                        <hr class="intro-divider">
+<br/>
+<p>Anfitriones:<img src="http://www.forocacao.com/media/filer_public/d1/fe/d1fe0fd6-65b7-48e8-aef5-6eef0df9cd2c/sagx60.png"> <img style="" src="http://www.forocacao.com/media/filer_public/63/69/6369f52a-7a14-4aaa-bdd8-790b2b624cf3/aprocacaho60.png"></p><p>
+</p>
+<br/>
+
+
+<!--                        <hr class="intro-divider"> -->
                         <ul class="list-inline intro-social-buttons">
             {% if request.user.is_authenticated %}
                             <li>

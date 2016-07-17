@@ -29,6 +29,8 @@ class User(AbstractUser):
     document = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Document ID'))
     organization = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Organization'))
     position = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Position'))
+    AGE_CHOICES = Choices(('A', '<=29'), ('B', '30-64'), ('C', '>=65'))
+    age = models.CharField(max_length=1, choices=AGE_CHOICES, null=True, blank=True)
     SEX_CHOICES = Choices(('M',_('Male')), ('F', _('Female')))
     sex = models.CharField(max_length=1, choices=SEX_CHOICES, null=True, blank=True)
     address = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Address'))

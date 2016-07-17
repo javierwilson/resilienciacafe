@@ -12,7 +12,9 @@ class SignupForm(forms.Form):
     last_name = forms.CharField(max_length=30, label=_('Last name'))
     document = forms.CharField(max_length=30, label=_('Document ID'))
     #country = forms.CountryField(verbose_name=_('Country'), blank=True, null=True)
-    country= forms.ChoiceField(countries)
+    country = forms.ChoiceField(countries, label=_('Pais'))
+    SEX_CHOICES = (('M',_('Masculino')), ('F', _('Femenino')))
+    sex = forms.ChoiceField(choices=SEX_CHOICES, label=_('Sexo'))
     phone = forms.CharField(max_length=30, label=_('Telephone'))
     organization = forms.CharField(max_length=30, label=_('Organization'))
     position = forms.CharField(max_length=30, label=_('Position'))
@@ -30,6 +32,7 @@ class SignupForm(forms.Form):
         user.position = self.cleaned_data['position']
         user.phone = self.cleaned_data['phone']
         user.country = self.cleaned_data['country']
+        user.sex = self.cleaned_data['sex']
         user.document = self.cleaned_data['document']
         event = Event.objects.filter(status='frontpage')[0]
         if event:

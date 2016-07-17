@@ -141,6 +141,7 @@ class Logo(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     image = FilerImageField(verbose_name=_('Logo'))
     weight = models.IntegerField()
+    url = models.URLField(null=True, blank=True)
 
     class Meta:
         ordering = ['weight']
