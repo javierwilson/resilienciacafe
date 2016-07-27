@@ -31,9 +31,13 @@ def createPNG(participant, where):
 
     event = participant.event
 
-    img = Image.new('RGBA', (event.badge_size_x, event.badge_size_y), event.badge_color)
+    badge_size_x = event.badge_size_x or 390
+    badge_size_y = event.badge_size_y or 260
+    badge_color = event.badge_color or "#FFFFFF"
+
+    img = Image.new('RGBA', (badge_size_x, badge_size_y), badge_color)
     draw = ImageDraw.Draw(img)
-    draw.rectangle(((0,0),(event.badge_size_x-1,event.badge_size_y-1)), outline = "black")
+    draw.rectangle(((0,0),(badge_size_x-1, badge_size_y-1)), outline = "black")
 
     match = {
             'event': event.name,
@@ -70,11 +74,11 @@ def createPNG(participant, where):
             color = field.color
             text = ("%s") % (content)
             textsize = draw.textsize(text, font=fnt)
-            if textsize[0]+x < event.badge_size_x:
+            if textsize[0]+x < badge_size_x:
                 draw.text((x,y), ("%s") % (content), font=fnt, fill=color)
             else:
                 # calculate maximum size in characters
-                max_chars = (event.badge_size_x-(x*2)) * len(text) / textsize[0]
+                max_chars = (badge_size_x-(x*2)) * len(text) / textsize[0]
                 lines = textwrap.fill(text, max_chars).splitlines()
                 tmp = y
                 for line in lines:
@@ -84,8 +88,8 @@ def createPNG(participant, where):
 
     # FIXME: add barcode
     short_full_name = "%s: %s" % (participant.id, participant.short_full_name())
-    barcode = get_barcode(short_full_name, event.badge_size_x-4)
+    barcode = get_barcode(short_full_name, badge_size_x-4)
     barcode_image = renderPM.drawToPIL(barcode)
-    img.paste(barcode_image, (0+2, event.badge_size_y-70))
+    img.paste(barcode_image, (0+2, badge_size_y-70))
 
     img.save(where, "PNG")

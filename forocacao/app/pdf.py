@@ -17,6 +17,10 @@ from reportlab.graphics.barcode import eanbc
 from reportlab.graphics.shapes import Drawing
 from reportlab.graphics import renderPDF
 
+from .png import get_barcode
+
+
+
 def draw(c, string, x, y, color=colors.black, font='Helvetica', size=12):
     c.setFillColor(color)
     c.setFont(font, size)
@@ -78,14 +82,14 @@ def createPDF(participant, where):
     y = tmp
 
     # insert logo
-    if participant.event.logo:
-        logo = Image.open(participant.event.logo.file.file)
-        logo_width = logo.size[0]
-        logo_height = logo.size[1]
-        #logo._restrictSize(2 * inch, 1 * inch)
-        #logo.thumbnail((120,100))
-        logo = participant.event.logo.file.file.name
-        c.drawImage(logo, wstart-100, hstart-(logo_height/2), width=logo_width/2, height=logo_height/2)
+    #if participant.event.logo:
+    #    logo = Image.open(participant.event.logo.file.file)
+    #    logo_width = logo.size[0]
+    #    logo_height = logo.size[1]
+    #    #logo._restrictSize(2 * inch, 1 * inch)
+    #    #logo.thumbnail((120,100))
+    #    logo = participant.event.logo.file.file.name
+    #    c.drawImage(logo, wstart-100, hstart-(logo_height/2), width=logo_width/2, height=logo_height/2)
 
     # FIXME do we need to do it the 'contact way' ?
     contact = {
@@ -97,10 +101,18 @@ def createPDF(participant, where):
     }
 
     # draw barcode
-    barcode128 = code128.Code128(contact['name'])
-    barcode128.drawOn(c, wstart-17, y-80)
+    #value = contact['name']
+    #barcode128 = code128.Code128(value)
+    #barcode128.drawOn(c, wstart-17, y-80)
     #barcode128 = code128.Code128(contact['name'][:20])
     #barcode128.drawOn(c, wstart-17, y-110)
+
+    badge_size_x = 220
+    badge_size_y = 150
+    short_full_name = "%s: %s" % (participant.id, participant.short_full_name())
+    barcode = get_barcode(short_full_name, badge_size_x-4)
+    renderPDF.draw(barcode, c, wstart-17, y-80)
+
 
     # draw a QR code
     qr_code = qr.QrCodeWidget(contact['name'])
