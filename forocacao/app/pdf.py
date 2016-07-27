@@ -73,7 +73,9 @@ def createPDF(participant, where):
     draw(c, participant.position, x+200, y)
     y += 20
 
-    lines = textwrap.fill(participant.event.pdfnote, 60).splitlines()
+    #lines = textwrap.fill(participant.event.pdfnote, 60).splitlines()
+    lines = (participant.event.pdfnote) % { 'full_name': participant.first_name,}
+    lines = lines.splitlines()
     tmp = y
     y -= 100
     for line in lines:
@@ -90,6 +92,15 @@ def createPDF(participant, where):
     #    #logo.thumbnail((120,100))
     #    logo = participant.event.logo.file.file.name
     #    c.drawImage(logo, wstart-100, hstart-(logo_height/2), width=logo_width/2, height=logo_height/2)
+
+    # insert header
+    if participant.event.pdflogo:
+        logo = Image.open(participant.event.pdflogo.file.file)
+        logo_width = logo.size[0]
+        logo_height = logo.size[1]
+        logo = participant.event.pdflogo.file.file.name
+        #c.drawImage(logo, wstart, hstart-(logo_height/2), width=logo_width/2, height=logo_height/2)
+        c.drawImage(logo, wstart, hstart-(logo_height/2)+50, width=logo_width/1.5, height=logo_height/1.5)
 
     # FIXME do we need to do it the 'contact way' ?
     contact = {
@@ -121,7 +132,7 @@ def createPDF(participant, where):
     height = bounds[3] - bounds[1]
     d = Drawing(100, 100, transform=[100./width,0,0,100./height,0,0])
     d.add(qr_code)
-    renderPDF.draw(d, c, wstart+320, y-80)
+    #renderPDF.draw(d, c, wstart+320, y-80)
 
     c.showPage()
     c.save()
