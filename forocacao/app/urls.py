@@ -10,6 +10,8 @@ from django.views.generic import TemplateView, DetailView
 from .views import HomeView, SpeakersView, SpeakersDetailView, ActivitiesView, AttendeeDetailView, AttendeeBadgeView, AttendeePNGView, AttendeePDFView, AttendeeReceiptView, ContentView, event
 
 urlpatterns = [
+    url(r'^photologue/', include('photologue.urls', namespace='photologue')),
+
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^(?P<slug>[\w-]+)/confirmation/$', ContentView.as_view(page='confirmation'), name='confirmation'),
     url(r'^confirmation/$', ContentView.as_view(page='confirmation'), name='confirmationmail'),

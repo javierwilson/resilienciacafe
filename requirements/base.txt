@@ -1,5 +1,5 @@
 # Bleeding edge Django
-django==1.8.3
+django==1.8.14
 
 # Configuration
 django-environ==0.3.0
@@ -48,3 +48,4 @@ git+git://github.com/jaredly/django-colorfield#egg=django-colorfield
 django-import-export==0.2.8
 unidecode
 #reportlab
+django-photologue==3.5.1

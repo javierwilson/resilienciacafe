@@ -58,6 +58,7 @@ class Organization(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class Event(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Event'))
     title = models.CharField(max_length=200, null=True, blank=True, verbose_name=_('Title'))

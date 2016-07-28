@@ -47,6 +47,8 @@ THIRD_PARTY_APPS = (
     'django_countries',
     'colorfield',
     'import_export',
+    'photologue',
+    'sortedm2m',
 )
 
 # Apps specific for this project go here.
