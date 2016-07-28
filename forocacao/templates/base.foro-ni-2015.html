@@ -63,8 +63,13 @@
                         <a href="{% url 'app:contact' event.slug %}">Contacto</a>
                     </li>
                     <li>
+                        <a href="{% url 'app:events' %}">Otros eventos</a>
+                    </li>
+                    <!--
+                    <li>
                         <form name="eventselect"><select onChange="window.document.location.href=this.options[this.selectedIndex].value;"><option>Otros eventos</option>{% for e in events %}<option value="/{{ e.slug }}">{{ e }}</option>{% endfor %}</select></form>
                     </li>
+                    -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -106,19 +111,23 @@
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
             {% if request.user.is_authenticated %}
+            <!--
                             <li>
                                 <a href="{% url 'users:detail' request.user.username  %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans "My Profile" %}</span></a>
                             </li>
                             <li>
                             <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Salir" %}</span></a>
                             </li>
+                            -->
             {% else %}
+            <!--
                             <li>
                                 <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Registrarse" %}</span></a>
                             </li>
                             <li>
                                 <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Ingresar" %}</span></a>
                             </li>
+                            -->
             {% endif %}
                             <li>
                             <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{{ event.activities_label }}</span></a>

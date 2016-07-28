@@ -2,16 +2,16 @@
 {% load static %}
 {% load thumbnail %}
 
-{% block title %}{{ event.activities_label }}{% endblock %}
+{% block title %}Eventos{% endblock %}
 
 {% block content %}
 <div class="container internal">
 
-<h1>{{ event.activities_label }}</h1>
+<h1>{{ event.events_label }}</h1>
 <div>
 {% for object in object_list %}
     <div class="col-md-10 clearfix">
-        <h3>{{ object.start|time }} - {{object.end|time }} {{ object.name }}</h3>
+        <h3>{{ object.name }}</h3>
         <!--
         {% if object.organizer %}
             <div class="organizador">Organizado por: {{ object.organizer }}
@@ -23,23 +23,14 @@
         -->
         <div class="contenido clear">
             {% if object.image %}
-                <img src="{% thumbnail object.image 550x250 crop %}" class="img-responsive"/>
+                <a href="/{{ object.slug }}"><img src="{% thumbnail object.image 550x250 %}" class="img-responsive"/></a>
             {% endif %}
             {{ object.text|safe }}
         </div>
-        {% if object.archivo %}
-        {# if user.is_authenticated #}
-            <a target="_blank" href="{{ MEDIA_URL }}{{ object.archivo}}" class="btn btn-default btn-lg"><i class="fa fa-file-pdf-o"></i></a>
-        {# endif #}
-        {% endif %}
         <div class="clearfix"></div>
     </div>
-    {% if forloop.last or forloop.counter|divisibleby:2 %}
-        <div class='clearfix'></div>
-        <div class="col-md-10"><hr class="separador"/></div>
-    {% endif %}
 {% empty %}
-    {# <h2>No se han registrado actividades.</h2> #}
+    <h2>No hay eventos.</h2>
 {% endfor %}
 </div>
 
