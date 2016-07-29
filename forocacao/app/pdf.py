@@ -35,7 +35,7 @@ def createPDF(participant, where):
     c.pagesize = letter
     c.setTitle("%s : %s" % (participant.event.name, participant.full_name()))
     width, height = letter
-    y = hstart = height-20
+    y = hstart = height-20-50
     x = wstart = 80
 
     draw(c, "Evento", x, y, size=10, color=colors.grey)
