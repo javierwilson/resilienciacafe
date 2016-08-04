@@ -74,7 +74,6 @@ staticfiles/
 .virtualenvs
 .cache
 media
-migrations
 *.sh
 .lesshst
 .gitconfig
