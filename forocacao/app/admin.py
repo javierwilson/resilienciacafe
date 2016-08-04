@@ -118,7 +118,8 @@ def mail_attendee(modeladmin, request, queryset):
     if has_approval_permission(request):
         logger = logging.getLogger('django')
         for obj in queryset:
-            message = "%s\r\n%s" % (obj.event.title, obj.event.pdfnote)
+            note = (obj.event.pdfnote) % { 'full_name': obj.first_name,}
+            message = "%s\r\n%s" % (obj.event.title, note)
             email = EmailMessage(obj.event.name, message, settings.DEFAULT_FROM_EMAIL, [ obj.email ],
                     headers={'Message-ID': "%s-%s" % (obj.event.slug, obj.id) })
             filename = '/tmp/%s.pdf' % (obj.email, )
