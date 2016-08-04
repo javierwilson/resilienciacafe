@@ -29,7 +29,12 @@ def current_event(request):
                 slug = slug[:-1]
             current_event = Event.objects.get(slug=slug)
         else:
-            current_event = Event.objects.filter(status='frontpage')[0]
+            current_event = Event.objects.filter(status='frontpage')
+            if len(current_event):
+                current_event = current_event[0]
+            else:
+                curent_event = None
+                return {}
         if current_event.template:
             basehtml = current_event.template
 
