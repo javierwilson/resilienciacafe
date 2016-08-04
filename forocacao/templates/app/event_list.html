@@ -2,35 +2,29 @@
 {% load static %}
 {% load thumbnail %}
 
-{% block title %}Eventos{% endblock %}
+{% block title %}Expositores{% endblock %}
 
 {% block content %}
 <div class="container internal">
 
-<h1>{{ event.events_label }}</h1>
+<h1>{{ title }}</h1>
 <div>
 {% for object in object_list %}
-    <div class="col-md-10 clearfix">
-        <h3>{{ object.name }}</h3>
-        <!--
-        {% if object.organizer %}
-            <div class="organizador">Organizado por: {{ object.organizer }}
-            {% if object.organizer.photo %}
-                <img src="{% thumbnail object.organizer.photo 30x30 crop %}" />
-            {% endif %}
-            </div>
-        {% endif %}
-        -->
+    <div class="col-md-3 clearfix">
+        <h3><a href="{% url 'app:event' object.slug %}">{{ object.name }}</a></h3>
         <div class="contenido clear">
             {% if object.image %}
-                <a href="/{{ object.slug }}"><img src="{% thumbnail object.image 550x250 %}" class="img-responsive"/></a>
+                <a href="{% url 'app:event' object.slug %}"><img src="{% thumbnail object.image 250x250 %}" class="img-responsive"/></a>
             {% endif %}
-            {{ object.text|safe }}
         </div>
-        <div class="clearfix"></div>
     </div>
+    <div class="col-md-5 clearfix">
+        {{ object.text|safe }}
+    </div>
+    <div class='clearfix'></div>
+    <div class="col-md-10"><hr class="separador"/></div>
 {% empty %}
-    <h2>No hay eventos.</h2>
+    <h2>No hay datos.</h2>
 {% endfor %}
 </div>
 

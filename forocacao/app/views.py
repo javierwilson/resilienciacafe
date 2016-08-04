@@ -10,7 +10,7 @@ from django.conf import settings
 
 from braces.views import LoginRequiredMixin
 
-from .models import Event, Activity, Attendee, AttendeeReceipt, Content, Logo
+from .models import Event, Activity, Attendee, AttendeeReceipt, Content, Logo, Organization
 from .pdf import createPDF
 from .png import createPNG
 
@@ -128,6 +128,23 @@ class SpeakersView(ListView):
         context = super(SpeakersView, self).get_context_data(**kwargs)
         context['event'] = Event.objects.get(slug=self.kwargs['slug'])
         return context
+
+
+class OrganizationsView(ListView):
+
+    model = Organization
+    filter = 'O'
+    title = 'Organizations'
+
+    def get_queryset(self):
+        return Organization.objects.filter(event__slug=self.kwargs['slug'], type=self.filter)
+
+    def get_context_data(self, **kwargs):
+        context = super(OrganizationsView, self).get_context_data(**kwargs)
+        context['title'] = self.title
+        #context['event'] = Event.objects.get(slug=self.kwargs['slug'])
+        return context
+
 
 #class ActivitiesView(LoginRequiredMixin, ListView):
 class ActivitiesView(ListView):

@@ -51,12 +51,6 @@ class Invited(models.Model):
     def __unicode__(self):
         return self.email
 
-class Organization(models.Model):
-    name = models.CharField(max_length=200, verbose_name=_('Organization'))
-    email = models.CharField(max_length=100, verbose_name=_('E-Mail'))
-
-    def __unicode__(self):
-        return self.name
 
 
 class Event(models.Model):
@@ -124,7 +118,21 @@ class Content(models.Model):
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     image = FilerImageField(blank=True, null=True, verbose_name=_('Image'))
     title = models.CharField(max_length=200, verbose_name=_('Title'))
-    STATUS = Choices(('about',_('About')), ('contact',_('Contact')), ('info',_('Main description')), ('footer', _('Footer')), ('services', _('Services')), ('404',_('Not Found')), ('confirmation', _('Confirmation')), ('other', _('Other')))
+    STATUS = Choices(
+        ('about',_('About')),
+        ('confirmation', _('Confirmation')),
+        ('contact',_('Contact')),
+        ('info',_('Main description')),
+        ('hotels', _('Hoteles')),
+        ('footer', _('Footer')),
+        ('attendees', _('Attendees')),
+        ('schedule', _('Progama')),
+        ('venue', _('Sede')),
+        ('services', _('Services')),
+        ('transportation', _('Transporte')),
+        ('404',_('Not Found')),
+        ('other', _('Other')),
+    )
     page = StatusField()
     text = models.TextField(blank=True, null=True)
 
@@ -287,6 +295,24 @@ class EventBadge(models.Model):
 
     def __unicode__(self):
         return self.field
+
+
+
+class Organization(models.Model):
+    TYPE_CHOICES = Choices(('O', 'Organizador'), ('E', 'Exhibidor'))
+    type = models.CharField(max_length=1, choices=TYPE_CHOICES, null=True, blank=True)
+    event = models.ForeignKey('Event', verbose_name=_('Event'))
+    name = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Name'))
+    photo = models.ImageField(null=True, blank=True, verbose_name=_('Photo'))
+    text = models.TextField(blank=True, verbose_name=_('Description'))
+    url = models.URLField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __unicode__(self):
+        return self.name
+
 
 class Attendee(User):
 

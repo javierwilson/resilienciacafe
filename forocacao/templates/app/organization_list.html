@@ -7,11 +7,11 @@
 {% block content %}
 <div class="container internal">
 
-<h1>Expositores</h1>
+<h1>{{ title }}</h1>
 <div>
 {% for object in object_list %}
     <div class="col-md-3 clearfix">
-        <h3>{{ object.full_name }}</h3>
+        <h3>{{ object.name }}</h3>
         <div class="contenido clear">
             {% if object.photo %}
                 <img src="{% thumbnail object.photo 250x250 %}" class="img-responsive"/>
@@ -24,7 +24,7 @@
     <div class='clearfix'></div>
     <div class="col-md-10"><hr class="separador"/></div>
 {% empty %}
-    <h2>No se han registrado expositores.</h2>
+    <h2>No hay datos.</h2>
 {% endfor %}
 </div>
 
