@@ -51,30 +51,48 @@
                 Inicio: {{ event }}</a></div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
+                    {% if event %}
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    {% if event %}
-                    <li>
-                        <a href="{% url 'app:about' event.slug %}">Acerca de...</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'app:activities' event.slug %}">{{ event.activities_label }}</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'app:speakers' event.slug %}">Expositores</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'app:contact' event.slug %}">Contacto</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'app:events' %}">Otros eventos</a>
-                    </li>
-                    <!-- <li>
-                        <a href="http://lwr.org/fororegional2014" target="_blank">I Foro Regional de Cacao Centroamericano</a>
-                    </li> -->
-                    {% endif %}
+<div class="btn-group" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Contenido
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="{% url 'app:schedule' event.slug %}">Programa</a></li>
+    <li><a href="{% url 'app:speakers' event.slug %}">Presentadores</a></li>
+    <li><a href="{% url 'app:attendees' event.slug %}">Participantes</a></li>
+    <li><a href="{% url 'app:exhibition' event.slug %}">Area de exhibición</a></li>
+    <li><a href="{% url 'app:organizers' event.slug %}">Organizadores</a></li>
+  </ul>
+  </div>
+  <div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Logística
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <li><a href="{% url 'app:venue' event.slug %}">Sede</a></li>
+    <li><a href="{% url 'app:transportation' event.slug %}">Transporte</a></li>
+    <li><a href="{% url 'app:hotels' event.slug %}">Hoteles</a></li>
+  </div>
+  <a href="{% url 'app:about'  event.slug %}" class="btn btn-default">Preguntas frecuentes</a>
+  <div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Recursos
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <li><a href="{% url 'app:speakers' event.slug %}">Presentaciones</a></li>
+    <li><a href="{% url 'app:speakers' event.slug %}">Enlaces</a></li>
+  </div>
+  <a href="{% url 'app:events' %}" class="btn btn-default">Otros eventos</a>
+</div>
                 </ul>
             </div>
+                    {% endif %}
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->

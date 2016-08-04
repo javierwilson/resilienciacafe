@@ -8,14 +8,15 @@ from django.template.defaultfilters import date as _date
 from django.utils import timezone
 
 from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.units import inch
+from reportlab.graphics import renderPDF
 from reportlab.graphics.barcode import qr
 from reportlab.graphics.barcode import code128
 from reportlab.graphics.barcode import code93, code39
 from reportlab.graphics.barcode import eanbc
 from reportlab.graphics.shapes import Drawing
-from reportlab.graphics import renderPDF
 
 from .png import get_barcode
 
@@ -38,7 +39,7 @@ def createPDF(participant, where):
     y = hstart = height-20-50
     x = wstart = 80
 
-    draw(c, "Evento", x, y, size=10, color=colors.grey)
+    #draw(c, "Evento", x, y, size=10, color=colors.grey)
     y -= 20
     draw(c, participant.event.name, x, y, size=22)
     y -= 20
@@ -100,7 +101,11 @@ def createPDF(participant, where):
         logo_height = logo.size[1]
         logo = participant.event.pdflogo.file.file.name
         #c.drawImage(logo, wstart, hstart-(logo_height/2), width=logo_width/2, height=logo_height/2)
-        c.drawImage(logo, wstart, hstart-(logo_height/2)+50, width=logo_width/1.5, height=logo_height/1.5)
+        print (logo_width/72)
+        print logo_width
+        print inch
+        c.drawImage(logo, 30, hstart-(logo_height/2)+50, width=612-15-(30*2), preserveAspectRatio=True)
+        #c.drawImage(logo, wstart, hstart-(logo_height/2)+50, width=6.5*inch, preserveAspectRatio=True)
 
     # FIXME do we need to do it the 'contact way' ?
     contact = {
