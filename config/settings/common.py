@@ -47,8 +47,9 @@ THIRD_PARTY_APPS = (
     'django_countries',
     'colorfield',
     'import_export',
-    'photologue',
+    'photologue', # photo gallery
     'sortedm2m',
+    'modeltranslation', # translations
 )
 
 # Apps specific for this project go here.
@@ -289,3 +290,10 @@ LOGGING = {
 ACCOUNT_SIGNUP_FORM_CLASS = 'forocacao.users.forms.SignupForm'
 ACCOUNT_USERNAME_REQUIRED = False
 GOOGLE_ANALYTICS_KEY = env('GOOGLE_ANALYTICS_KEY', default='')
+
+from django.utils.translation import ugettext_lazy as _
+
+LANGUAGES = [
+    ('es', _('Spanish')),
+    ('en', _('English')),
+]

@@ -1,0 +1,328 @@
+{% load thumbnail %}
+{% load staticfiles i18n %}<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{ event }}">
+    <meta name="author" content="">
+
+    <title>{% block title %}{{ event }}{% endblock title %}</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/landing-page.css' %}?v=2016d" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- This file store project specific CSS -->
+    <link href="{% static 'css/project.css' %}?v=2016e" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header col-md-4 col-sm-10">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                {% if not home %}<div class="col-md-2 col-sm-2 col-xs-3 nopadding"><img src="{{ event.logo.url }}"/></div>{% endif %}
+                <div class="col-md-10 col-sm-10 {% if not home %}col-xs-6 nopadding{% else %}cols-xs-8 {% endif %}"><a class="navbar-brand topnav" href="{% url 'app:home' %}">
+                Inicio: {{ event }}</a></div>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+                    {% if event %}
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+<div class="btn-group" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Contenido
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="{% url 'app:schedule' event.slug %}">Programa</a></li>
+    <li><a href="{% url 'app:speakers' event.slug %}">Presentadores</a></li>
+    <li><a href="{% url 'app:attendees' event.slug %}">Participantes</a></li>
+    <li><a href="{% url 'app:exhibition' event.slug %}">Area de exhibición</a></li>
+    <li><a href="{% url 'app:organizers' event.slug %}">Organizadores</a></li>
+  </ul>
+  </div>
+  <div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Logística
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <li><a href="{% url 'app:venue' event.slug %}">Sede</a></li>
+    <li><a href="{% url 'app:transportation' event.slug %}">Transporte</a></li>
+    <li><a href="{% url 'app:hotels' event.slug %}">Hoteles</a></li>
+  </div>
+  <a href="{% url 'app:about'  event.slug %}" class="btn btn-default">Preguntas frecuentes</a>
+  <div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Recursos
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <li><a href="{% url 'app:speakers' event.slug %}">Presentaciones</a></li>
+    <li><a href="{% url 'app:speakers' event.slug %}">Enlaces</a></li>
+  </div>
+  <a href="{% url 'app:events' %}" class="btn btn-default">Otros eventos</a>
+</div>
+                </ul>
+            </div>
+                    {% endif %}
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Header -->
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+          {% endfor %}
+      {% endif %}
+      {% block content %}
+
+    <div class="clearfix intro-bheader">
+        <div class="col-md-12 logos">
+            {% for logo in logos %}
+                {% if logo.url %}<a href="{{logo.url}}" target="_blank"><img src="{% thumbnail logo.image 200x200 %}"/></a>{% else %}
+               <img src="{% thumbnail logo.image 200x200 %}"/>{% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-md-7 col-sm-8 col-md-offset-1 hidden-xs">
+            <img src="{% thumbnail object.image 800x308 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <img src="{% thumbnail object.translucid 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+        </div>
+        <div class="col-md-12 visible-xs">
+            <img src="{% static 'img/logoforocacaoregional-movil.png' %}" title="{{ object.name }} {{ object.title }}"/>
+            <h1 class="title2">{{ event }}</h1>
+            <h2 class="subtitle">{{ event.title }}</h1>
+        </div>
+        <!--
+        <div class="col-md-5">
+			<div class="contenido">  
+            {{ object.text|safe }}
+			</div>
+        </div>
+        -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message-off">
+                        <h2>{{ object.start|date:"d"}} y {{ object.end|date:"DATE_FORMAT" }} - {{ object.place }}</h2>
+<br/>
+<p>Anfitriones:<img src="http://www.forocacao.com/media/filer_public/d1/fe/d1fe0fd6-65b7-48e8-aef5-6eef0df9cd2c/sagx60.png"> <img style="" src="http://www.forocacao.com/media/filer_public/63/69/6369f52a-7a14-4aaa-bdd8-790b2b624cf3/aprocacaho60.png"></p><p>
+</p>
+<br/>
+
+
+<!--                        <hr class="intro-divider"> -->
+                        <ul class="list-inline intro-social-buttons">
+            {% if request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'users:detail' request.user.username  %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans "My Profile" %}</span></a>
+                            </li>
+                            <li>
+                            <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Salir" %}</span></a>
+                            </li>
+            {% else %}
+                            <li>
+                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Registrarse" %}</span></a>
+                            </li>
+                            <li>
+                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Ingresar" %}</span></a>
+                            </li>
+            {% endif %}
+                            <li>
+                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{{ event.activities_label }}</span></a>
+                            </li>
+                            <li>
+                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">Expositores</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.intro-header -->
+
+    <!-- Page Content -->
+
+	<a  name="services"></a>
+    {% if current_info.text %}
+    <div class="content-section-b">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-8 col-sm-9">
+                    <!-- <hr class="section-heading-spacer"> -->
+                    <div class="clearfix"></div>
+                    <!-- div class="lead text-center"-->
+                    <div class="content">
+                        {{ current_info.text|safe }}
+                    </div>
+                    <!--
+                    <h2 class="section-heading">Death to the Stock Photo:<br>Special Thanks</h2>
+                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>-->
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <!-- <img class="img-responsive" src="{% static 'img/ipad.png' %}" alt=""> -->
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    {% endif %}
+    <!-- /.content-section-a -->
+    {% if current_footer.text %}
+    <div class="content-section-b">
+
+        <div class="container">
+            {{ current_footer.text|safe }}
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+    {% endif %}
+    <div class="content-section-a" style="display: none;">
+
+        <div class="container">
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+      {% endblock %} <!-- /.content -->
+	<a  name="contact"></a>
+    <div class="banner" style="display: none; background-image: url({{ object.image_footer.url }});">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2></h2>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-inline banner-social-buttons">
+            {% if request.user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'users:detail' request.user.username  %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans "My Profile" %}</span></a>
+                            </li>
+                            <li>
+                            <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Salir" %}</span></a>
+                            </li>
+            {% else %}
+                            <li>
+                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Registrarse" %}</span></a>
+                            </li>
+                            <li>
+                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Ingresar" %}</span></a>
+                            </li>
+            {% endif %}
+            {% if event %}
+                            <li>
+                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{{ event.activities_label }}</span></a>
+                            </li>
+                            <li>
+                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">Expositores</span></a>
+                            </li>
+            {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.banner -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                <!--
+                    <ul class="list-inline">
+                        <li>
+			    <a href="{% url 'app:home' %}">Inicio</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+            {% if event %}
+                        <li>
+                            <a href="{% url 'app:about' event.slug %}">Acerca de...</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="{% url 'app:activities' event.slug %}">{{ event.activities_label }}</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="{% url 'app:speakers' event.slug %}">Expositores</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="{% url 'app:contact' event.slug %}">Contacto</a>
+                        </li>
+            {% endif %}
+                    </ul>
+                    -->
+                    <p class="copyright text-muted small">Copyright &copy; {{event.organizer }} 2016. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    {% if GOOGLE_ANALYTICS_KEY %}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', '{{ GOOGLE_ANALYTICS_KEY }}', 'auto');
+  ga('send', 'pageview');
+</script>
+    {% endif %}
+</body>
+
+</html>

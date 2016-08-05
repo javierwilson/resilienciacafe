@@ -24,7 +24,9 @@ def has_approval_permission(request, obj=None):
 class ContentForm(forms.ModelForm):
     class Meta:
         widgets = {
-            'text': RedactorWidget(editor_options={'lang': 'es', 'minHeight': '300'})
+            'text': RedactorWidget(editor_options={'lang': 'es', 'minHeight': '300'}),
+            'text_es': RedactorWidget(editor_options={'lang': 'es', 'minHeight': '300'}),
+            'text_en': RedactorWidget(editor_options={'lang': 'en', 'minHeight': '300'}),
         }
 
 class ContentAdmin(admin.ModelAdmin):
