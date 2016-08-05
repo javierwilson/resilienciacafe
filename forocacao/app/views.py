@@ -29,8 +29,6 @@ class HomeView(DetailView):
         return object
 
     def get_context_data(self, **kwargs):
-        print translation.get_language()
-        #print self.request.LANGUAGE_CODE
         context = super(HomeView, self).get_context_data(**kwargs)
         context['home'] = True
         context['logos'] = Logo.objects.filter(event=self.object)

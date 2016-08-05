@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 10:31-0600\n"
+"POT-Creation-Date: 2016-08-05 04:20-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,102 +17,151 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps.py:7
+#: forocacao/users/apps.py:7
 msgid "Users"
 msgstr "Usuarios"
 
-#: forms.py:7
+#: forocacao/users/forms.py:11
 msgid "First name"
 msgstr "Nombre"
 
-#: forms.py:8
+#: forocacao/users/forms.py:12
 msgid "Last name"
 msgstr "Apellido"
 
-#: forms.py:9
-msgid "Document"
-msgstr "Documento"
-
-#: forms.py:10
-msgid "Telephone"
-msgstr "Teléfono"
-
-#: forms.py:11 models.py:30
-msgid "Organization"
-msgstr "Organización"
-
-#: forms.py:12 models.py:31
-msgid "Position"
-msgstr "Cargo"
-
-#: models.py:20
-msgid "Event"
-msgstr "Evento"
-
-#: models.py:21
-msgid "Profession"
-msgstr "Profesión"
-
-#: models.py:22
-msgid "Phone"
-msgstr "Teléfono"
-
-#: models.py:23
-msgid "Extra Activity"
-msgstr "Precongreso"
-
-#: models.py:24
-msgid "Country"
-msgstr "País"
-
-#: models.py:25
-msgid "Nationality"
-msgstr "Nacionalidad"
-
-#: models.py:26
-msgid "Soponsored"
-msgstr "Patrocinado"
-
-#: models.py:28
-msgid "Sponsor"
-msgstr "Patrocinador"
-
-#: models.py:29
+#: forocacao/users/forms.py:13 forocacao/users/models.py:29
 msgid "Document ID"
 msgstr "Documento de Identidad"
 
-#: models.py:34
+#: forocacao/users/forms.py:15
+msgid "Pais"
+msgstr ""
+
+#: forocacao/users/forms.py:17
+msgid "Edad"
+msgstr ""
+
+#: forocacao/users/forms.py:18
+msgid "Masculino"
+msgstr ""
+
+#: forocacao/users/forms.py:18
+msgid "Femenino"
+msgstr ""
+
+#: forocacao/users/forms.py:19
+msgid "Sexo"
+msgstr ""
+
+#: forocacao/users/forms.py:20
+msgid "Telephone"
+msgstr "Teléfono"
+
+#: forocacao/users/forms.py:21 forocacao/users/models.py:30
+msgid "Organization"
+msgstr "Organización"
+
+#: forocacao/users/forms.py:23 forocacao/users/models.py:31
+msgid "Position"
+msgstr "Cargo"
+
+#: forocacao/users/forms.py:24
+msgid "Otro"
+msgstr ""
+
+#: forocacao/users/models.py:20
+msgid "Event"
+msgstr "Evento"
+
+#: forocacao/users/models.py:21
+msgid "Profession"
+msgstr "Profesión"
+
+#: forocacao/users/models.py:22
+msgid "Phone"
+msgstr "Teléfono"
+
+#: forocacao/users/models.py:23
+msgid "Extra Activity"
+msgstr "Precongreso"
+
+#: forocacao/users/models.py:24
+msgid "Country"
+msgstr "País"
+
+#: forocacao/users/models.py:25
+msgid "Nationality"
+msgstr "Nacionalidad"
+
+#: forocacao/users/models.py:26
+msgid "Soponsored"
+msgstr "Patrocinado"
+
+#: forocacao/users/models.py:28
+msgid "Sponsor"
+msgstr "Patrocinador"
+
+#: forocacao/users/models.py:34
+msgid "Male"
+msgstr ""
+
+#: forocacao/users/models.py:34
+msgid "Female"
+msgstr ""
+
+#: forocacao/users/models.py:36
+msgid "Address"
+msgstr ""
+
+#: forocacao/users/models.py:39
 msgid "Type"
 msgstr "Tipo"
 
-#: models.py:36
+#: forocacao/users/models.py:41
+msgid "Approved"
+msgstr ""
+
+#: forocacao/users/models.py:42
+msgid "Rejected"
+msgstr ""
+
+#: forocacao/users/models.py:43
 msgid "Photo"
 msgstr "Foto"
 
-#: models.py:38
+#: forocacao/users/models.py:45
 msgid "Biography"
 msgstr "Biografía"
 
-#: models.py:40
+#: forocacao/users/models.py:47
 msgid "Activity"
 msgstr "Actividad"
 
-#: models.py:43
+#: forocacao/users/models.py:48
+#, fuzzy
+#| msgid "Organization"
+msgid "Organization responsible"
+msgstr "Organización"
+
+#: forocacao/users/models.py:51
 msgid "Attendee"
 msgstr "Participante"
 
-#: models.py:44
+#: forocacao/users/models.py:52
 msgid "Attendees"
 msgstr "Participantes"
 
-msgid "Name of User"
-msgstr "Nombre completo"
+#~ msgid "Document"
+#~ msgstr "Documento"
 
-msgid "Age"
-msgstr "Edad"
+#~ msgid "Name of User"
+#~ msgstr "Nombre completo"
 
-msgid "Speaker"
-msgstr "Ponente"
+#~ msgid "Age"
+#~ msgstr "Edad"
 
-msgid "Special"
-msgstr "Especial"
+#~ msgid "Speaker"
+#~ msgstr "Ponente"
+
+#~ msgid "Special"
+#~ msgstr "Especial"

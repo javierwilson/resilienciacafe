@@ -101,9 +101,6 @@ def createPDF(participant, where):
         logo_height = logo.size[1]
         logo = participant.event.pdflogo.file.file.name
         #c.drawImage(logo, wstart, hstart-(logo_height/2), width=logo_width/2, height=logo_height/2)
-        print (logo_width/72)
-        print logo_width
-        print inch
         c.drawImage(logo, 30, hstart-(logo_height/2)+50, width=612-15-(30*2), preserveAspectRatio=True)
         #c.drawImage(logo, wstart, hstart-(logo_height/2)+50, width=6.5*inch, preserveAspectRatio=True)
 

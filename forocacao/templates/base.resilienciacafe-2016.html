@@ -47,7 +47,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                {% if not home %}<div class="col-md-2 col-sm-2 col-xs-3 nopadding"><img src="{{ event.logo.url }}"/></div>{% endif %}
+                {% if not home and event.logo %}<div class="col-md-2 col-sm-2 col-xs-3 nopadding"><img src="{{ event.logo.url }}"/></div>{% endif %}
                 <div class="col-md-10 col-sm-10 {% if not home %}col-xs-6 nopadding{% else %}cols-xs-8 {% endif %}"><a class="navbar-brand topnav" href="{% url 'app:home' %}">
                 Inicio: {{ event }}</a></div>
             </div>
@@ -56,22 +56,38 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
 <div class="btn-group" role="group" aria-label="...">
+
   <div class="btn-group" role="group">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Contenido
+    {% trans 'Content' %}
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="{% url 'app:schedule' event.slug %}">Programa</a></li>
-    <li><a href="{% url 'app:speakers' event.slug %}">Presentadores</a></li>
-    <li><a href="{% url 'app:attendees' event.slug %}">Participantes</a></li>
-    <li><a href="{% url 'app:exhibition' event.slug %}">Area de exhibición</a></li>
-    <li><a href="{% url 'app:organizers' event.slug %}">Organizadores</a></li>
+    <li><a href="{% url 'app:schedule' event.slug %}">{% trans 'Schedule' %}</a></li>
+    <li><a href="{% url 'app:schedule' event.slug %}">{% trans 'Field trip' %}</a></li>
   </ul>
   </div>
+
+  <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default">{% trans 'Speakers' %}</a>
+
+  <div class="btn-group" role="group">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {% trans 'Registration' %}
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    {% if request.user.is_authenticated %}
+    <li><a href="{% url 'account_logout' %}">{% trans "Salir" %}</a></li>
+    {% else %}
+    <li><a href="{% url 'account_signup' %}">{% trans 'Register' %}</a></li>
+    {% endif %}
+    <li><a href="{% url 'app:exhibition' event.slug %}">{% trans 'Exhibition Area' %}</a></li>
+  </ul>
+  </div>
+
   <div class="btn-group" role="group">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Logística
+    {% trans 'Logistics' %}
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -79,17 +95,10 @@
     <li><a href="{% url 'app:transportation' event.slug %}">Transporte</a></li>
     <li><a href="{% url 'app:hotels' event.slug %}">Hoteles</a></li>
   </div>
-  <a href="{% url 'app:about'  event.slug %}" class="btn btn-default">Preguntas frecuentes</a>
-  <div class="btn-group" role="group">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Recursos
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <li><a href="{% url 'app:speakers' event.slug %}">Presentaciones</a></li>
-    <li><a href="{% url 'app:speakers' event.slug %}">Enlaces</a></li>
-  </div>
-  <a href="{% url 'app:events' %}" class="btn btn-default">Otros eventos</a>
+
+  <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default">{% trans 'Resources' %}</a>
+  <a href="{% url 'app:contact' event.slug %}" class="btn btn-default">{% trans 'Contact' %}</a>
+
 </div>
 
 

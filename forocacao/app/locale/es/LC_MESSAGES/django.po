@@ -8,15 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-05 03:08-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-08-05 10:32+0000\n"
+"PO-Revision-Date: 2016-08-05 04:34-0545\n"
+"Last-Translator:   <javier.wilson@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.7.12\n"
 
 #: admin.py:96 models.py:372
 msgid "Balance"
@@ -36,21 +37,19 @@ msgstr ""
 
 #: admin.py:150
 msgid "invited"
-msgstr ""
+msgstr "invitado"
 
 #: admin.py:154 admin.py:272
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: admin.py:154 admin.py:272
-#, fuzzy
-#| msgid "Note"
 msgid "No"
-msgstr "Nota"
+msgstr "No"
 
 #: admin.py:268
 msgid "registered"
-msgstr ""
+msgstr "registrado"
 
 #: apps.py:7
 msgid "Event Management"
@@ -87,11 +86,11 @@ msgstr ""
 
 #: models.py:39 models.py:40 models.py:363
 msgid "Invited"
-msgstr ""
+msgstr "Invitado"
 
 #: models.py:48
 msgid "Registered"
-msgstr ""
+msgstr "Registrado"
 
 #: models.py:59 models.py:168
 msgid "Organizer"
@@ -134,10 +133,8 @@ msgid "Logo"
 msgstr "Logo"
 
 #: models.py:69
-#, fuzzy
-#| msgid "Logo"
 msgid "PDF Logo"
-msgstr "Logo"
+msgstr "Logo PDF"
 
 #: models.py:70
 msgid "PDF and Approval Note"
@@ -177,7 +174,7 @@ msgstr "Fin"
 
 #: models.py:79
 msgid "Place"
-msgstr ""
+msgstr "Lugar"
 
 #: models.py:81
 msgid "Proffesions"
@@ -233,12 +230,11 @@ msgid "About"
 msgstr "Acerca de..."
 
 #: models.py:123
-#, fuzzy
-#| msgid "Position"
 msgid "Confirmation"
-msgstr "Cargo"
+msgstr "Confirmación"
 
-#: models.py:124
+#: models.py:124 templates/base.html:100
+#: templates/base.resilienciacafe-2016.html:100
 msgid "Contact"
 msgstr "Contacto"
 
@@ -247,8 +243,8 @@ msgid "Main description"
 msgstr "Descripción del evento"
 
 #: models.py:126
-msgid "Hoteles"
-msgstr ""
+msgid "Hotels"
+msgstr "Hoteles"
 
 #: models.py:127
 msgid "Footer"
@@ -258,21 +254,22 @@ msgstr "Pie de página"
 msgid "Attendees"
 msgstr "Participantes"
 
-#: models.py:129
-msgid "Progama"
-msgstr ""
+#: models.py:129 templates/base.html:66
+#: templates/base.resilienciacafe-2016.html:66
+msgid "Schedule"
+msgstr "Programa"
 
 #: models.py:130
-msgid "Sede"
-msgstr ""
+msgid "Venue"
+msgstr "Sede"
 
 #: models.py:131
 msgid "Services"
 msgstr "Servicios"
 
 #: models.py:132
-msgid "Transporte"
-msgstr ""
+msgid "Transportation"
+msgstr "Transporte"
 
 #: models.py:133
 msgid "Not Found"
@@ -280,9 +277,10 @@ msgstr "No encontrado"
 
 #: models.py:134
 msgid "Other"
-msgstr ""
+msgstr "Otros"
 
-#: models.py:141
+#: models.py:141 templates/base.html:62
+#: templates/base.resilienciacafe-2016.html:62
 msgid "Content"
 msgstr "Contenido"
 
@@ -291,18 +289,14 @@ msgid "Contents"
 msgstr "Contenidos"
 
 #: models.py:157 models.py:158
-#, fuzzy
-#| msgid "Logo"
 msgid "Logos"
-msgstr "Logo"
+msgstr "Logos"
 
 #: models.py:170
 msgid "Activity description"
 msgstr "Descripción de actividad"
 
 #: models.py:173
-#, fuzzy
-#| msgid "Filename"
 msgid "File"
 msgstr "Archivo"
 
@@ -442,7 +436,7 @@ msgstr "Y"
 msgid "Extra"
 msgstr "Extra"
 
-#: models.py:293
+#: models.py:293 templates/admin/app/attendee/change_form.html:9
 msgid "Badge"
 msgstr "Gafete"
 
@@ -451,43 +445,371 @@ msgid "Badges"
 msgstr "Gafetes"
 
 #: models.py:307
-#, fuzzy
-#| msgid "Main description"
 msgid "Description"
-msgstr "Descripción del evento"
+msgstr "Descripción"
 
-#~ msgid "Receipt"
-#~ msgstr "Recibo"
+#: templates/account/email.html:7
+#, fuzzy
+#| msgid "Amount"
+msgid "Account"
+msgstr "Monto"
 
-#~ msgid "Sheet"
-#~ msgstr "Hoja"
+#: templates/account/email.html:13
+msgid "E-mail Addresses"
+msgstr "Direcciones de correo"
+
+#: templates/account/email.html:15
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: templates/account/email.html:29
+msgid "Verified"
+msgstr "Verificado"
+
+#: templates/account/email.html:31
+msgid "Unverified"
+msgstr "Sin verificar"
+
+#: templates/account/email.html:33
+msgid "Primary"
+msgstr "Primario"
+
+#: templates/account/email.html:39
+msgid "Make Primary"
+msgstr "Hacer primario"
+
+#: templates/account/email.html:40
+msgid "Re-send Verification"
+msgstr "Re-enviar verficación"
+
+#: templates/account/email.html:41
+msgid "Remove"
+msgstr "Quitar"
+
+#: templates/account/email.html:48
+msgid "Warning:"
+msgstr ""
+
+#: templates/account/email.html:48
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, "
+"etc."
+msgstr ""
+
+#: templates/account/email.html:53
+#, fuzzy
+#| msgid "E-mail Addresses"
+msgid "Add E-mail Address"
+msgstr "Direcciones de correo"
+
+#: templates/account/email.html:58
+#, fuzzy
+#| msgid "E-mail"
+msgid "Add E-mail"
+msgstr "E-mail"
+
+#: templates/account/email.html:69
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: templates/account/email_confirm.html:7
+#: templates/account/email_confirm.html:14
+#: templates/account/email_confirmed.html:6
+#: templates/account/email_confirmed.html:13
+#, fuzzy
+#| msgid "E-mail Addresses"
+msgid "Confirm E-mail Address"
+msgstr "Direcciones de correo"
+
+#: templates/account/email_confirm.html:20
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: templates/account/email_confirm.html:24
+#, fuzzy
+#| msgid "Confirmation"
+msgid "Confirm"
+msgstr "Confirmación"
+
+#: templates/account/email_confirm.html:31
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a "
+"href=\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: templates/account/email_confirmed.html:17
+#, python-format
+msgid ""
+"You have confirmed that <a href=\"mailto:%(email)s\">%(email)s</a> is an "
+"e-mail address for user %(user_display)s."
+msgstr ""
+
+#: templates/account/login.html:8 templates/account/login.html.py:14
+#: templates/account/login.html:42
+msgid "Sign In"
+msgstr ""
+
+#: templates/account/login.html:17
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"      of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign up</a>\n"
+"      for a %(site_name)s account and sign in below:"
+msgstr ""
+
+#: templates/account/login.html:27
+msgid "or"
+msgstr ""
+
+#: templates/account/login.html:43
+msgid "Forgot Password?"
+msgstr ""
+
+#: templates/account/logout.html:6 templates/account/logout.html.py:13
+#: templates/account/logout.html:22
+msgid "Sign Out"
+msgstr ""
+
+#: templates/account/logout.html:15
+msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: templates/account/password_change.html:5
+#: templates/account/password_change.html:11
+#: templates/account/password_change.html:16
+#: templates/account/password_reset_from_key.html:7
+#: templates/account/password_reset_from_key.html:13
+#: templates/account/password_reset_from_key_done.html:5
+#: templates/account/password_reset_from_key_done.html:11
+msgid "Change Password"
+msgstr ""
+
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset.html:14
+#: templates/account/password_reset_done.html:6
+#: templates/account/password_reset_done.html:12
+msgid "Password Reset"
+msgstr ""
+
+#: templates/account/password_reset.html:19
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you"
+" an e-mail allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:24
+msgid "Reset My Password"
+msgstr ""
+
+#: templates/account/password_reset.html:27
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: templates/account/password_reset_done.html:18
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:13
+msgid "Bad Token"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:17
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password "
+"reset</a>."
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:23
+msgid "change password"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:26
+#: templates/account/password_reset_from_key_done.html:12
+msgid "Your password is now changed."
+msgstr ""
+
+#: templates/account/password_set.html:6
+#: templates/account/password_set.html:12
+#: templates/account/password_set.html:17
+msgid "Set Password"
+msgstr ""
+
+#: templates/account/signup.html:7
+msgid "Signup"
+msgstr ""
+
+#: templates/account/signup.html:14 templates/account/signup.html.py:24
+msgid "Sign Up"
+msgstr ""
+
+#: templates/account/signup.html:16
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: templates/account/signup_closed.html:6
+#: templates/account/signup_closed.html:12
+msgid "Sign Up Closed"
+msgstr ""
+
+#: templates/account/signup_closed.html:14
+msgid "We are sorry, but the sign up is currently closed."
+msgstr ""
+
+#: templates/account/verification_sent.html:5
+#: templates/account/verification_sent.html:11
+#: templates/account/verified_email_required.html:6
+#: templates/account/verified_email_required.html:12
+#, fuzzy
+#| msgid "E-mail Addresses"
+msgid "Verify Your E-mail Address"
+msgstr "Direcciones de correo"
+
+#: templates/account/verification_sent.html:13
+#, python-format
+msgid ""
+"We have sent an e-mail to <a href=\"mailto:%(email)s\">%(email)s</a> for "
+"verification. Follow the link provided to finalize the signup process. "
+"Please contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/account/verified_email_required.html:16
+msgid ""
+"This part of the site requires us to verify that\n"
+"        you are who you claim to be. For this purpose, we require that you\n"
+"        verify ownership of your e-mail address. "
+msgstr ""
+
+#: templates/account/verified_email_required.html:20
+msgid ""
+"We have sent an e-mail to you for\n"
+"        verification. Please click on the link inside this e-mail. Please\n"
+"        contact us if you do not receive it within a few minutes."
+msgstr ""
+
+#: templates/account/verified_email_required.html:24
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your "
+"e-mail address</a>."
+msgstr ""
+
+#: templates/admin/app/attendee/change_form.html:5
+#: templates/admin/app/attendeereceipt/change_form.html:5
+msgid "History"
+msgstr ""
+
+#: templates/admin/app/attendee/change_form.html:11
+#: templates/admin/app/attendeereceipt/change_form.html:9
+msgid "Receipt"
+msgstr "Recibo"
+
+#: templates/admin/app/attendee/change_form.html:14
+msgid "Sheet"
+msgstr "Hoja"
+
+#: templates/admin/app/attendee/change_form.html:15
+msgid "PDF"
+msgstr ""
+
+#: templates/admin/app/attendee/change_form.html:19
+#: templates/admin/app/attendeereceipt/change_form.html:14
+msgid "View on site"
+msgstr ""
+
+#: templates/admin/import_export/change_list_export.html:6
+#: templates/admin/import_export/change_list_import_export.html:6
+msgid "Export"
+msgstr ""
+
+#: templates/app/speaker_list.html:6
+msgid "Expositores"
+msgstr ""
+
+#: templates/base.foro-ca-2016.html:149 templates/base.foro-ca-2016.html:243
+#: templates/base.foro-ni-2015.html:116 templates/base.foro-ni-2015.html:217
+#: templates/base.html:175 templates/base.html.py:269
+#: templates/base.resilienciacafe-2016.html:175
+#: templates/base.resilienciacafe-2016.html:269
+msgid "My Profile"
+msgstr "Mi Perfil"
+
+#: templates/base.foro-ca-2016.html:152 templates/base.foro-ca-2016.html:246
+#: templates/base.foro-ni-2015.html:119 templates/base.foro-ni-2015.html:220
+#: templates/base.html:80 templates/base.html.py:178 templates/base.html:272
+#: templates/base.resilienciacafe-2016.html:80
+#: templates/base.resilienciacafe-2016.html:178
+#: templates/base.resilienciacafe-2016.html:272
+msgid "Salir"
+msgstr ""
+
+#: templates/base.foro-ca-2016.html:156 templates/base.foro-ca-2016.html:250
+#: templates/base.foro-ni-2015.html:125 templates/base.foro-ni-2015.html:224
+#: templates/base.html:182 templates/base.html.py:276
+#: templates/base.resilienciacafe-2016.html:182
+#: templates/base.resilienciacafe-2016.html:276
+#, fuzzy
+#| msgid "Registered"
+msgid "Registrarse"
+msgstr "Registrado"
+
+#: templates/base.foro-ca-2016.html:159 templates/base.foro-ca-2016.html:253
+#: templates/base.foro-ni-2015.html:128 templates/base.foro-ni-2015.html:227
+#: templates/base.html:185 templates/base.html.py:279
+#: templates/base.resilienciacafe-2016.html:185
+#: templates/base.resilienciacafe-2016.html:279
+msgid "Ingresar"
+msgstr ""
+
+#: templates/base.html:67 templates/base.resilienciacafe-2016.html:67
+#| msgid "Field"
+msgid "Field trip"
+msgstr "Gira de campo"
+
+#: templates/base.html:71 templates/base.resilienciacafe-2016.html:71
+#| msgid "Speaker"
+msgid "Speakers"
+msgstr "Ponentes"
+
+#: templates/base.html:75 templates/base.resilienciacafe-2016.html:75
+#| msgid "Registered"
+msgid "Registration"
+msgstr "Registro"
+
+#: templates/base.html:82 templates/base.resilienciacafe-2016.html:82
+#| msgid "Registered"
+msgid "Register"
+msgstr "Registrarse"
+
+#: templates/base.html:84 templates/base.resilienciacafe-2016.html:84
+msgid "Exhibition Area"
+msgstr "Area de exhibición"
+
+#: templates/base.html:90 templates/base.resilienciacafe-2016.html:90
+msgid "Logistics"
+msgstr "Logística"
+
+#: templates/base.html:99 templates/base.resilienciacafe-2016.html:99
+msgid "Resources"
+msgstr "Recursos"
+
+#: templates/base.html:164 templates/base.resilienciacafe-2016.html:164
+#| msgid "End"
+msgid "and"
+msgstr "y"
 
 #~ msgid "Tools"
 #~ msgstr "Herramientas"
-
-#~ msgid "E-mail Addresses"
-#~ msgstr "Direcciones de correo"
-
-#~ msgid "Verified"
-#~ msgstr "Verificado"
-
-#~ msgid "Unverified"
-#~ msgstr "Sin verificar"
-
-#~ msgid "Primary"
-#~ msgstr "Primario"
-
-#~ msgid "Make Primary"
-#~ msgstr "Hacer primario"
-
-#~ msgid "Re-send Verification"
-#~ msgstr "Re-enviar verficación"
-
-#~ msgid "Remove"
-#~ msgstr "Quitar"
-
-#~ msgid "My Profile"
-#~ msgstr "Mi Perfil"
 
 #~ msgid "Log In"
 #~ msgstr "Entrar"
@@ -497,9 +819,6 @@ msgstr "Descripción del evento"
 
 #~ msgid "Age"
 #~ msgstr "Edad"
-
-#~ msgid "Speaker"
-#~ msgstr "Ponente"
 
 #~ msgid "Sponsor"
 #~ msgstr "Patrocinador"
