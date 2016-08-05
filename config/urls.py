@@ -11,6 +11,10 @@ from forocacao.app.views import HomeView
 
 urlpatterns = [
 
+    # set language
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^rosetta/', include('rosetta.urls')),
+
     # django smart selects
     url(r'^chaining/', include('smart_selects.urls')),
 

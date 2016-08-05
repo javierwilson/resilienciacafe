@@ -49,7 +49,8 @@ THIRD_PARTY_APPS = (
     'import_export',
     'photologue', # photo gallery
     'sortedm2m',
-    'modeltranslation', # translations
+    'modeltranslation', # model translations
+    'rosetta', # translations
 )
 
 # Apps specific for this project go here.
@@ -67,6 +68,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE_CLASSES = (
     # Make sure djangosecure.middleware.SecurityMiddleware is listed first
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

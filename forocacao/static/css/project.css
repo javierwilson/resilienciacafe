@@ -72,9 +72,10 @@ h4 { color: #242424;font-size: 15px;}
   margin-top: 20px;
 }
 .navbar-default select {
-  color: #6e3018;
-  font-size: 15px;
-  font-weight: bold;
+  /*color: #6e3018;*/
+  /* font-size: 15px; */
+  /* font-weight: bold;*/
+  /* 
   margin-top: 10px;
   float: left;
   text-align: left;
@@ -83,13 +84,16 @@ h4 { color: #242424;font-size: 15px;}
   -moz-appearance: none;
   appearance: none;
   padding: 2px;
+  */
 }
 .navbar-default select:hover, .navbar-default select:focus {
-  color: #6e3018;
+  /*color: #6e3018;*/
 }
 .navbar-default select option {
+/*
   padding: 5px;
   border-bottom: 1px solid #fff;
+  */
 }
 .subtitle {
   font-size: 32px;

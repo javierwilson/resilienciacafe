@@ -1,5 +1,6 @@
+{% load i18n %}
 {% load thumbnail %}
-{% load staticfiles i18n %}<!DOCTYPE html>
+{% load staticfiles %}<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -90,6 +91,22 @@
   </div>
   <a href="{% url 'app:events' %}" class="btn btn-default">Otros eventos</a>
 </div>
+
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{{ redirect_to }}" />
+    <select name="language" onchange="this.form.submit()">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
                 </ul>
             </div>
                     {% endif %}
@@ -135,7 +152,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message-off">
-                        <h2>{{ object.start|date:"d"}} y {{ object.end|date:"DATE_FORMAT" }} - {{ object.place }}</h2>
+                        <h2>{{ object.start|date:"d"}} {% trans 'and' %} {{ object.end|date:"DATE_FORMAT" }} - {{ object.place }}</h2>
 <br/>
 <p>Anfitriones:<img src="http://www.forocacao.com/media/filer_public/d1/fe/d1fe0fd6-65b7-48e8-aef5-6eef0df9cd2c/sagx60.png"> <img style="" src="http://www.forocacao.com/media/filer_public/63/69/6369f52a-7a14-4aaa-bdd8-790b2b624cf3/aprocacaho60.png"></p><p>
 </p>
