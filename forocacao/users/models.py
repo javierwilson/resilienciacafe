@@ -46,6 +46,8 @@ class User(AbstractUser):
                                  help_text='Try and enter few some more lines')
     activities = models.ManyToManyField('app.Activity', blank=True, verbose_name=_('Activity'))
     responsible = models.ForeignKey('app.Organization', null=True, verbose_name=_('Organization responsible'))
+    emergency_name = models.CharField(max_length=30, verbose_name=_('Emergency Contact Name'))
+    emergency_phone = models.CharField(max_length=30, verbose_name=_('Emergency Contact Telephone'))
 
     class Meta:
         verbose_name = _("Attendee")

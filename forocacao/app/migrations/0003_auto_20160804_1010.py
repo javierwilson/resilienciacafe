@@ -15,10 +15,10 @@ class Migration(migrations.Migration):
             name='organization',
             options={'ordering': ['name']},
         ),
-        migrations.RemoveField(
-            model_name='organization',
-            name='email',
-        ),
+        #migrations.RemoveField(
+        #    model_name='organization',
+        #    name='email',
+        #),
         migrations.AddField(
             model_name='organization',
             name='event',

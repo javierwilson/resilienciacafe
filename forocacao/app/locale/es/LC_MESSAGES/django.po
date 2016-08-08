@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-05 10:32+0000\n"
-"PO-Revision-Date: 2016-08-05 04:34-0545\n"
+"POT-Creation-Date: 2016-08-06 05:25+0000\n"
+"PO-Revision-Date: 2016-08-05 23:27-0545\n"
 "Last-Translator:   <javier.wilson@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.7.12\n"
 
-#: admin.py:96 models.py:372
+#: admin.py:96 models.py:374
 msgid "Balance"
 msgstr "Saldo"
 
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Reject participation of selected attendees"
 msgstr ""
 
-#: admin.py:147 models.py:404
+#: admin.py:147 models.py:406
 msgid "Approve participation of selected attendees"
 msgstr ""
 
@@ -39,15 +39,15 @@ msgstr ""
 msgid "invited"
 msgstr "invitado"
 
-#: admin.py:154 admin.py:272
+#: admin.py:154 admin.py:273
 msgid "Yes"
 msgstr "Sí"
 
-#: admin.py:154 admin.py:272
+#: admin.py:154 admin.py:273
 msgid "No"
 msgstr "No"
 
-#: admin.py:268
+#: admin.py:269
 msgid "registered"
 msgstr "registrado"
 
@@ -64,19 +64,19 @@ msgid "Media"
 msgstr ""
 
 #: models.py:23 models.py:57 models.py:90 models.py:104 models.py:117
-#: models.py:149 models.py:214 models.py:279 models.py:280 models.py:304
+#: models.py:151 models.py:216 models.py:281 models.py:282 models.py:306
 msgid "Event"
 msgstr "Evento"
 
-#: models.py:32 models.py:280
+#: models.py:32 models.py:282
 msgid "First name"
 msgstr "Nombre"
 
-#: models.py:33 models.py:280
+#: models.py:33 models.py:282
 msgid "Last name"
 msgstr "Apellido"
 
-#: models.py:34 models.py:101 models.py:282
+#: models.py:34 models.py:101 models.py:284
 msgid "Organization"
 msgstr "Organización"
 
@@ -84,7 +84,7 @@ msgstr "Organización"
 msgid "E-Mail"
 msgstr ""
 
-#: models.py:39 models.py:40 models.py:363
+#: models.py:39 models.py:40 models.py:365
 msgid "Invited"
 msgstr "Invitado"
 
@@ -92,7 +92,7 @@ msgstr "Invitado"
 msgid "Registered"
 msgstr "Registrado"
 
-#: models.py:59 models.py:168
+#: models.py:59 models.py:170
 msgid "Organizer"
 msgstr "Organizador"
 
@@ -120,7 +120,7 @@ msgstr "Estado"
 msgid "Activities label"
 msgstr "Etiqueta de actividades"
 
-#: models.py:64 models.py:181
+#: models.py:64 models.py:183
 msgid "Activities"
 msgstr "Actividades"
 
@@ -128,7 +128,7 @@ msgstr "Actividades"
 msgid "Event description"
 msgstr "Descripción del evento"
 
-#: models.py:68 models.py:151 models.py:282
+#: models.py:68 models.py:153 models.py:284
 msgid "Logo"
 msgstr "Logo"
 
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Reject Note"
 msgstr ""
 
-#: models.py:72 models.py:119 models.py:172
+#: models.py:72 models.py:119 models.py:174
 msgid "Image"
 msgstr "Imagen"
 
@@ -152,7 +152,7 @@ msgstr "Imagen"
 msgid "Translucid Image"
 msgstr ""
 
-#: models.py:74 models.py:174
+#: models.py:74 models.py:176
 msgid "Image footer"
 msgstr "Imagen de abajo"
 
@@ -164,11 +164,11 @@ msgstr "Inicio registro temprano"
 msgid "Early Bird End"
 msgstr "Fin registro temprano"
 
-#: models.py:77 models.py:175
+#: models.py:77 models.py:177
 msgid "Start"
 msgstr "Inicio"
 
-#: models.py:78 models.py:176
+#: models.py:78 models.py:178
 msgid "End"
 msgstr "Fin"
 
@@ -180,7 +180,7 @@ msgstr "Lugar"
 msgid "Proffesions"
 msgstr "Profesiones"
 
-#: models.py:82 models.py:207
+#: models.py:82 models.py:209
 msgid "Payment Methods"
 msgstr "Formas de pago"
 
@@ -212,16 +212,16 @@ msgstr "Teléfono"
 msgid "Position"
 msgstr "Cargo"
 
-#: models.py:102 models.py:195 models.py:281
+#: models.py:102 models.py:197 models.py:283
 msgid "Profession"
 msgstr "Profesión"
 
-#: models.py:102 models.py:281
+#: models.py:102 models.py:283
 msgid "Country"
 msgstr "País"
 
-#: models.py:118 models.py:150 models.py:166 models.py:187 models.py:202
-#: models.py:224 models.py:267 models.py:305 models.py:396 models.py:400
+#: models.py:118 models.py:152 models.py:168 models.py:189 models.py:204
+#: models.py:226 models.py:269 models.py:307 models.py:398 models.py:402
 msgid "Name"
 msgstr "Nombre"
 
@@ -233,8 +233,8 @@ msgstr "Acerca de..."
 msgid "Confirmation"
 msgstr "Confirmación"
 
-#: models.py:124 templates/base.html:100
-#: templates/base.resilienciacafe-2016.html:100
+#: models.py:124 templates/base.html:105
+#: templates/base.resilienciacafe-2016.html:105
 msgid "Contact"
 msgstr "Contacto"
 
@@ -242,209 +242,224 @@ msgstr "Contacto"
 msgid "Main description"
 msgstr "Descripción del evento"
 
-#: models.py:126
+#: models.py:126 templates/base.html:101
+#: templates/base.resilienciacafe-2016.html:101
 msgid "Hotels"
 msgstr "Hoteles"
 
 #: models.py:127
+#, fuzzy
+#| msgid "Field trip"
+msgid "Field Trip"
+msgstr "Gira de campo"
+
+#: models.py:128
 msgid "Footer"
 msgstr "Pie de página"
 
-#: models.py:128 models.py:326
+#: models.py:129 models.py:328
 msgid "Attendees"
 msgstr "Participantes"
 
-#: models.py:129 templates/base.html:66
-#: templates/base.resilienciacafe-2016.html:66
+#: models.py:130 templates/base.html:78
+#: templates/base.resilienciacafe-2016.html:78
+msgid "Registration"
+msgstr "Registro"
+
+#: models.py:131 templates/base.html:68 templates/base.html.py:199
+#: templates/base.resilienciacafe-2016.html:68
+#: templates/base.resilienciacafe-2016.html:199
 msgid "Schedule"
 msgstr "Programa"
 
-#: models.py:130
+#: models.py:132 templates/base.html:99
+#: templates/base.resilienciacafe-2016.html:99
 msgid "Venue"
 msgstr "Sede"
 
-#: models.py:131
+#: models.py:133
 msgid "Services"
 msgstr "Servicios"
 
-#: models.py:132
+#: models.py:134 templates/base.html:100
+#: templates/base.resilienciacafe-2016.html:100
 msgid "Transportation"
 msgstr "Transporte"
 
-#: models.py:133
+#: models.py:135
 msgid "Not Found"
 msgstr "No encontrado"
 
-#: models.py:134
+#: models.py:136
 msgid "Other"
 msgstr "Otros"
 
-#: models.py:141 templates/base.html:62
-#: templates/base.resilienciacafe-2016.html:62
+#: models.py:143 templates/base.html:63
+#: templates/base.resilienciacafe-2016.html:63
 msgid "Content"
 msgstr "Contenido"
 
-#: models.py:142
+#: models.py:144
 msgid "Contents"
 msgstr "Contenidos"
 
-#: models.py:157 models.py:158
+#: models.py:159 models.py:160
 msgid "Logos"
 msgstr "Logos"
 
-#: models.py:170
+#: models.py:172
 msgid "Activity description"
 msgstr "Descripción de actividad"
 
-#: models.py:173
+#: models.py:175
 msgid "File"
 msgstr "Archivo"
 
-#: models.py:180
+#: models.py:182
 msgid "Activity"
 msgstr "Actividad"
 
-#: models.py:190
+#: models.py:192
 msgid "Profession description"
 msgstr "Descripción de profesión"
 
-#: models.py:196
+#: models.py:198
 msgid "Professions"
 msgstr "Profesiones"
 
-#: models.py:206 models.py:251
+#: models.py:208 models.py:253
 msgid "Payment Method"
 msgstr "Forma de pago"
 
-#: models.py:213 models.py:228
+#: models.py:215 models.py:230
 msgid "Attendee Type"
 msgstr "Tipo de Participante"
 
-#: models.py:215 models.py:392
+#: models.py:217 models.py:394
 msgid "Price"
 msgstr "Precio"
 
-#: models.py:216
+#: models.py:218
 msgid "Early Bird Price"
 msgstr "Precio Temprano"
 
-#: models.py:217
+#: models.py:219
 msgid "Extra Activity Price"
 msgstr "Precio Precongreso"
 
-#: models.py:220
+#: models.py:222
 msgid "Attendee Type in Event"
 msgstr "Tipo de participante en evento"
 
-#: models.py:221
+#: models.py:223
 msgid "Attendee Types in Events"
 msgstr "Tipo de participantes en eventos"
 
-#: models.py:229
+#: models.py:231
 msgid "Attendee Types"
 msgstr "Tipos de Participante"
 
-#: models.py:235 models.py:250 models.py:325
+#: models.py:237 models.py:252 models.py:327
 msgid "Attendee"
 msgstr "Participante"
 
-#: models.py:236 models.py:252
+#: models.py:238 models.py:254
 msgid "Date"
 msgstr "Fecha"
 
-#: models.py:237 models.py:254
+#: models.py:239 models.py:256
 msgid "Reference"
 msgstr "Referencia"
 
-#: models.py:238 models.py:255
+#: models.py:240 models.py:257
 msgid "Note"
 msgstr "Nota"
 
-#: models.py:242
+#: models.py:244
 msgid "Attendee Receipt"
 msgstr "Recibo"
 
-#: models.py:243
+#: models.py:245
 msgid "Attendee Receipts"
 msgstr "Recibos"
 
-#: models.py:253
+#: models.py:255
 msgid "Amount"
 msgstr "Monto"
 
-#: models.py:259
+#: models.py:261
 msgid "Attendee Payment"
 msgstr "Pago del participante"
 
-#: models.py:260
+#: models.py:262
 msgid "Attendee Payments"
 msgstr "Pagos del participante"
 
-#: models.py:268
+#: models.py:270
 msgid "Filename"
 msgstr "Archivo"
 
-#: models.py:272 models.py:285
+#: models.py:274 models.py:287
 msgid "Font"
 msgstr "Fuente"
 
-#: models.py:273
+#: models.py:275
 msgid "Fonts"
 msgstr "Fuentes"
 
-#: models.py:280
+#: models.py:282
 msgid "Complete name"
 msgstr "Nombre completo"
 
-#: models.py:281
+#: models.py:283
 msgid "Type"
 msgstr "Tipo"
 
-#: models.py:281
+#: models.py:283
 msgid "E-mail"
 msgstr "E-mail"
 
-#: models.py:281
+#: models.py:283
 msgid "Text"
 msgstr "Texto"
 
-#: models.py:282 models.py:306
+#: models.py:284 models.py:308
 msgid "Photo"
 msgstr "Foto"
 
-#: models.py:283
+#: models.py:285
 msgid "Field"
 msgstr "Campo"
 
-#: models.py:284
+#: models.py:286
 msgid "Color"
 msgstr "Color"
 
-#: models.py:286
+#: models.py:288
 msgid "Size"
 msgstr "Tamaño"
 
-#: models.py:287
+#: models.py:289
 msgid "X"
 msgstr "X"
 
-#: models.py:288
+#: models.py:290
 msgid "Y"
 msgstr "Y"
 
-#: models.py:289
+#: models.py:291
 msgid "Extra"
 msgstr "Extra"
 
-#: models.py:293 templates/admin/app/attendee/change_form.html:9
+#: models.py:295 templates/admin/app/attendee/change_form.html:9
 msgid "Badge"
 msgstr "Gafete"
 
-#: models.py:294
+#: models.py:296
 msgid "Badges"
 msgstr "Gafetes"
 
-#: models.py:307
+#: models.py:309
 msgid "Description"
 msgstr "Descripción"
 
@@ -643,11 +658,13 @@ msgstr ""
 msgid "Set Password"
 msgstr ""
 
-#: templates/account/signup.html:7
+#: templates/account/signup.html:7 templates/base.html:85
+#: templates/base.html.py:190 templates/base.resilienciacafe-2016.html:85
+#: templates/base.resilienciacafe-2016.html:190
 msgid "Signup"
 msgstr ""
 
-#: templates/account/signup.html:14 templates/account/signup.html.py:24
+#: templates/account/signup.html:14 templates/account/signup.html.py:26
 msgid "Sign Up"
 msgstr ""
 
@@ -656,6 +673,22 @@ msgstr ""
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
 msgstr ""
+
+#: templates/account/signup.html:18
+msgid ""
+"Please note that there is no cost to participate in the forum itself, other "
+"than travel, food and lodging expenses. Space is limited, so please request "
+"your spot by completing the information below. Once your request has been "
+"approved, you will receive an email confirming your spot. For further "
+"information, please email us at <a "
+"href=\"mailto:info@resilienciacafe.com\">info@resilienciacafe.com</a>"
+msgstr ""
+"Favor tomar nota que su participación en el Foro no tiene ningún costo salvo"
+" sus gastos de viaje, alimentación y alojamiento.  Los cupos están "
+"limitados, si desea participar en el evento favor llene el siguiente "
+"formulario. Una vez aceptada su solicitud, recibirá un correo confirmando su"
+" cupo. Para información adicional puede excribir a <a "
+"href=\"mailto:info@resilienciacafe.com\">info@resilienciacafe.com</a>"
 
 #: templates/account/signup_closed.html:6
 #: templates/account/signup_closed.html:12
@@ -738,26 +771,21 @@ msgstr ""
 
 #: templates/base.foro-ca-2016.html:149 templates/base.foro-ca-2016.html:243
 #: templates/base.foro-ni-2015.html:116 templates/base.foro-ni-2015.html:217
-#: templates/base.html:175 templates/base.html.py:269
-#: templates/base.resilienciacafe-2016.html:175
-#: templates/base.resilienciacafe-2016.html:269
+#: templates/base.html:183 templates/base.html.py:279
+#: templates/base.resilienciacafe-2016.html:183
+#: templates/base.resilienciacafe-2016.html:279
 msgid "My Profile"
 msgstr "Mi Perfil"
 
 #: templates/base.foro-ca-2016.html:152 templates/base.foro-ca-2016.html:246
 #: templates/base.foro-ni-2015.html:119 templates/base.foro-ni-2015.html:220
-#: templates/base.html:80 templates/base.html.py:178 templates/base.html:272
-#: templates/base.resilienciacafe-2016.html:80
-#: templates/base.resilienciacafe-2016.html:178
-#: templates/base.resilienciacafe-2016.html:272
+#: templates/base.html:282 templates/base.resilienciacafe-2016.html:282
 msgid "Salir"
 msgstr ""
 
 #: templates/base.foro-ca-2016.html:156 templates/base.foro-ca-2016.html:250
 #: templates/base.foro-ni-2015.html:125 templates/base.foro-ni-2015.html:224
-#: templates/base.html:182 templates/base.html.py:276
-#: templates/base.resilienciacafe-2016.html:182
-#: templates/base.resilienciacafe-2016.html:276
+#: templates/base.html:286 templates/base.resilienciacafe-2016.html:286
 #, fuzzy
 #| msgid "Registered"
 msgid "Registrarse"
@@ -765,54 +793,60 @@ msgstr "Registrado"
 
 #: templates/base.foro-ca-2016.html:159 templates/base.foro-ca-2016.html:253
 #: templates/base.foro-ni-2015.html:128 templates/base.foro-ni-2015.html:227
-#: templates/base.html:185 templates/base.html.py:279
-#: templates/base.resilienciacafe-2016.html:185
-#: templates/base.resilienciacafe-2016.html:279
+#: templates/base.html:289 templates/base.resilienciacafe-2016.html:289
 msgid "Ingresar"
 msgstr ""
 
 #: templates/base.html:67 templates/base.resilienciacafe-2016.html:67
-#| msgid "Field"
+msgid "Participants"
+msgstr "Participantes"
+
+#: templates/base.html:69 templates/base.resilienciacafe-2016.html:69
 msgid "Field trip"
 msgstr "Gira de campo"
 
-#: templates/base.html:71 templates/base.resilienciacafe-2016.html:71
-#| msgid "Speaker"
+#: templates/base.html:73 templates/base.html.py:202
+#: templates/base.resilienciacafe-2016.html:73
+#: templates/base.resilienciacafe-2016.html:202
 msgid "Speakers"
 msgstr "Ponentes"
 
-#: templates/base.html:75 templates/base.resilienciacafe-2016.html:75
-#| msgid "Registered"
-msgid "Registration"
-msgstr "Registro"
+#: templates/base.html:83 templates/base.html.py:186
+#: templates/base.resilienciacafe-2016.html:83
+#: templates/base.resilienciacafe-2016.html:186
+#, fuzzy
+#| msgid "Log In"
+msgid "Log out"
+msgstr "Entrar"
 
-#: templates/base.html:82 templates/base.resilienciacafe-2016.html:82
-#| msgid "Registered"
-msgid "Register"
-msgstr "Registrarse"
-
-#: templates/base.html:84 templates/base.resilienciacafe-2016.html:84
+#: templates/base.html:87 templates/base.resilienciacafe-2016.html:87
 msgid "Exhibition Area"
 msgstr "Area de exhibición"
 
-#: templates/base.html:90 templates/base.resilienciacafe-2016.html:90
+#: templates/base.html:91 templates/base.resilienciacafe-2016.html:91
+msgid "Register"
+msgstr "Registrarse"
+
+#: templates/base.html:95 templates/base.resilienciacafe-2016.html:95
 msgid "Logistics"
 msgstr "Logística"
 
-#: templates/base.html:99 templates/base.resilienciacafe-2016.html:99
+#: templates/base.html:104 templates/base.resilienciacafe-2016.html:104
 msgid "Resources"
 msgstr "Recursos"
 
-#: templates/base.html:164 templates/base.resilienciacafe-2016.html:164
-#| msgid "End"
+#: templates/base.html:171 templates/base.resilienciacafe-2016.html:171
 msgid "and"
 msgstr "y"
 
+#: templates/base.html:194 templates/base.resilienciacafe-2016.html:194
+#, fuzzy
+#| msgid "Log In"
+msgid "Log in"
+msgstr "Entrar"
+
 #~ msgid "Tools"
 #~ msgstr "Herramientas"
-
-#~ msgid "Log In"
-#~ msgstr "Entrar"
 
 #~ msgid "Phone"
 #~ msgstr "Teléfono"

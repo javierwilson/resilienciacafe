@@ -10,18 +10,15 @@ from forocacao.app.models import Event, Profession
 class SignupForm(forms.Form):
     first_name = forms.CharField(max_length=30, label=_('First name'))
     last_name = forms.CharField(max_length=30, label=_('Last name'))
-    document = forms.CharField(max_length=30, label=_('Document ID'))
-    #country = forms.CountryField(verbose_name=_('Country'), blank=True, null=True)
-    country = forms.ChoiceField(countries, label=_('Pais'))
-    AGE_CHOICES = (('A', '<=29'), ('B', '30-64'), ('C', '>=65'))
-    age = forms.ChoiceField(choices=AGE_CHOICES, label=_('Edad'))
-    SEX_CHOICES = (('M',_('Masculino')), ('F', _('Femenino')))
-    sex = forms.ChoiceField(choices=SEX_CHOICES, label=_('Sexo'))
-    phone = forms.CharField(max_length=30, label=_('Telephone'))
+    SEX_CHOICES = (('M',_('Male')), ('F', _('Female')))
+    sex = forms.ChoiceField(choices=SEX_CHOICES, label=_('Gender'))
     organization = forms.CharField(max_length=30, label=_('Organization'))
-    professions = Profession.objects.all()
-    profession = forms.ModelChoiceField(queryset=professions, label=_('Position'), required=False)
-    position = forms.CharField(max_length=30, label=_('Otro'), required=False)
+    position = forms.CharField(max_length=30, label=_('Job title'), required=True)
+    country = forms.ChoiceField(countries, label=_('Country'))
+    emergency_name = forms.CharField(max_length=30, label=_('Emergency Contact Name'))
+    emergency_phone = forms.CharField(max_length=30, label=_('Emergency Contact Telephone'))
+    extra = forms.BooleanField(required=False, label=_('I am  interested in participating in the field visit 22 and 23rd of September'))
+    text = forms.CharField(required=False, widget=forms.Textarea, label=_('What is your experience with coffee and resilience?'))
 
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
@@ -34,12 +31,12 @@ class SignupForm(forms.Form):
         user.last_name = self.cleaned_data['last_name']
         user.organization = self.cleaned_data['organization']
         user.position = self.cleaned_data['position']
-        user.profession = self.cleaned_data['profession']
-        user.phone = self.cleaned_data['phone']
+        user.emergency_name = self.cleaned_data['emergency_name']
+        user.emergency_phone = self.cleaned_data['emergency_phone']
         user.country = self.cleaned_data['country']
-        user.age = self.cleaned_data['age']
         user.sex = self.cleaned_data['sex']
-        user.document = self.cleaned_data['document']
+        user.extra = self.cleaned_data['extra']
+        user.text = self.cleaned_data['text']
         event = Event.objects.filter(status='frontpage')[0]
         if event:
             user.event = event

@@ -8,148 +8,152 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-05 04:20-0600\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2016-08-05 22:22+0000\n"
+"PO-Revision-Date: 2016-08-05 19:49-0545\n"
+"Last-Translator:   <mprojas@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"X-Translated-Using: django-rosetta 0.7.12\n"
 
-#: forocacao/users/apps.py:7
+#: apps.py:7
 msgid "Users"
 msgstr "Usuarios"
 
-#: forocacao/users/forms.py:11
+#: forms.py:11
 msgid "First name"
 msgstr "Nombre"
 
-#: forocacao/users/forms.py:12
+#: forms.py:12
 msgid "Last name"
 msgstr "Apellido"
 
-#: forocacao/users/forms.py:13 forocacao/users/models.py:29
-msgid "Document ID"
-msgstr "Documento de Identidad"
+#: forms.py:13 models.py:34
+msgid "Male"
+msgstr "Masculino"
 
-#: forocacao/users/forms.py:15
-msgid "Pais"
-msgstr ""
+#: forms.py:13 models.py:34
+msgid "Female"
+msgstr "Femenino"
 
-#: forocacao/users/forms.py:17
-msgid "Edad"
-msgstr ""
+#: forms.py:14
+msgid "Gender"
+msgstr "Sexo"
 
-#: forocacao/users/forms.py:18
-msgid "Masculino"
-msgstr ""
-
-#: forocacao/users/forms.py:18
-msgid "Femenino"
-msgstr ""
-
-#: forocacao/users/forms.py:19
-msgid "Sexo"
-msgstr ""
-
-#: forocacao/users/forms.py:20
-msgid "Telephone"
-msgstr "Teléfono"
-
-#: forocacao/users/forms.py:21 forocacao/users/models.py:30
+#: forms.py:15 models.py:30
 msgid "Organization"
 msgstr "Organización"
 
-#: forocacao/users/forms.py:23 forocacao/users/models.py:31
-msgid "Position"
+#: forms.py:16
+msgid "Job title"
 msgstr "Cargo"
 
-#: forocacao/users/forms.py:24
-msgid "Otro"
-msgstr ""
-
-#: forocacao/users/models.py:20
-msgid "Event"
-msgstr "Evento"
-
-#: forocacao/users/models.py:21
-msgid "Profession"
-msgstr "Profesión"
-
-#: forocacao/users/models.py:22
-msgid "Phone"
-msgstr "Teléfono"
-
-#: forocacao/users/models.py:23
-msgid "Extra Activity"
-msgstr "Precongreso"
-
-#: forocacao/users/models.py:24
+#: forms.py:17 models.py:24
 msgid "Country"
 msgstr "País"
 
-#: forocacao/users/models.py:25
+#: forms.py:18 models.py:49
+msgid "Emergency Contact Name"
+msgstr "Contacto en caso de emergencia"
+
+#: forms.py:19 models.py:50
+msgid "Emergency Contact Telephone"
+msgstr "Teléfono de contacto de emergencia"
+
+#: forms.py:20
+msgid ""
+"I am  interested in participating in the field visit 22 and 23rd of "
+"September"
+msgstr ""
+"Estoy interesado en participar en la gira de campo los días 22 y 23 de "
+"Septiembre"
+
+#: forms.py:21
+msgid "What is your experience with coffee and resilience?"
+msgstr "Cuál es su experiencia con café y resiliencia?"
+
+#: models.py:20
+msgid "Event"
+msgstr "Evento"
+
+#: models.py:21
+msgid "Profession"
+msgstr "Profesión"
+
+#: models.py:22
+msgid "Phone"
+msgstr "Teléfono"
+
+#: models.py:23
+msgid "Extra Activity"
+msgstr "Precongreso"
+
+#: models.py:25
 msgid "Nationality"
 msgstr "Nacionalidad"
 
-#: forocacao/users/models.py:26
+#: models.py:26
 msgid "Soponsored"
 msgstr "Patrocinado"
 
-#: forocacao/users/models.py:28
+#: models.py:28
 msgid "Sponsor"
 msgstr "Patrocinador"
 
-#: forocacao/users/models.py:34
-msgid "Male"
-msgstr ""
+#: models.py:29
+msgid "Document ID"
+msgstr "Documento de Identidad"
 
-#: forocacao/users/models.py:34
-msgid "Female"
-msgstr ""
+#: models.py:31
+msgid "Position"
+msgstr "Cargo"
 
-#: forocacao/users/models.py:36
+#: models.py:36
 msgid "Address"
 msgstr ""
 
-#: forocacao/users/models.py:39
+#: models.py:39
 msgid "Type"
 msgstr "Tipo"
 
-#: forocacao/users/models.py:41
+#: models.py:41
 msgid "Approved"
 msgstr ""
 
-#: forocacao/users/models.py:42
+#: models.py:42
 msgid "Rejected"
 msgstr ""
 
-#: forocacao/users/models.py:43
+#: models.py:43
 msgid "Photo"
 msgstr "Foto"
 
-#: forocacao/users/models.py:45
+#: models.py:45
 msgid "Biography"
 msgstr "Biografía"
 
-#: forocacao/users/models.py:47
+#: models.py:47
 msgid "Activity"
 msgstr "Actividad"
 
-#: forocacao/users/models.py:48
+#: models.py:48
 #, fuzzy
 #| msgid "Organization"
 msgid "Organization responsible"
 msgstr "Organización"
 
-#: forocacao/users/models.py:51
+#: models.py:53
 msgid "Attendee"
 msgstr "Participante"
 
-#: forocacao/users/models.py:52
+#: models.py:54
 msgid "Attendees"
 msgstr "Participantes"
+
+#~ msgid "Telephone"
+#~ msgstr "Teléfono"
 
 #~ msgid "Document"
 #~ msgstr "Documento"

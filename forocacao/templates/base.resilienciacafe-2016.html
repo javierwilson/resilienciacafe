@@ -5,6 +5,7 @@
 
 <head>
 
+<meta name="google-site-verification" content="UydXyxBBD0tt8BUdtj1XqzAPXESwTajnsg9Dmj5oykY" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,13 +64,15 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="{% url 'app:attendees' event.slug %}">{% trans 'Participants' %}</a></li>
     <li><a href="{% url 'app:schedule' event.slug %}">{% trans 'Schedule' %}</a></li>
-    <li><a href="{% url 'app:schedule' event.slug %}">{% trans 'Field trip' %}</a></li>
+    <li><a href="{% url 'app:fieldtrip' event.slug %}">{% trans 'Field trip' %}</a></li>
   </ul>
   </div>
 
   <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default">{% trans 'Speakers' %}</a>
 
+<!--
   <div class="btn-group" role="group">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     {% trans 'Registration' %}
@@ -77,13 +80,15 @@
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     {% if request.user.is_authenticated %}
-    <li><a href="{% url 'account_logout' %}">{% trans "Salir" %}</a></li>
+    <li><a href="{% url 'account_logout' %}">{% trans "Log out" %}</a></li>
     {% else %}
-    <li><a href="{% url 'account_signup' %}">{% trans 'Register' %}</a></li>
+    <li><a href="{% url 'account_signup' %}">{% trans 'Signup' %}</a></li>
     {% endif %}
     <li><a href="{% url 'app:exhibition' event.slug %}">{% trans 'Exhibition Area' %}</a></li>
   </ul>
   </div>
+-->
+  <a href="{% url 'account_signup' %}" class="btn btn-default">{% trans 'Register' %}</a>
 
   <div class="btn-group" role="group">
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -91,9 +96,9 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <li><a href="{% url 'app:venue' event.slug %}">Sede</a></li>
-    <li><a href="{% url 'app:transportation' event.slug %}">Transporte</a></li>
-    <li><a href="{% url 'app:hotels' event.slug %}">Hoteles</a></li>
+    <li><a href="{% url 'app:venue' event.slug %}">{% trans "Venue" %}</a></li>
+    <li><a href="{% url 'app:transportation' event.slug %}">{% trans "Transportation" %}</a></li>
+    <li><a href="{% url 'app:hotels' event.slug %}">{% trans "Hotels" %}</a></li>
   </div>
 
   <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default">{% trans 'Resources' %}</a>
@@ -139,11 +144,10 @@
                <img src="{% thumbnail logo.image 200x200 %}"/>{% endif %}
             {% endfor %}
         </div>
-        <div class="col-md-7 col-sm-8 col-md-offset-1 hidden-xs">
-            <img src="{% thumbnail object.image 800x308 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
-        </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
+        <!--
             <img src="{% thumbnail object.translucid 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+        -->
         </div>
         <div class="col-md-12 visible-xs">
             <img src="{% static 'img/logoforocacaoregional-movil.png' %}" title="{{ object.name }} {{ object.title }}"/>
@@ -161,10 +165,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message-off">
+                <div align="center"><img src="{% thumbnail object.image 800x308 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/></div>
+                        <h2>{{ object.title }}</h2>
+                        {% if LANGUAGE_CODE == 'es' %}
                         <h2>{{ object.start|date:"d"}} {% trans 'and' %} {{ object.end|date:"DATE_FORMAT" }} - {{ object.place }}</h2>
+                        {% else %}
+                        <h2>{{ object.start|date:"F d"}} - {{ object.end|date:"dS" }} - {{ object.place }}</h2>
+                        {% endif %}
 <br/>
-<p>Anfitriones:<img src="http://www.forocacao.com/media/filer_public/d1/fe/d1fe0fd6-65b7-48e8-aef5-6eef0df9cd2c/sagx60.png"> <img style="" src="http://www.forocacao.com/media/filer_public/63/69/6369f52a-7a14-4aaa-bdd8-790b2b624cf3/aprocacaho60.png"></p><p>
-</p>
 <br/>
 
 
@@ -175,21 +183,23 @@
                                 <a href="{% url 'users:detail' request.user.username  %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans "My Profile" %}</span></a>
                             </li>
                             <li>
-                            <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Salir" %}</span></a>
+                            <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Log out" %}</span></a>
                             </li>
             {% else %}
                             <li>
-                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Registrarse" %}</span></a>
+                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Signup" %}</span></a>
                             </li>
+                            <!--
                             <li>
-                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Ingresar" %}</span></a>
+                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Log in" %}</span></a>
                             </li>
+                            -->
             {% endif %}
                             <li>
-                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{{ event.activities_label }}</span></a>
+                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{% trans "Schedule" %}</span></a>
                             </li>
                             <li>
-                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">Expositores</span></a>
+                            <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">{% trans "Speakers" %}</span></a>
                             </li>
                         </ul>
                     </div>

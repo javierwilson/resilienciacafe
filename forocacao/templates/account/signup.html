@@ -15,6 +15,8 @@
 
       <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
+      <p>{% blocktrans %}Please note that there is no cost to participate in the forum itself, other than travel, food and lodging expenses. Space is limited, so please request your spot by completing the information below. Once your request has been approved, you will receive an email confirming your spot. For further information, please email us at <a href="mailto:info@resilienciacafe.com">info@resilienciacafe.com</a>{% endblocktrans %}</p>
+
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {{ form|crispy }}

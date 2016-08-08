@@ -193,6 +193,7 @@ class AttendeeAdmin(ImportExportModelAdmin):
         (None, {
             'fields': ('event','type','first_name', 'last_name', 'email', 'approved', 'rejected', 'profession',
             'organization','position','document',
+            'emergency_name', 'emergency_phone',
             'phone','country','nationality','extra','sponsored','sponsor','photo')
         }),
         ('Informacion de actividades y biografia', {
