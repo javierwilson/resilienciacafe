@@ -49,8 +49,8 @@
                     <span class="icon-bar"></span>
                 </button>
                 {% if not home and event.logo %}<div class="col-md-2 col-sm-2 col-xs-3 nopadding"><img src="{{ event.logo.url }}"/></div>{% endif %}
-                <div class="col-md-10 col-sm-10 {% if not home %}col-xs-6 nopadding{% else %}cols-xs-8 {% endif %}"><a class="navbar-brand topnav" href="{% url 'app:home' %}">
-                Inicio: {{ event }}</a></div>
+                <div class="col-md-10 col-sm-10 {% if not home %}col-xs-6 nopadding{% else %}cols-xs-8 {% endif %}"><a class="navbar-brand topnav btn btn-default"href="{% url 'app:home' %}">
+                {% trans 'Home' %}<!-- : {{ event }} --></a></div>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
                     {% if event %}
@@ -58,19 +58,18 @@
                 <ul class="nav navbar-nav navbar-right">
 <div class="btn-group" role="group" aria-label="...">
 
+  <a href="{% url 'app:schedule' event.slug %}" class="btn btn-default">{% trans 'Program' %}</a>
+  <a href="{% url 'app:fieldtrip' event.slug %}" class="btn btn-default">{% trans 'Field trip' %}</a>
   <div class="btn-group" role="group">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {% trans 'Content' %}
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {% trans 'Participants' %}
     <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="{% url 'app:attendees' event.slug %}">{% trans 'Participants' %}</a></li>
-    <li><a href="{% url 'app:schedule' event.slug %}">{% trans 'Schedule' %}</a></li>
-    <li><a href="{% url 'app:fieldtrip' event.slug %}">{% trans 'Field trip' %}</a></li>
-  </ul>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <li><a href="{% url 'app:speakers' event.slug %}">{% trans 'Speakers' %}</a>
+    <li><a href="{% url 'app:attendees' event.slug %}">{% trans 'Attendees' %}</a></li>
   </div>
 
-  <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default">{% trans 'Speakers' %}</a>
 
 <!--
   <div class="btn-group" role="group">
@@ -80,9 +79,9 @@
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
     {% if request.user.is_authenticated %}
-    <li><a href="{% url 'account_logout' %}">{% trans "Log out" %}</a></li>
+    <li><a href="{% url 'account_logout' %}">{% trans 'Log out' %}</a></li>
     {% else %}
-    <li><a href="{% url 'account_signup' %}">{% trans 'Signup' %}</a></li>
+    <li><a href="{% url 'account_signup' %}">{% trans 'Register' %}</a></li>
     {% endif %}
     <li><a href="{% url 'app:exhibition' event.slug %}">{% trans 'Exhibition Area' %}</a></li>
   </ul>
@@ -90,24 +89,12 @@
 -->
   <a href="{% url 'account_signup' %}" class="btn btn-default">{% trans 'Register' %}</a>
 
-  <div class="btn-group" role="group">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {% trans 'Logistics' %}
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <li><a href="{% url 'app:venue' event.slug %}">{% trans "Venue" %}</a></li>
-    <li><a href="{% url 'app:transportation' event.slug %}">{% trans "Transportation" %}</a></li>
-    <li><a href="{% url 'app:hotels' event.slug %}">{% trans "Hotels" %}</a></li>
-  </div>
-
-  <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default">{% trans 'Resources' %}</a>
+  <a href="{% url 'app:logistics' event.slug %}" class="btn btn-default">{% trans 'Logistics' %}</a>
+  <a href="{% url 'app:resources' event.slug %}" class="btn btn-default">{% trans 'Resources' %}</a>
   <a href="{% url 'app:contact' event.slug %}" class="btn btn-default">{% trans 'Contact' %}</a>
 
-</div>
 
-
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+<form action="{% url 'set_language' %}" method="post" style="display:inline;" >{% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}" />
     <select name="language" onchange="this.form.submit()">
         {% get_current_language as LANGUAGE_CODE %}
@@ -120,6 +107,7 @@
         {% endfor %}
     </select>
 </form>
+</div>
 
                 </ul>
             </div>
@@ -187,7 +175,7 @@
                             </li>
             {% else %}
                             <li>
-                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Signup" %}</span></a>
+                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Register" %}</span></a>
                             </li>
                             <!--
                             <li>
@@ -196,7 +184,7 @@
                             -->
             {% endif %}
                             <li>
-                            <a href="{% url 'app:activities' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{% trans "Schedule" %}</span></a>
+                            <a href="{% url 'app:schedule' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{% trans "Program" %}</span></a>
                             </li>
                             <li>
                             <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">{% trans "Speakers" %}</span></a>
@@ -279,14 +267,14 @@
                                 <a href="{% url 'users:detail' request.user.username  %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans "My Profile" %}</span></a>
                             </li>
                             <li>
-                            <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Salir" %}</span></a>
+                            <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Log out" %}</span></a>
                             </li>
             {% else %}
                             <li>
-                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Registrarse" %}</span></a>
+                                <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Register" %}</span></a>
                             </li>
                             <li>
-                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Ingresar" %}</span></a>
+                                <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Log in" %}</span></a>
                             </li>
             {% endif %}
             {% if event %}

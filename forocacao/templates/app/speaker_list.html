@@ -3,12 +3,12 @@
 {% load static %}
 {% load thumbnail %}
 
-{% block title %}{% trans "Expositores" %}{% endblock %}
+{% block title %}{% trans "Speakers" %}{% endblock %}
 
 {% block content %}
 <div class="container internal">
 
-<h1>Expositores</h1>
+<h1>{% trans "Speakers" %}</h1>
 <div>
 {% for object in object_list %}
     <div class="col-md-3 clearfix">

@@ -33,6 +33,8 @@ urlpatterns = [
     url(r'^(?P<slug>[\w-]+)/venue/$', ContentView.as_view(page='venue'), name='venue'),
     url(r'^(?P<slug>[\w-]+)/hotels/$', ContentView.as_view(page='hotels'), name='hotels'),
     url(r'^(?P<slug>[\w-]+)/transportation/$', ContentView.as_view(page='transportation'), name='transportation'),
+    url(r'^(?P<slug>[\w-]+)/resources/$', ContentView.as_view(page='resources'), name='resources'),
+    url(r'^(?P<slug>[\w-]+)/logistics/$', ContentView.as_view(page='logistics'), name='logistics'),
 
     # activities
     url(r'^(?P<slug>[\w-]+)/activities/$', ActivitiesView.as_view(), name='activities'),
