@@ -96,7 +96,7 @@
 
 <form action="{% url 'set_language' %}" method="post" style="display:inline;" >{% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}" />
-    <select name="language" onchange="this.form.submit()">
+    <select name="language" onchange="this.form.submit()" class="btn btn-default">
         {% get_current_language as LANGUAGE_CODE %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
@@ -125,20 +125,15 @@
       {% endif %}
       {% block content %}
 
-    <div class="clearfix intro-bheader">
+    <div class="clearfix intro-header">
         <div class="col-md-12 logos">
             {% for logo in logos %}
                 {% if logo.url %}<a href="{{logo.url}}" target="_blank"><img src="{% thumbnail logo.image 200x200 %}"/></a>{% else %}
                <img src="{% thumbnail logo.image 200x200 %}"/>{% endif %}
             {% endfor %}
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-        <!--
-            <img src="{% thumbnail object.translucid 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
-        -->
-        </div>
         <div class="col-md-12 visible-xs">
-            <img src="{% static 'img/logoforocacaoregional-movil.png' %}" title="{{ object.name }} {{ object.title }}"/>
+            <!-- img src="{% static 'img/logoforocacaoregional-movil.png' %}" title="{{ object.name }} {{ object.title }}"/ -->
             <h1 class="title2">{{ event }}</h1>
             <h2 class="subtitle">{{ event.title }}</h1>
         </div>
@@ -152,28 +147,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="intro-message-off">
-                <div align="center"><img src="{% thumbnail object.image 800x308 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/></div>
+                    <div class="intro-message" style="background: url({% thumbnail object.image 800x800 %}) no-repeat center top;" width="80%">
+                    <div>
                         <h2>{{ object.title }}</h2>
                         {% if LANGUAGE_CODE == 'es' %}
                         <h2>{{ object.start|date:"d"}} {% trans 'and' %} {{ object.end|date:"DATE_FORMAT" }} - {{ object.place }}</h2>
                         {% else %}
                         <h2>{{ object.start|date:"F d"}} - {{ object.end|date:"dS" }} - {{ object.place }}</h2>
                         {% endif %}
-<br/>
-<br/>
-
-
-<!--                        <hr class="intro-divider"> -->
+                    </div>
                         <ul class="list-inline intro-social-buttons">
-            {% if request.user.is_authenticated %}
+						{% if request.user.is_authenticated %}
                             <li>
                                 <a href="{% url 'users:detail' request.user.username  %}" class="btn btn-default btn-lg"><i class="fa fa-user"></i> <span class="network-name">{% trans "My Profile" %}</span></a>
                             </li>
                             <li>
                             <a href="{% url 'account_logout' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-out"></i> <span class="network-name">{% trans "Log out" %}</span></a>
                             </li>
-            {% else %}
+						{% else %}
                             <li>
                                 <a href="{% url 'account_signup' %}" class="btn btn-default btn-lg"><i class="fa fa-list-alt"></i> <span class="network-name">{% trans "Register" %}</span></a>
                             </li>
@@ -182,7 +173,7 @@
                                 <a href="{% url 'account_login' %}" class="btn btn-default btn-lg"><i class="fa fa-sign-in"></i> <span class="network-name">{% trans "Log in" %}</span></a>
                             </li>
                             -->
-            {% endif %}
+						{% endif %}
                             <li>
                             <a href="{% url 'app:schedule' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-calendar-o"></i> <span class="network-name">{% trans "Program" %}</span></a>
                             </li>
@@ -190,6 +181,19 @@
                             <a href="{% url 'app:speakers' event.slug %}" class="btn btn-default btn-lg"><i class="fa fa-users"></i> <span class="network-name">{% trans "Speakers" %}</span></a>
                             </li>
                         </ul>
+
+			</div> <!-- row -->
+            <div class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12 vcenter">
+                <img src="{% thumbnail object.translucid 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 vcenter">
+                <img src="{% thumbnail object.image_footer 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+                </div>
+            </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+        </div>
+
                     </div>
                 </div>
             </div>
@@ -299,6 +303,14 @@
     <footer>
         <div class="container">
             <div class="row">
+                {% if not home %}
+                <div class="col-md-4 col-sm-4 col-xs-12 vcenter">
+                <img src="{% thumbnail event.translucid 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 vcenter">
+                <img src="{% thumbnail event.image_footer 400x300 %}" class="img-responsive" alt="{{ object.name }}" title="{{ object.name }} {{ object.title }}"/>
+                </div>
+                {% endif %}
                 <div class="col-lg-12">
                 <!--
                     <ul class="list-inline">

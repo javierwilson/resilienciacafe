@@ -34,7 +34,6 @@ body { font-weight: 400;}
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     /*padding-bottom: 50px;*/
     text-align: center;
-    /* background: url(/xmedia/filer_public/35/2d/352df529-2976-4126-bb11-42a942e20b99/rs11966_dsc_6700e-lpr.jpg) no-repeat center center; */
     background-size: cover;
 }
 
@@ -43,14 +42,13 @@ body { font-weight: 400;}
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    /* background: url(/xmedia/filer_public/35/2d/352df529-2976-4126-bb11-42a942e20b99/rs11966_dsc_6700e-lpr.jpg) no-repeat center center; */
     background-size: cover;
 }
 
 .intro-message {
     position: relative;
-    padding-top: 05%;
-    /*padding-bottom: 40%;*/
+    padding-top: 1%;
+    padding-bottom: 1%;
 }
 
 .intro-message > h1 {
