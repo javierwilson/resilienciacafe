@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
-from .models import Event, Content
+from .models import Event, Content, Organization
 
 
 class EventTranslationOptions(TranslationOptions):
@@ -12,3 +12,9 @@ class ContentTranslationOptions(TranslationOptions):
     fields = ('name', 'title', 'text')
 
 translator.register(Content, ContentTranslationOptions)
+
+
+class OrganizationTranslationOptions(TranslationOptions):
+    fields = ('text',)
+
+translator.register(Organization, OrganizationTranslationOptions)

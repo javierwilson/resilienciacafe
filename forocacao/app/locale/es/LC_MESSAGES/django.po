@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-11 23:33+0000\n"
-"PO-Revision-Date: 2016-08-13 01:10-0545\n"
+"POT-Creation-Date: 2016-08-17 21:21+0000\n"
+"PO-Revision-Date: 2016-08-17 15:23-0545\n"
 "Last-Translator:   <javier.wilson@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -533,6 +533,44 @@ msgstr "E-mail"
 msgid "Do you really want to remove the selected e-mail address?"
 msgstr ""
 
+#: templates/account/email/email_confirmation_message.txt:2
+#, python-format
+msgid ""
+"\n"
+"\n"
+"Thank you for your interest in the Forum Building Resilience in Coffee Dependant Communities in Central America and the Caribbean. \n"
+"\n"
+"You are receiving this message because the email address %(user_display user)s has requested a spot to participate in the forum through the web site http://resilienciacafe.com\n"
+"\n"
+"To confirm your request, please click on the following link\n"
+"%(activate_url)s\n"
+"\n"
+"You will receive an email informing you of the status of your request.  \n"
+"\n"
+"\n"
+"Kindly,\n"
+"\n"
+"The Organizing Team\n"
+"\n"
+"(If you received this email by mistake, please ignore it)\n"
+msgstr ""
+"\n"
+"Gracias por su interés en el Foro Construyendo Resiliencia en Comunidades que Dependen del Café en Centroamérica y el Caribe.\n"
+"\n"
+"Ha recibido este mensaje porque la dirección de correo %(user_display user)s ha solicitado un cupo para participar en el foro a traves del sitio http://resilienciacafe.com\n"
+"\n"
+"Para confirmar esta solicitud es necesario que haga clic en el siguiente enlace:\n"
+"%(activate_url)s\n"
+"\n"
+"Recibirá un correo indicando si su solicitud ha sido aprobado.  \n"
+"\n"
+"Un saludo atento,\n"
+"\n"
+"El Equipo Organizador\n"
+"\n"
+"\n"
+"(Si este mensaje fue recibido por error, favor ignorarlo).\n"
+
 #: templates/account/email_confirm.html:7
 #: templates/account/email_confirm.html:14
 #: templates/account/email_confirmed.html:6
@@ -716,8 +754,15 @@ msgstr "Direcciones de correo"
 msgid ""
 "We have sent an e-mail to <a href=\"mailto:%(email)s\">%(email)s</a> for "
 "verification. Follow the link provided to finalize the signup process. "
-"Please contact us if you do not receive it within a few minutes."
+"Please contact us at <a "
+"href=\"mailto:info@resilienciacafe.com\">info@resilienciacafe.com</a> you do"
+" not receive it within a few minutes."
 msgstr ""
+"Hemos enviado un mensaje para validar su dirección de correo electrónico <a "
+"href=\"mailto:%(email)s\">%(email)s</a>. Por favor siga el enlace incluido "
+"para finalizar el proceso de solicitud de cupo. Si después de unos minutos "
+"no recibe el correo, puede contactarnos a <a "
+"href=\"mailto:info@resilienciacafe.com\">info@resilienciacafe.com</a>"
 
 #: templates/account/verified_email_required.html:16
 msgid ""
@@ -769,17 +814,17 @@ msgid "Export"
 msgstr "Exportar"
 
 #: templates/app/speaker_list.html:6 templates/app/speaker_list.html.py:11
-#: templates/base.html:69 templates/base.html.py:190
+#: templates/base.html:69 templates/base.html.py:181
 #: templates/base.resilienciacafe-2016.html:69
-#: templates/base.resilienciacafe-2016.html:190
+#: templates/base.resilienciacafe-2016.html:181
 msgid "Speakers"
 msgstr "Expositores"
 
 #: templates/base.foro-ca-2016.html:149 templates/base.foro-ca-2016.html:243
 #: templates/base.foro-ni-2015.html:116 templates/base.foro-ni-2015.html:217
-#: templates/base.html:171 templates/base.html.py:267
-#: templates/base.resilienciacafe-2016.html:171
-#: templates/base.resilienciacafe-2016.html:267
+#: templates/base.html:162 templates/base.html.py:271
+#: templates/base.resilienciacafe-2016.html:162
+#: templates/base.resilienciacafe-2016.html:271
 msgid "My Profile"
 msgstr "Mi Perfil"
 
@@ -804,9 +849,9 @@ msgstr ""
 msgid "Home"
 msgstr "Inicio"
 
-#: templates/base.html:61 templates/base.html.py:187
+#: templates/base.html:61 templates/base.html.py:178
 #: templates/base.resilienciacafe-2016.html:61
-#: templates/base.resilienciacafe-2016.html:187
+#: templates/base.resilienciacafe-2016.html:178
 msgid "Program"
 msgstr "Programa"
 
@@ -818,19 +863,18 @@ msgstr "Gira de campo"
 msgid "Participants"
 msgstr "Participantes"
 
-#: templates/base.html:82 templates/base.html.py:174 templates/base.html:270
+#: templates/base.html:82 templates/base.html.py:165 templates/base.html:274
 #: templates/base.resilienciacafe-2016.html:82
-#: templates/base.resilienciacafe-2016.html:174
-#: templates/base.resilienciacafe-2016.html:270
-#| msgid "Log In"
+#: templates/base.resilienciacafe-2016.html:165
+#: templates/base.resilienciacafe-2016.html:274
 msgid "Log out"
 msgstr "Salir"
 
-#: templates/base.html:84 templates/base.html.py:90 templates/base.html:178
-#: templates/base.html.py:274 templates/base.resilienciacafe-2016.html:84
+#: templates/base.html:84 templates/base.html.py:90 templates/base.html:169
+#: templates/base.html.py:278 templates/base.resilienciacafe-2016.html:84
 #: templates/base.resilienciacafe-2016.html:90
-#: templates/base.resilienciacafe-2016.html:178
-#: templates/base.resilienciacafe-2016.html:274
+#: templates/base.resilienciacafe-2016.html:169
+#: templates/base.resilienciacafe-2016.html:278
 msgid "Register"
 msgstr "Registro"
 
@@ -838,14 +882,13 @@ msgstr "Registro"
 msgid "Exhibition Area"
 msgstr "Area de exhibición"
 
-#: templates/base.html:159 templates/base.resilienciacafe-2016.html:159
+#: templates/base.html:154 templates/base.resilienciacafe-2016.html:154
 msgid "and"
 msgstr "y"
 
-#: templates/base.html:182 templates/base.html.py:277
-#: templates/base.resilienciacafe-2016.html:182
-#: templates/base.resilienciacafe-2016.html:277
-#| msgid "Log In"
+#: templates/base.html:173 templates/base.html.py:281
+#: templates/base.resilienciacafe-2016.html:173
+#: templates/base.resilienciacafe-2016.html:281
 msgid "Log in"
 msgstr "Entrar"
 

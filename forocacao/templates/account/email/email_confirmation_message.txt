@@ -1,16 +1,20 @@
 {% load account %}{% load i18n %}{% autoescape off %}
-Hola {{ user }}:
- 
-Gracias por su interés en el {{ current_site.name }}.
+{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
 
-Ha recibido este mensaje porque la dirección de correo {% user_display user %} ha sido registrada en {{ current_site.domain }} solicitando la inscripción al {{ current_site.name }}.
+Thank you for your interest in the Forum Building Resilience in Coffee Dependant Communities in Central America and the Caribbean. 
 
-Para confirmar su solicitud de inscripción al foro, es necesario que haga clic en {{ activate_url }}. Una vez confirmado su interés, recibirá otro mensaje con instrucciones acerca del proceso de inscripción.
+You are receiving this message because the email address {{ user_display user }} has requested a spot to participate in the forum through the web site http://resilienciacafe.com
 
-Un saludo atento,
+To confirm your request, please click on the following link
+{{ activate_url }}
 
-El equipo organizador
-{{ current_site.name }}
+You will receive an email informing you of the status of your request.  
 
-(Si este mensaje fue recibido por error, favor ignorarlo).
+
+Kindly,
+
+The Organizing Team
+
+(If you received this email by mistake, please ignore it)
+{% endblocktrans %}
 {% endautoescape %}

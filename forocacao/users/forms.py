@@ -18,6 +18,7 @@ class SignupForm(forms.Form):
     emergency_name = forms.CharField(max_length=30, label=_('Emergency Contact Name'))
     emergency_phone = forms.CharField(max_length=30, label=_('Emergency Contact Telephone'))
     extra = forms.BooleanField(required=False, label=_('I am  interested in participating in the field visit 22 and 23rd of September'))
+    translation = forms.BooleanField(required=False, label=_('The forum will be held in Spanish.  Will you need translation to English?'))
     text = forms.CharField(required=False, widget=forms.Textarea, label=_('What is your experience with coffee and resilience?'))
 
     def __init__(self, *args, **kwargs):

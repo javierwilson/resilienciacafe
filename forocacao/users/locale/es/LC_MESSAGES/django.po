@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-11 17:41+0000\n"
-"PO-Revision-Date: 2016-08-11 17:40-0545\n"
+"POT-Creation-Date: 2016-08-18 18:06+0000\n"
+"PO-Revision-Date: 2016-08-18 12:11-0545\n"
 "Last-Translator:   <javier.wilson@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -144,11 +144,17 @@ msgstr "Actividad"
 msgid "Organization responsible"
 msgstr "Organización"
 
-#: models.py:53
+#: models.py:51
+msgid ""
+"The forum will be held in Spanish.  Will you need translation to English?"
+msgstr ""
+"El foro se realizará en español. Usted necesitará traducción al inglés?"
+
+#: models.py:55
 msgid "Attendee"
 msgstr "Asistente"
 
-#: models.py:54
+#: models.py:56
 msgid "Attendees"
 msgstr "Asistentes"
 

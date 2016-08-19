@@ -48,6 +48,8 @@ class User(AbstractUser):
     responsible = models.ForeignKey('app.Organization', null=True, verbose_name=_('Organization responsible'))
     emergency_name = models.CharField(max_length=30, verbose_name=_('Emergency Contact Name'))
     emergency_phone = models.CharField(max_length=30, verbose_name=_('Emergency Contact Telephone'))
+    translation = models.BooleanField(verbose_name=_('Needs translation'), default=False)
+
 
     class Meta:
         verbose_name = _("Attendee")

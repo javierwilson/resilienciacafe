@@ -301,9 +301,8 @@ class EventBadge(models.Model):
         return self.field
 
 
-
 class Organization(models.Model):
-    TYPE_CHOICES = Choices(('O', 'Organizador'), ('E', 'Exhibidor'))
+    TYPE_CHOICES = Choices(('O', 'Organizador'), ('E', 'Exhibidor'), ('S', 'Speaker'))
     type = models.CharField(max_length=1, choices=TYPE_CHOICES, null=True, blank=True)
     event = models.ForeignKey('Event', verbose_name=_('Event'))
     name = models.CharField(max_length=50, null=True, blank=True, verbose_name=_('Name'))
