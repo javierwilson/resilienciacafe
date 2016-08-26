@@ -114,7 +114,7 @@ class InvitedResource(resources.ModelResource):
 class AttendeeResource(resources.ModelResource):
     class Meta:
         model = Attendee
-        fields = ('id', 'first_name', 'last_name', 'document', 'organization', 'position', 'telephone', 'username', 'email', 'country', 'address', 'sex')
+        fields = ('id', 'first_name', 'last_name', 'document', 'organization', 'position', 'telephone', 'username', 'email', 'country', 'address', 'sex', 'emergency_name', 'emergency_phone', 'extra', 'text')
 
 def mail_attendee(modeladmin, request, queryset):
     if has_approval_permission(request):
