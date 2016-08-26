@@ -7,6 +7,10 @@
 {% block content %}
 <div class="container internal">
 
+    {% if event.image %}
+    <div class="intro-header" style="background-image: url(/media/filer_public/d9/4d/d94da70f-c595-43d7-a2c3-acf6bc996b93/zona_cafetalera.jpg);"></div>
+    {% endif %}
+
 <h1>{{ title }}</h1>
 <div>
 {% for object in object_list %}
@@ -19,7 +23,9 @@
         </div>
     </div>
     <div class="col-md-5 clearfix">
-        {{ object.text|safe }}
+        {% if object.place %}<h3>{{ object.place }}{% endif %}</h3>
+        {% if object.title %}<h3>{{ object.title }}{% endif %}</h3>
+        <p>{{ object.text|linebreaks }}</p>
     </div>
     <div class='clearfix'></div>
     <div class="col-md-10"><hr class="separador"/></div>
