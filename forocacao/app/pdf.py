@@ -10,6 +10,7 @@ from django.utils import timezone
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
 from reportlab.graphics import renderPDF
 from reportlab.graphics.barcode import qr
@@ -17,6 +18,7 @@ from reportlab.graphics.barcode import code128
 from reportlab.graphics.barcode import code93, code39
 from reportlab.graphics.barcode import eanbc
 from reportlab.graphics.shapes import Drawing
+from reportlab.platypus import Paragraph, Table, TableStyle
 
 from .png import get_barcode
 
@@ -33,15 +35,24 @@ def createPDF(participant, where):
 
     c = canvas.Canvas(where)
 
+    style = getSampleStyleSheet()
     c.pagesize = letter
     c.setTitle("%s : %s" % (participant.event.name, participant.full_name()))
     width, height = letter
     y = hstart = height-20-50
     x = wstart = 80
 
-    #draw(c, "Evento", x, y, size=10, color=colors.grey)
     y -= 20
-    draw(c, participant.event.name, x, y, size=22)
+    draw(c, "Evento", x, y, size=10, color=colors.grey)
+    y -= 20
+    y -= 20
+    line = participant.event.name
+    P = Paragraph(line, style["Heading2"])
+    aw = 6*inch
+    ah = 2*inch
+    w,h = P.wrap(aw, ah)
+    P.drawOn(c, x, y)
+    #draw(c, participant.event.name, x, y, size=18)
     y -= 20
 
     draw(c, "Fecha y Hora", x, y, size=10, color=colors.grey)
@@ -51,7 +62,13 @@ def createPDF(participant, where):
 
     draw(c, "Ubicación", x+200, y, size=10, color=colors.grey)
     y -= 20
-    draw(c, participant.event.place, x+200, y)
+    line = participant.event.place
+    P = Paragraph(line, style["Normal"])
+    aw = 6*inch
+    ah = 2*inch
+    w,h = P.wrap(aw, ah)
+    P.drawOn(c, x+200, y)
+    #draw(c, participant.event.place, x+200, y)
     y -= 20
 
     draw(c, "Participante", x, y, size=10, color=colors.grey)
@@ -76,13 +93,22 @@ def createPDF(participant, where):
 
     #lines = textwrap.fill(participant.event.pdfnote, 60).splitlines()
     lines = (participant.event.pdfnote) % { 'full_name': participant.first_name,}
+
     lines = lines.splitlines()
     tmp = y
     y -= 100
+    y -= 40
     for line in lines:
-        draw(c, line, x, y)
+        P = Paragraph(line, style["Normal"])
+        aw = 6*inch
+        ah = 2*inch
+        w,h = P.wrap(aw, ah)
+        P.drawOn(c, x, y)
+        #draw(c, line, x, y)
         y -= 20
     y = tmp
+
+
 
     # insert logo
     #if participant.event.logo:
