@@ -38,6 +38,7 @@ class SignupForm(forms.Form):
         user.sex = self.cleaned_data['sex']
         user.extra = self.cleaned_data['extra']
         user.text = self.cleaned_data['text']
+        user.translation = self.cleaned_data['translation']
         event = Event.objects.filter(status='frontpage')[0]
         if event:
             user.event = event

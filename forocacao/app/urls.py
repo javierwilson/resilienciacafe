@@ -43,7 +43,7 @@ urlpatterns = [
     # speakers
     url(r'^(?P<slug>[\w-]+)/organizadores/$', OrganizationsView.as_view(title=u'Orgnizadores', filter='O'), name='organizers'),
     url(r'^(?P<slug>[\w-]+)/exhibicion/$', OrganizationsView.as_view(title=u'Area de exhibición', filter='E'), name='exhibition'),
-    url(r'^(?P<slug>[\w-]+)/speakers/$', OrganizationsView.as_view(title=_('Speakers'), filter='S'), name='speakers'),
+    url(r'^(?P<slug>[\w-]+)/speakers/$', OrganizationsView.as_view(title=u'Speakers', filter='S'), name='speakers'),
     #url(r'^(?P<slug>[\w-]+)/speakers/$', SpeakersView.as_view(), name='speakers'),
     url(r'^(?P<eventslug>[\w-]+)/speakers/(?P<slug>[\w-]+)/$', SpeakersDetailView.as_view(), name='speakers-detail'),
 
