@@ -9,6 +9,7 @@ from reportlab.graphics.barcode import createBarcodeDrawing
 from reportlab.graphics.barcode import createBarcodeImageInMemory
 from reportlab.graphics.shapes import Drawing
 
+from django.conf import settings
 
 def get_barcode(value, width, humanReadable = True):
 
@@ -31,18 +32,28 @@ def createPNG(participant, where):
 
     event = participant.event
 
-    badge_size_x = event.badge_size_x or 390
-    badge_size_y = event.badge_size_y or 260
+    badge_size_x = event.badge_size_x or 1040
+    badge_size_y = event.badge_size_y or 698
     badge_color = event.badge_color or "#FFFFFF"
 
-    img = Image.new('RGBA', (badge_size_x, badge_size_y), badge_color)
+    image_file = settings.MEDIA_ROOT + '/gafete1040x698.png'
+    img = Image.open(image_file)
+    #img = Image.new('RGBA', (badge_size_x, badge_size_y), badge_color)
     draw = ImageDraw.Draw(img)
     draw.rectangle(((0,0),(badge_size_x-1, badge_size_y-1)), outline = "black")
 
+
+    if (len(participant.last_name) + len(participant.first_name) > 20):
+        last_name = participant.last_name.partition(' ')[0] if len(participant.last_name) > 12 else participant.last_name
+        first_name = participant.first_name.partition(' ')[0] if len(participant.first_name) >= 12 else participant.first_name
+    else:
+        last_name = participant.last_name
+        first_name = participant.first_name
     match = {
             'event': event.name,
             #'name': "%s %s" % (participant.first_name, participant.last_name ),
-            'name': "%s %s" % (participant.first_name.partition(' ')[0], participant.last_name.partition(' ')[0]),
+            #'name': "%s %s" % (participant.first_name.partition(' ')[0], participant.last_name.partition(' ')[0]),
+            'name': "%s %s" % (first_name, last_name),
             'first_name': participant.first_name,
             'last_name': participant.last_name,
             'profession': participant.profession,
@@ -87,9 +98,9 @@ def createPNG(participant, where):
                 y = tmp
 
     # FIXME: add barcode
-    short_full_name = "%s: %s" % (participant.id, participant.short_full_name())
-    barcode = get_barcode(short_full_name, badge_size_x-4)
-    barcode_image = renderPM.drawToPIL(barcode)
-    img.paste(barcode_image, (0+2, badge_size_y-70))
+    #short_full_name = "%s: %s" % (participant.id, participant.short_full_name())
+    #barcode = get_barcode(short_full_name, badge_size_x-4)
+    #barcode_image = renderPM.drawToPIL(barcode)
+    #img.paste(barcode_image, (0+2, badge_size_y-70))
 
     img.save(where, "PNG")

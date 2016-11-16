@@ -1,6 +1,7 @@
 {% extends basehtml %}
 {% load static %}
 {% load thumbnail %}
+{% load embed_video_tags %}
 
 {% block title %}{{ event.activities_label }}{% endblock %}
 
@@ -12,6 +13,10 @@
 {% for object in object_list %}
     <div class="col-md-10 clearfix">
         <h3>{{ object.start|time }} - {{object.end|time }} {{ object.name }}</h3>
+		{% video object.video as my_video %}
+  		<!-- <img src="{{ my_video.thumbnail }}" width="200" /> -->
+        {% video my_video '400x300' %}
+        {% endvideo %}
         <!--
         {% if object.organizer %}
             <div class="organizador">Organizado por: {{ object.organizer }}

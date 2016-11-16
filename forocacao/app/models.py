@@ -12,6 +12,7 @@ from django_countries.fields import CountryField
 from model_utils import Choices
 from model_utils.fields import StatusField
 from colorfield.fields import ColorField
+from embed_video.fields import EmbedVideoField
 
 from forocacao.users.models import User
 
@@ -167,6 +168,7 @@ class Logo(models.Model):
 
 class Activity(models.Model):
     #event = models.ForeignKey('Event', verbose_name=_('Event'))
+    video = EmbedVideoField(blank=True, null=True)
     name = models.CharField(max_length=200, verbose_name=_('Name'))
     slug = models.SlugField()
     organizer = models.ForeignKey('users.User', null=True, blank=True, verbose_name=_('Organizer'))

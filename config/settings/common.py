@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = (
     'sortedm2m',
     'modeltranslation', # model translations
     'rosetta', # translations
+    'embed_video', # youtube thumbs and videos
 )
 
 # Apps specific for this project go here.
