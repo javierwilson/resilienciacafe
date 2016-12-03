@@ -29,7 +29,8 @@ urlpatterns = [
     # FIXME: necesitamos esto como flatpage?
     url(r'^(?P<slug>[\w-]+)/attendees/$', ContentView.as_view(page='attendees'), name='attendees'),
     url(r'^(?P<slug>[\w-]+)/fieldtrip/$', ContentView.as_view(page='fieldtrip'), name='fieldtrip'),
-    url(r'^(?P<slug>[\w-]+)/schedule/$', ContentView.as_view(page='schedule'), name='schedule'),
+    #url(r'^(?P<slug>[\w-]+)/schedule/$', ContentView.as_view(page='schedule'), name='schedule'),
+    url(r'^(?P<slug>[\w-]+)/schedule/$', ActivitiesView.as_view(), name='schedule'),
     # new contect 2016
     url(r'^(?P<slug>[\w-]+)/venue/$', ContentView.as_view(page='venue'), name='venue'),
     url(r'^(?P<slug>[\w-]+)/hotels/$', ContentView.as_view(page='hotels'), name='hotels'),

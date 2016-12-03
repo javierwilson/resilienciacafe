@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
 
     # Your stuff: custom urls includes go here
+    url(r'^photologue/', include('photologue.urls', namespace='photologue')),
     url(r'', include("forocacao.app.urls", namespace="app")),
 
 
